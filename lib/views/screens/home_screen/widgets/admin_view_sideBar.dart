@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../../../../theme/my_colors.dart';
 import '../../../../theme/my_design_system.dart';
 import '../../../../theme/my_theme.dart';
+import '../../../widgets/container_pattern_painter.dart';
 import 'sidebar_button.dart';
 
 enum SideTabType { collection, category, manageMedia, leaderboard, addQuizzes, addLevels, addQuestions }
@@ -29,15 +31,26 @@ class AdminViewSideBar extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: MySpaceSystem.spaceX3),
-          // const Divider(height: 2, thickness: 1, color: MyColors.primaryColor),
+          Container(
+            margin: EdgeInsets.only(top: MySpaceSystem.spaceX3, bottom: MySpaceSystem.spaceX3),
+            child: Center(
+              child: SizedBox(
+                width: 154,
+                height: 100,
+                child: Image.network("https://i.ibb.co/6FfsC8x/logo.png"),
+              ),
+            ),
+          ),
+          Divider(height: 2, thickness: 1, color: themeData.colorScheme.outline),
+          // SizedBox(height: MySpaceSystem.spaceX3),
           // Group A
+
           SideBarButtonsGroupWidget(
-            groupTitle: 'View Data',
+            groupTitle: 'Public',
             groupChildren: [
               SideBarButton(
-                title: 'Collections',
-                iconData: Icons.collections_bookmark_rounded,
+                title: 'Explore',
+                iconData: Icons.explore_rounded,
                 isActive: activeButtonType == SideTabType.collection ? true : false,
                 onTap: () {
                   onSideTabButtonChange(SideTabType.collection);
@@ -71,27 +84,35 @@ class AdminViewSideBar extends StatelessWidget {
           ),
           // Group B
           SideBarButtonsGroupWidget(
-            groupTitle: 'Quiz',
+            groupTitle: 'Your',
             groupChildren: [
               SideBarButton(
-                title: 'Quizzes',
-                iconData: Icons.quiz_rounded,
+                title: 'Components',
+                iconData: Icons.layers_rounded,
                 isActive: activeButtonType == SideTabType.addQuizzes ? true : false,
                 onTap: () {
                   onSideTabButtonChange(SideTabType.addQuizzes);
                 },
               ),
               SideBarButton(
-                title: 'Levels',
-                iconData: Icons.layers_rounded,
+                title: 'Learning',
+                iconData: Icons.video_library_rounded,
                 isActive: activeButtonType == SideTabType.addLevels ? true : false,
                 onTap: () {
                   onSideTabButtonChange(SideTabType.addLevels);
                 },
               ),
+              // SideBarButton(
+              //   title: 'Design System',
+              //   iconData: Icons.video_library_rounded,
+              //   isActive: activeButtonType == SideTabType.addLevels ? true : false,
+              //   onTap: () {
+              //     onSideTabButtonChange(SideTabType.addLevels);
+              //   },
+              // ),
               SideBarButton(
-                title: 'Questions',
-                iconData: Icons.live_help_rounded,
+                title: 'Saved',
+                iconData: Icons.save_rounded,
                 isActive: activeButtonType == SideTabType.addQuestions ? true : false,
                 onTap: () {
                   onSideTabButtonChange(SideTabType.addQuestions);

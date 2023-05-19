@@ -87,6 +87,7 @@ class SideBarButtonsGroupWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var themeData = Theme.of(context);
     return Container(
+      // constraints: BoxConstraints(maxHeight: 300),
       // margin: EdgeInsets.symmetric(horizontal: 12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
