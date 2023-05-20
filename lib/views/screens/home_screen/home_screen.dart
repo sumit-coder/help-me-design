@@ -5,6 +5,7 @@ import 'package:help_me_design/theme/my_theme.dart';
 import 'package:provider/provider.dart';
 
 import '../../widgets/container_pattern_painter.dart';
+import '../tabs/categories_screens.dart';
 import '../tabs/explore_screen.dart';
 import 'widgets/admin_view_sideBar.dart';
 import 'widgets/sidebar_button.dart';
@@ -31,11 +32,12 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Container(
           // width: double.maxFinite,
           height: size.height,
+          // clipBehavior: Clip.antiAlias,
           constraints: BoxConstraints(maxWidth: 1200, minWidth: 1200),
           margin: EdgeInsets.all(44),
           // padding: EdgeInsets.all(24),
           decoration: BoxDecoration(
-            border: Border.all(width: 1, color: Colors.black54),
+            // border: Border.all(width: 1, color: Colors.black54),
             borderRadius: BorderRadius.circular(24),
             // color: Theme.of(context).colorScheme.secondary,
           ),
@@ -53,8 +55,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 Expanded(
                   child: AnimatedSwitcher(
-                    duration: 1000.ms,
-                    child: ExploreView(),
+                    duration: 100.ms,
+                    child: activeButton == SideTabType.explore ? ExploreView() : CategoriesView(),
                   ),
                 )
               ],

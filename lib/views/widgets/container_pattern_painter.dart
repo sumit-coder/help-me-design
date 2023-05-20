@@ -13,7 +13,7 @@ class ContainerPatternPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     Dots(
       bgColor: Colors.transparent,
-      fgColor: Color(0xFF1A1A1A),
+      fgColor: MyColors.actionColor,
       featuresCount: featuresCount,
     ).paintOnWidget(canvas, size);
   }
