@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../theme/my_colors.dart';
 import '../../../../theme/my_design_system.dart';
@@ -6,16 +7,22 @@ import '../../../../theme/my_theme.dart';
 import '../../../widgets/container_pattern_painter.dart';
 import 'sidebar_button.dart';
 
-enum SideTabType { collection, category, manageMedia, leaderboard, addQuizzes, addLevels, addQuestions }
+enum SideTabType { explore, category, manageMedia, leaderboard, addQuizzes, addLevels, addQuestions }
 
-class AdminViewSideBar extends StatelessWidget {
+class AdminViewSideBar extends StatefulWidget {
   AdminViewSideBar({Key? key, required this.onSideTabButtonChange, required this.activeButtonType}) : super(key: key);
 
   final Function(SideTabType newTabChange) onSideTabButtonChange;
   final SideTabType activeButtonType;
 
   @override
+  State<AdminViewSideBar> createState() => _AdminViewSideBarState();
+}
+
+class _AdminViewSideBarState extends State<AdminViewSideBar> {
+  @override
   Widget build(BuildContext context) {
+    var themeMangerProvider = Provider.of<ThemeManager>(context, listen: false);
     var themeData = Theme.of(context);
     return Container(
       width: 244,
@@ -37,7 +44,7 @@ class AdminViewSideBar extends StatelessWidget {
               child: SizedBox(
                 width: 154,
                 height: 100,
-                child: Image.network("https://i.ibb.co/6FfsC8x/logo.png"),
+                child: Image.network("https://i.ibb.co/7YnRnRc/logo.png"),
               ),
             ),
           ),
@@ -51,33 +58,33 @@ class AdminViewSideBar extends StatelessWidget {
               SideBarButton(
                 title: 'Explore',
                 iconData: Icons.explore_rounded,
-                isActive: activeButtonType == SideTabType.collection ? true : false,
+                isActive: widget.activeButtonType == SideTabType.explore ? true : false,
                 onTap: () {
-                  onSideTabButtonChange(SideTabType.collection);
+                  widget.onSideTabButtonChange(SideTabType.explore);
                 },
               ),
               SideBarButton(
                 title: 'Category',
                 iconData: Icons.category_rounded,
-                isActive: activeButtonType == SideTabType.category ? true : false,
+                isActive: widget.activeButtonType == SideTabType.category ? true : false,
                 onTap: () {
-                  onSideTabButtonChange(SideTabType.category);
+                  widget.onSideTabButtonChange(SideTabType.category);
                 },
               ),
               SideBarButton(
                 title: 'Leaderboard',
                 iconData: Icons.leaderboard_rounded,
-                isActive: activeButtonType == SideTabType.leaderboard ? true : false,
+                isActive: widget.activeButtonType == SideTabType.leaderboard ? true : false,
                 onTap: () {
-                  onSideTabButtonChange(SideTabType.leaderboard);
+                  widget.onSideTabButtonChange(SideTabType.leaderboard);
                 },
               ),
               SideBarButton(
                 title: 'Media',
                 iconData: Icons.perm_media_rounded,
-                isActive: activeButtonType == SideTabType.manageMedia ? true : false,
+                isActive: widget.activeButtonType == SideTabType.manageMedia ? true : false,
                 onTap: () {
-                  onSideTabButtonChange(SideTabType.manageMedia);
+                  widget.onSideTabButtonChange(SideTabType.manageMedia);
                 },
               ),
             ],
@@ -89,17 +96,17 @@ class AdminViewSideBar extends StatelessWidget {
               SideBarButton(
                 title: 'Components',
                 iconData: Icons.layers_rounded,
-                isActive: activeButtonType == SideTabType.addQuizzes ? true : false,
+                isActive: widget.activeButtonType == SideTabType.addQuizzes ? true : false,
                 onTap: () {
-                  onSideTabButtonChange(SideTabType.addQuizzes);
+                  widget.onSideTabButtonChange(SideTabType.addQuizzes);
                 },
               ),
               SideBarButton(
                 title: 'Learning',
                 iconData: Icons.video_library_rounded,
-                isActive: activeButtonType == SideTabType.addLevels ? true : false,
+                isActive: widget.activeButtonType == SideTabType.addLevels ? true : false,
                 onTap: () {
-                  onSideTabButtonChange(SideTabType.addLevels);
+                  widget.onSideTabButtonChange(SideTabType.addLevels);
                 },
               ),
               // SideBarButton(
@@ -113,12 +120,30 @@ class AdminViewSideBar extends StatelessWidget {
               SideBarButton(
                 title: 'Saved',
                 iconData: Icons.save_rounded,
-                isActive: activeButtonType == SideTabType.addQuestions ? true : false,
+                isActive: widget.activeButtonType == SideTabType.addQuestions ? true : false,
                 onTap: () {
-                  onSideTabButtonChange(SideTabType.addQuestions);
+                  widget.onSideTabButtonChange(SideTabType.addQuestions);
                 },
               ),
             ],
+          ),
+
+          IconButton(
+            onPressed: () {
+              if (themeMangerProvider.isDarkMode) {
+                themeMangerProvider.changeThemeMode(ThemeMode.light);
+                setState(() {});
+                return;
+              }
+              themeMangerProvider.changeThemeMode(ThemeMode.dark);
+              setState(() {});
+
+              print(themeMangerProvider.getThemeMode);
+            },
+            icon: Icon(
+              Icons.dark_mode,
+              color: Theme.of(context).colorScheme.secondary,
+            ),
           ),
         ],
       ),
