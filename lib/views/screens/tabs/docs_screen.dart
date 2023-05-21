@@ -1,3 +1,7 @@
+import 'dart:io';
+import 'dart:typed_data';
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:help_me_design/theme/my_colors.dart';
@@ -19,6 +23,7 @@ class DocsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var themeData = Theme.of(context);
+
     return Container(
       alignment: Alignment.topCenter,
       // color: Colors.red,
@@ -35,7 +40,9 @@ class DocsView extends StatelessWidget {
               title: MyTextConstants.docsTabHeadline,
             ),
             Container(
-              // height: 88,
+              height: 58,
+              width: double.maxFinite,
+              clipBehavior: Clip.antiAlias,
               padding: const EdgeInsets.all(6),
               margin: EdgeInsets.only(left: MySpaceSystem.spaceX3, bottom: MySpaceSystem.spaceX3),
               decoration: BoxDecoration(
@@ -43,14 +50,41 @@ class DocsView extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
                 color: themeData.colorScheme.secondary,
               ),
-              child: Row(
-                children: [
-                  TechCard(techName: "Saved", icon: Icons.bookmark_added_rounded, onTap: () {}),
-                  TechCard(techName: "Javascript", onTap: () {}),
-                  TechCard(techName: "Dart", onTap: () {}),
-                  TechCard(techName: "Flutter", onTap: () {}),
-                ],
+              child: ScrollConfiguration(
+                behavior: ScrollConfiguration.of(context).copyWith(
+                  dragDevices: {
+                    PointerDeviceKind.touch,
+                    PointerDeviceKind.mouse,
+                  },
+                ),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      TechCard(techName: "Saved", icon: Icons.bookmark_added_rounded, onTap: () {}),
+                      for (var i = 0; i < 3; i++) TechCard(techName: "Javascript", onTap: () {}),
+                      TechCard(techName: "Dart", onTap: () {}),
+                      TechCard(techName: "Flutter", onTap: () {}),
+                    ],
+                  ),
+                ),
               ),
+              // child: ScrollConfiguration(
+              // behavior: ScrollConfiguration.of(context).copyWith(
+              //   dragDevices: {
+              //     PointerDeviceKind.touch,
+              //     PointerDeviceKind.mouse,
+              //   },
+              // ),
+              //   child: ListView.builder(
+              //     // shrinkWrap: true,
+              //     scrollDirection: Axis.horizontal,
+              //     itemCount: 10,
+              //     itemBuilder: (context, index) {
+              //       return TechCard(techName: "Flutter", onTap: () {});
+              //     },
+              //   ),
+              // ),
             ),
             Container(
               margin: EdgeInsets.only(left: MySpaceSystem.spaceX3),
@@ -64,13 +98,29 @@ class DocsView extends StatelessWidget {
                   for (var i in _items)
                     Container(
                       height: 200,
-                      width: 244,
+                      width: 220,
+                      padding: EdgeInsets.all(MySpaceSystem.spaceX2),
                       decoration: BoxDecoration(
                         boxShadow: cardShadow,
                         borderRadius: BorderRadius.circular(8),
                         color: themeData.colorScheme.secondary,
                       ),
-                      child: const Text('adf'),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('adf', style: themeData.textTheme.bodyMedium),
+                              IconButton(
+                                onPressed: () {},
+                                icon: Icon(Icons.bookmark_add_rounded),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                 ],
               ),
