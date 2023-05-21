@@ -7,7 +7,7 @@ import '../../../../theme/my_theme.dart';
 import '../../../widgets/container_pattern_painter.dart';
 import 'sidebar_button.dart';
 
-enum SideTabType { explore, category, manageMedia, leaderboard, addQuizzes, addLevels, addQuestions }
+enum SideTabType { explore, category, manageMedia, learning, codeSnippet, designSystem, components, docs }
 
 class AdminViewSideBar extends StatefulWidget {
   AdminViewSideBar({Key? key, required this.onSideTabButtonChange, required this.activeButtonType}) : super(key: key);
@@ -71,42 +71,50 @@ class _AdminViewSideBarState extends State<AdminViewSideBar> {
                   widget.onSideTabButtonChange(SideTabType.category);
                 },
               ),
-              SideBarButton(
-                title: 'Leaderboard',
-                iconData: Icons.leaderboard_rounded,
-                isActive: widget.activeButtonType == SideTabType.leaderboard ? true : false,
-                onTap: () {
-                  widget.onSideTabButtonChange(SideTabType.leaderboard);
-                },
-              ),
-              SideBarButton(
-                title: 'Media',
-                iconData: Icons.perm_media_rounded,
-                isActive: widget.activeButtonType == SideTabType.manageMedia ? true : false,
-                onTap: () {
-                  widget.onSideTabButtonChange(SideTabType.manageMedia);
-                },
-              ),
+              // SideBarButton(
+              //   title: 'Leaderboard',
+              //   iconData: Icons.leaderboard_rounded,
+              //   isActive: widget.activeButtonType == SideTabType.leaderboard ? true : false,
+              //   onTap: () {
+              //     widget.onSideTabButtonChange(SideTabType.leaderboard);
+              //   },
+              // ),
+              // SideBarButton(
+              //   title: 'Media',
+              //   iconData: Icons.perm_media_rounded,
+              //   isActive: widget.activeButtonType == SideTabType.manageMedia ? true : false,
+              //   onTap: () {
+              //     widget.onSideTabButtonChange(SideTabType.manageMedia);
+              //   },
+              // ),
             ],
           ),
           // Group B
           SideBarButtonsGroupWidget(
-            groupTitle: 'Your',
+            groupTitle: 'Saved',
             groupChildren: [
+              SideBarButton(
+                title: 'Design System',
+                iconData: Icons.design_services_rounded,
+                isActive: widget.activeButtonType == SideTabType.designSystem ? true : false,
+                onTap: () {
+                  widget.onSideTabButtonChange(SideTabType.designSystem);
+                },
+              ),
               SideBarButton(
                 title: 'Components',
                 iconData: Icons.layers_rounded,
-                isActive: widget.activeButtonType == SideTabType.addQuizzes ? true : false,
+                isActive: widget.activeButtonType == SideTabType.components ? true : false,
                 onTap: () {
-                  widget.onSideTabButtonChange(SideTabType.addQuizzes);
+                  widget.onSideTabButtonChange(SideTabType.components);
                 },
               ),
               SideBarButton(
                 title: 'Learning',
                 iconData: Icons.video_library_rounded,
-                isActive: widget.activeButtonType == SideTabType.addLevels ? true : false,
+                isActive: widget.activeButtonType == SideTabType.learning ? true : false,
                 onTap: () {
-                  widget.onSideTabButtonChange(SideTabType.addLevels);
+                  widget.onSideTabButtonChange(SideTabType.learning);
                 },
               ),
               // SideBarButton(
@@ -118,11 +126,19 @@ class _AdminViewSideBarState extends State<AdminViewSideBar> {
               //   },
               // ),
               SideBarButton(
-                title: 'Saved',
-                iconData: Icons.save_rounded,
-                isActive: widget.activeButtonType == SideTabType.addQuestions ? true : false,
+                title: 'Snippets',
+                iconData: Icons.data_object_rounded,
+                isActive: widget.activeButtonType == SideTabType.codeSnippet ? true : false,
                 onTap: () {
-                  widget.onSideTabButtonChange(SideTabType.addQuestions);
+                  widget.onSideTabButtonChange(SideTabType.codeSnippet);
+                },
+              ),
+              SideBarButton(
+                title: 'Docs',
+                iconData: Icons.article_rounded,
+                isActive: widget.activeButtonType == SideTabType.docs ? true : false,
+                onTap: () {
+                  widget.onSideTabButtonChange(SideTabType.docs);
                 },
               ),
             ],
