@@ -1,0 +1,120 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:help_me_design/theme/my_colors.dart';
+import 'package:help_me_design/theme/my_design_system.dart';
+import 'package:help_me_design/theme/my_theme.dart';
+
+import '../../../constants/text_constants.dart';
+import '../../widgets/container_pattern_painter.dart';
+
+class DocsView extends StatelessWidget {
+  DocsView({Key? key}) : super(key: key);
+
+  List<String> _items = ['q', 'm', '007', 'J', 'q', 'm'];
+
+  int constants = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    var themeData = Theme.of(context);
+    return Container(
+      alignment: Alignment.topCenter,
+      // color: Colors.red,
+      child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              margin: EdgeInsets.only(left: MySpaceSystem.spaceX3, bottom: MySpaceSystem.spaceX3),
+              decoration: BoxDecoration(
+                boxShadow: cardShadow,
+                borderRadius: BorderRadius.circular(8),
+                color: themeData.colorScheme.secondary,
+              ),
+              // width: 630,
+              height: 250,
+              child: Stack(
+                children: [
+                  CustomPaint(
+                    painter: ContainerSquarePatternTwoPainter(44, context),
+                    child: Container(),
+                  ),
+                  Positioned(
+                    right: 0,
+                    top: 0,
+                    bottom: 0,
+                    child: SizedBox(
+                      // width: 300,
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.only(bottomRight: Radius.circular(8), topRight: Radius.circular(8)),
+                        child: Image.network(
+                          "https://i.ibb.co/SNVPkKM/original-dd50f8430ab324b03b6af592e73ca6c7-removebg-preview.png",
+                          fit: BoxFit.cover,
+                          alignment: Alignment.topCenter,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: MySpaceSystem.spaceX3,
+                    bottom: MySpaceSystem.spaceX3,
+                    child: SizedBox(
+                      width: 330,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(4),
+                            color: DesignSystemColors.primaryColor,
+                            child: Text(
+                              MyTextConstants.docsTabHeadline,
+                              style: MyTextTypeSystem.titleXXLargeDark.copyWith(fontSize: 34, height: 1.0),
+                            ),
+                          ),
+                          SizedBox(height: MySpaceSystem.spaceX2),
+                          Container(
+                            padding: const EdgeInsets.all(4),
+                            color: DesignSystemColors.primaryColor,
+                            child: Text(
+                              MyTextConstants.docsTabShortDescription,
+                              style: MyTextTypeSystem.titleMediumDark.copyWith(height: 1.3),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(left: MySpaceSystem.spaceX3),
+              // width: 660,
+              // height: 300,
+              child: Wrap(
+                spacing: MySpaceSystem.spaceX3,
+                runSpacing: MySpaceSystem.spaceX3,
+                // direction: Axis.vertical,
+                children: [
+                  for (var i in _items)
+                    Container(
+                      height: 200,
+                      width: 244,
+                      decoration: BoxDecoration(
+                        boxShadow: cardShadow,
+                        borderRadius: BorderRadius.circular(8),
+                        color: themeData.colorScheme.secondary,
+                      ),
+                      child: const Text('adf'),
+                    ),
+                ],
+              ),
+            )
+          ],
+        ).animate().scaleXY(begin: 0.1).move(begin: const Offset(-250, 300)).flipH(begin: -0.1),
+      ),
+    );
+  }
+}
