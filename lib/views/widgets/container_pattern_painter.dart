@@ -32,7 +32,7 @@ class ContainerSquarePatternPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     TexturePattern(
       bgColor: Colors.transparent,
-      fgColor: Color(0xFF1A1A1A),
+      fgColor: MyColors.actionColor,
       featuresCount: featuresCount,
     ).paintOnWidget(canvas, size);
   }
@@ -51,7 +51,7 @@ class ContainerSquarePatternTwoPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     DiagonalStripesLight(
       bgColor: Colors.transparent,
-      fgColor: Color(0xFF1A1A1A),
+      fgColor: MyColors.actionColor,
       featuresCount: featuresCount,
     ).paintOnWidget(canvas, size);
   }

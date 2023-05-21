@@ -110,27 +110,19 @@ class _AdminViewSideBarState extends State<AdminViewSideBar> {
                 },
               ),
               SideBarButton(
-                title: 'Learning',
-                iconData: Icons.video_library_rounded,
-                isActive: widget.activeButtonType == SideTabType.learning ? true : false,
-                onTap: () {
-                  widget.onSideTabButtonChange(SideTabType.learning);
-                },
-              ),
-              // SideBarButton(
-              //   title: 'Design System',
-              //   iconData: Icons.video_library_rounded,
-              //   isActive: activeButtonType == SideTabType.addLevels ? true : false,
-              //   onTap: () {
-              //     onSideTabButtonChange(SideTabType.addLevels);
-              //   },
-              // ),
-              SideBarButton(
                 title: 'Snippets',
                 iconData: Icons.data_object_rounded,
                 isActive: widget.activeButtonType == SideTabType.codeSnippet ? true : false,
                 onTap: () {
                   widget.onSideTabButtonChange(SideTabType.codeSnippet);
+                },
+              ),
+              SideBarButton(
+                title: 'Learning',
+                iconData: Icons.video_library_rounded,
+                isActive: widget.activeButtonType == SideTabType.learning ? true : false,
+                onTap: () {
+                  widget.onSideTabButtonChange(SideTabType.learning);
                 },
               ),
               SideBarButton(

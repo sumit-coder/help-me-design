@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../widgets/container_pattern_painter.dart';
 import '../tabs/categories_screens.dart';
+import '../tabs/docs_screen.dart';
 import '../tabs/explore_screen.dart';
 import 'widgets/admin_view_sideBar.dart';
 import 'widgets/sidebar_button.dart';
@@ -22,7 +23,19 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  SideTabType activeButton = SideTabType.explore;
+  SideTabType activeButton = SideTabType.docs;
+
+  Widget switchTabs(SideTabType newActiveTab) {
+    switch (newActiveTab) {
+      case SideTabType.explore:
+        return ExploreView();
+      case SideTabType.docs:
+        return DocsView();
+
+      default:
+        return CategoriesView();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Expanded(
                   child: AnimatedSwitcher(
                     duration: 100.ms,
-                    child: activeButton == SideTabType.explore ? ExploreView() : CategoriesView(),
+                    child: switchTabs(activeButton),
                   ),
                 )
               ],
