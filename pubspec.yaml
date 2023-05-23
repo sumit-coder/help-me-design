@@ -39,6 +39,8 @@ dependencies:
   patterns_canvas: ^0.4.0
   provider: ^6.0.5
   flutter_animate: ^4.1.1+1
+  favicon: ^1.1.1
+  appwrite: ^9.0.0
 
 dev_dependencies:
   flutter_test:

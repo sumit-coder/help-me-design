@@ -1,5 +1,3 @@
-import 'dart:io';
-import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -12,11 +10,12 @@ import 'package:help_me_design/views/widgets/button_tap_effect.dart';
 import '../../../constants/text_constants.dart';
 import '../../widgets/container_pattern_painter.dart';
 import 'widgets/tab_view_hero_card.dart';
+import 'widgets/website_card.dart';
 
 class DocsView extends StatelessWidget {
   DocsView({Key? key}) : super(key: key);
 
-  List<String> _items = ['q', 'm', '007', 'J', 'q', 'm'];
+  List<String> _items = ['q', 'm', '007', 'J', 'q', 'm', 'J', 'q', 'm'];
 
   int constants = 0;
 
@@ -69,22 +68,6 @@ class DocsView extends StatelessWidget {
                   ),
                 ),
               ),
-              // child: ScrollConfiguration(
-              // behavior: ScrollConfiguration.of(context).copyWith(
-              //   dragDevices: {
-              //     PointerDeviceKind.touch,
-              //     PointerDeviceKind.mouse,
-              //   },
-              // ),
-              //   child: ListView.builder(
-              //     // shrinkWrap: true,
-              //     scrollDirection: Axis.horizontal,
-              //     itemCount: 10,
-              //     itemBuilder: (context, index) {
-              //       return TechCard(techName: "Flutter", onTap: () {});
-              //     },
-              //   ),
-              // ),
             ),
             Container(
               margin: EdgeInsets.only(left: MySpaceSystem.spaceX3),
@@ -96,31 +79,12 @@ class DocsView extends StatelessWidget {
                 // direction: Axis.vertical,
                 children: [
                   for (var i in _items)
-                    Container(
-                      height: 200,
-                      width: 220,
-                      padding: EdgeInsets.all(MySpaceSystem.spaceX2),
-                      decoration: BoxDecoration(
-                        boxShadow: cardShadow,
-                        borderRadius: BorderRadius.circular(8),
-                        color: themeData.colorScheme.secondary,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text('adf', style: themeData.textTheme.bodyMedium),
-                              IconButton(
-                                onPressed: () {},
-                                icon: Icon(Icons.bookmark_add_rounded),
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
+                    const WebsiteCard(
+                      title: 'Youtube-can-be-website.com',
+                      shortDescription: 'Youtube is for watching videos \nfor free adasd asd fefad faeasd fa ea3',
+                      imageUrl: 'https://i.ibb.co/Rhkgs3q/nyt-puppeteer.jpg',
+                      websiteUrl: 'https://youtube.com',
+                      isBookmarked: false,
                     ),
                 ],
               ),
@@ -148,7 +112,7 @@ class TechCard extends StatelessWidget {
   Widget build(BuildContext context) {
     var themeData = Theme.of(context);
     return ButtonTapEffect(
-      onTap: () {},
+      onTap: () async {},
       child: Container(
         // height: 54,
         margin: const EdgeInsets.only(right: 8),
@@ -168,7 +132,10 @@ class TechCard extends StatelessWidget {
                       color: DesignSystemColors.secondaryColorDark,
                     ),
                   )
-                : SizedBox(height: 24, child: Image.network('https://upload.wikimedia.org/wikipedia/commons/c/c6/Dart_logo.png')),
+                : SizedBox(
+                    height: 24,
+                    child: Image.network('https://upload.wikimedia.org/wikipedia/commons/c/c6/Dart_logo.png'),
+                  ),
             SizedBox(width: MySpaceSystem.spaceX2),
             Text(techName, style: MyTextTypeSystem.titleLargeDark),
           ],
@@ -177,3 +144,6 @@ class TechCard extends StatelessWidget {
     );
   }
 }
+
+// https://i.ibb.co/pjzhF6F/nyt-puppeteer.jpg
+// https://www.rockstargames.com/favicon.ico
