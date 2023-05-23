@@ -96,30 +96,66 @@ class DocsView extends StatelessWidget {
                 // direction: Axis.vertical,
                 children: [
                   for (var i in _items)
-                    Container(
-                      height: 200,
-                      width: 220,
-                      padding: EdgeInsets.all(MySpaceSystem.spaceX2),
-                      decoration: BoxDecoration(
-                        boxShadow: cardShadow,
-                        borderRadius: BorderRadius.circular(8),
-                        color: themeData.colorScheme.secondary,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text('adf', style: themeData.textTheme.bodyMedium),
-                              IconButton(
-                                onPressed: () {},
-                                icon: Icon(Icons.bookmark_add_rounded),
-                              )
-                            ],
-                          ),
-                        ],
+                    ButtonTapEffect(
+                      onTap: () {},
+                      child: Container(
+                        height: 250,
+                        width: 300,
+                        color: themeData.colorScheme.primary,
+                        // padding: EdgeInsets.all(MySpaceSystem.spaceX2),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              height: 144,
+                              decoration: BoxDecoration(
+                                boxShadow: cardShadow,
+                                borderRadius: BorderRadius.circular(4),
+                                color: themeData.colorScheme.secondary,
+                              ),
+                              width: double.maxFinite,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(4),
+                                child: Image.network(
+                                  "https://i.ibb.co/pjzhF6F/nyt-puppeteer.jpg",
+                                  fit: BoxFit.cover,
+                                  alignment: Alignment.topCenter,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(
+                                margin: EdgeInsets.only(top: 8),
+                                padding: EdgeInsets.symmetric(horizontal: MySpaceSystem.spaceX2),
+                                decoration: BoxDecoration(
+                                  boxShadow: cardShadow,
+                                  borderRadius: BorderRadius.circular(4),
+                                  color: themeData.colorScheme.secondary,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text('Youtube', maxLines: 1, style: themeData.textTheme.titleMedium),
+                                        SizedBox(height: MySpaceSystem.spaceX1),
+                                        Text('Youtube is for watching videos \nfor free',
+                                            maxLines: 2, style: themeData.textTheme.bodyMedium),
+                                      ],
+                                    ),
+                                    IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(Icons.bookmark_add_rounded),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                 ],
@@ -177,3 +213,6 @@ class TechCard extends StatelessWidget {
     );
   }
 }
+
+// https://i.ibb.co/pjzhF6F/nyt-puppeteer.jpg
+// https://www.rockstargames.com/favicon.ico
