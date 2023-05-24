@@ -42,6 +42,12 @@ dependencies:
   favicon: ^1.1.1
   appwrite: ^9.0.0
 
+  # codeview: ^0.0.16
+  dart_code_viewer2: ^1.0.1
+  selectable_code_view: ^0.0.1
+  # code_viewer: ^0.0.2
+  # flutter_markdown: ^0.6.14
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
