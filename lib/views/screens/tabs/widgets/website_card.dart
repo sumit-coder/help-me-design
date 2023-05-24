@@ -29,88 +29,94 @@ class WebsiteCard extends StatelessWidget {
     return ButtonTapEffect(
       onTap: () {},
       child: Container(
-        height: 250,
+        height: 300,
         width: 300,
-        color: themeData.colorScheme.primary,
+        padding: EdgeInsets.all(MySpaceSystem.spaceX2),
+        decoration: BoxDecoration(
+          boxShadow: cardShadow,
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
+          color: themeData.colorScheme.secondary,
+        ),
         // padding: EdgeInsets.all(MySpaceSystem.spaceX2),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
+        child: Stack(
           children: [
-            Container(
-              height: 144,
-              decoration: BoxDecoration(
-                boxShadow: cardShadow,
-                borderRadius: BorderRadius.circular(8),
-                color: themeData.colorScheme.secondary,
-              ),
-              width: double.maxFinite,
+            SizedBox(
+              height: 54,
+              width: 54,
               child: ClipRRect(
-                borderRadius: const BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8)),
-                child: Image.network(
-                  imageUrl,
-                  fit: BoxFit.cover,
-                  alignment: Alignment.topCenter,
-                ),
+                child: Image.network("https://i.ibb.co/wL7nkQb/favicon-V2.png"),
               ),
             ),
-            Expanded(
-              child: Container(
-                margin: const EdgeInsets.only(top: 6),
-                padding: EdgeInsets.only(left: MySpaceSystem.spaceX2, right: MySpaceSystem.spaceX2),
-                decoration: BoxDecoration(
-                  boxShadow: cardShadow,
-                  borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(8), bottomRight: Radius.circular(8)),
-                  color: themeData.colorScheme.secondary,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            title,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: themeData.textTheme.titleMedium,
-                          ),
-                          SizedBox(height: MySpaceSystem.spaceX1),
-                          Text(
-                            shortDescription,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: themeData.textTheme.bodyMedium,
-                          ),
-                        ],
-                      ),
+            Positioned(
+              right: 0,
+              top: 0,
+              child: Column(
+                children: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.open_in_new_rounded,
+                      // Icons.bookmark_add_rounded,
+                      color: DesignSystemColors.primaryColor,
                     ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.open_in_new_rounded,
-                            // Icons.bookmark_add_rounded,
-                            color: DesignSystemColors.primaryColor,
-                          ),
+                  ),
+                  SizedBox(height: MySpaceSystem.spaceX1),
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.bookmark_added_rounded,
+                      // Icons.bookmark_add_rounded,
+                      color: DesignSystemColors.primaryColor,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Positioned.fill(
+              // left: 0,
+              bottom: 0,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: themeData.textTheme.titleMedium,
+                  ),
+                  SizedBox(height: MySpaceSystem.spaceX1),
+                  Text(
+                    shortDescription,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                    style: themeData.textTheme.bodyMedium,
+                  ),
+                  SizedBox(height: MySpaceSystem.spaceX3),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "stakeoverflow.com",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: themeData.textTheme.bodySmall,
+                      ),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: themeData.colorScheme.onSecondary,
+                          borderRadius: const BorderRadius.all(Radius.circular(4)),
                         ),
-                        const SizedBox(height: MySpaceSystem.spaceX),
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.bookmark_added_rounded,
-                            // Icons.bookmark_add_rounded,
-                            color: DesignSystemColors.primaryColor,
-                          ),
+                        child: Text(
+                          'Dart',
+                          overflow: TextOverflow.ellipsis,
+                          style: themeData.textTheme.bodyMedium,
                         ),
-                      ],
-                    )
-                  ],
-                ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
           ],

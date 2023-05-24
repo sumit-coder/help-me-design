@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../widgets/container_pattern_painter.dart';
 import '../tabs/categories_screens.dart';
+import '../tabs/code_snippet_screen.dart';
 import '../tabs/docs_screen.dart';
 import '../tabs/explore_screen.dart';
 import 'widgets/admin_view_sideBar.dart';
@@ -23,7 +24,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  SideTabType activeButton = SideTabType.docs;
+  SideTabType activeButton = SideTabType.codeSnippet;
 
   Widget switchTabs(SideTabType newActiveTab) {
     switch (newActiveTab) {
@@ -31,6 +32,8 @@ class _MyHomePageState extends State<MyHomePage> {
         return ExploreView();
       case SideTabType.docs:
         return DocsView();
+      case SideTabType.codeSnippet:
+        return CodeSnippetScreen();
 
       default:
         return CategoriesView();
