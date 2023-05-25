@@ -1,0 +1,221 @@
+
+import 'package:highlight/highlight.dart';
+import 'package:highlight/languages/actionscript.dart';
+import 'package:highlight/languages/apache.dart';
+import 'package:highlight/languages/applescript.dart';
+import 'package:highlight/languages/arcade.dart';
+import 'package:highlight/languages/arduino.dart';
+import 'package:highlight/languages/armasm.dart';
+import 'package:highlight/languages/bash.dart';
+import 'package:highlight/languages/basic.dart';
+import 'package:highlight/languages/clean.dart';
+import 'package:highlight/languages/cmake.dart';
+import 'package:highlight/languages/cos.dart';
+import 'package:highlight/languages/cpp.dart';
+import 'package:highlight/languages/crmsh.dart';
+import 'package:highlight/languages/crystal.dart';
+import 'package:highlight/languages/cs.dart';
+import 'package:highlight/languages/csp.dart';
+import 'package:highlight/languages/css.dart';
+import 'package:highlight/languages/dart.dart';
+import 'package:highlight/languages/diff.dart';
+import 'package:highlight/languages/django.dart';
+import 'package:highlight/languages/dns.dart';
+import 'package:highlight/languages/dockerfile.dart';
+import 'package:highlight/languages/dos.dart';
+import 'package:highlight/languages/dsconfig.dart';
+import 'package:highlight/languages/dust.dart';
+import 'package:highlight/languages/elixir.dart';
+import 'package:highlight/languages/excel.dart';
+import 'package:highlight/languages/go.dart';
+import 'package:highlight/languages/gradle.dart';
+import 'package:highlight/languages/groovy.dart';
+import 'package:highlight/languages/http.dart';
+import 'package:highlight/languages/java.dart';
+import 'package:highlight/languages/javascript.dart';
+import 'package:highlight/languages/json.dart';
+import 'package:highlight/languages/julia.dart';
+import 'package:highlight/languages/kotlin.dart';
+import 'package:highlight/languages/livescript.dart';
+import 'package:highlight/languages/markdown.dart';
+import 'package:highlight/languages/mathematica.dart';
+import 'package:highlight/languages/matlab.dart';
+import 'package:highlight/languages/mercury.dart';
+import 'package:highlight/languages/nginx.dart';
+import 'package:highlight/languages/objectivec.dart';
+import 'package:highlight/languages/perl.dart';
+import 'package:highlight/languages/pgsql.dart';
+import 'package:highlight/languages/php.dart';
+import 'package:highlight/languages/powershell.dart';
+import 'package:highlight/languages/profile.dart';
+import 'package:highlight/languages/properties.dart';
+import 'package:highlight/languages/python.dart';
+import 'package:highlight/languages/qml.dart';
+import 'package:highlight/languages/r.dart';
+import 'package:highlight/languages/ruby.dart';
+import 'package:highlight/languages/rust.dart';
+import 'package:highlight/languages/sas.dart';
+import 'package:highlight/languages/scala.dart';
+import 'package:highlight/languages/scheme.dart';
+import 'package:highlight/languages/scss.dart';
+import 'package:highlight/languages/shell.dart';
+import 'package:highlight/languages/sql.dart';
+import 'package:highlight/languages/swift.dart';
+import 'package:highlight/languages/typescript.dart';
+import 'package:highlight/languages/vim.dart';
+import 'package:highlight/languages/x86asm.dart';
+import 'package:highlight/languages/xml.dart';
+import 'package:highlight/languages/xquery.dart';
+import 'package:highlight/languages/yaml.dart';
+import 'package:highlight/languages/vue.dart';
+import 'package:highlight/languages/graphql.dart';
+import 'package:highlight/languages/solidity.dart';
+
+final communityLanguages = {
+  'vue': vue,
+  'graphql': graphql,
+  'solidity': solidity,
+};
+final Map<String, Mode> builtinLanguages = {
+  'actionscript': actionscript,
+  'apache': apache,
+  'applescript': applescript,
+  'arcade': arcade,
+  'arduino': arduino,
+  'armasm': armasm,
+  'bash': bash,
+  'basic': basic,
+  'clean': clean,
+  'cmake': cmake,
+  'cos': cos,
+  'cpp': cpp,
+  'crmsh': crmsh,
+  'crystal': crystal,
+  'cs': cs,
+  'csp': csp,
+  'css': css,
+  'dart': dart,
+  'diff': diff,
+  'django': django,
+  'dns': dns,
+  'dockerfile': dockerfile,
+  'dos': dos,
+  'dsconfig': dsconfig,
+  'dust': dust,
+  'elixir': elixir,
+  'excel': excel,
+  'go': go,
+  'gradle': gradle,
+  'groovy': groovy,
+  'http': http,
+  'java': java,
+  'javascript': javascript,
+  'json': json,
+  'julia': julia,
+  'kotlin': kotlin,
+  'livescript': livescript,
+  'markdown': markdown,
+  'mathematica': mathematica,
+  'matlab': matlab,
+  'mercury': mercury,
+  'nginx': nginx,
+  'objectivec': objectivec,
+  'perl': perl,
+  'pgsql': pgsql,
+  'php': php,
+  'powershell': powershell,
+  'profile': profile,
+  'properties': properties,
+  'python': python,
+  'qml': qml,
+  'r': r,
+  'ruby': ruby,
+  'rust': rust,
+  'sas': sas,
+  'scala': scala,
+  'scheme': scheme,
+  'scss': scss,
+  'shell': shell,
+  'sql': sql,
+  'swift': swift,
+  'typescript': typescript,
+  'vim': vim,
+  'x86asm': x86Asm,
+  'xml': xml,
+  'xquery': xquery,
+  'yaml': yaml,
+};
+final allLanguages = {...builtinLanguages, ...communityLanguages};
+
+// enum CodeLanguage {
+//   actionscript,
+//   apache,
+//   applescript,
+//   arcade,
+//   arduino,
+//   armasm,
+//   bash,
+//   basic,
+//   clean,
+//   cmake,
+//   cos,
+//   cpp,
+//   crmsh,
+//   crystal,
+//   cs,
+//   csp,
+//   css,
+//   dart,
+//   diff,
+//   django,
+//   dns,
+//   dockerfile,
+//   dos,
+//   dsconfig,
+//   dust,
+//   elixir,
+//   excel,
+//   go,
+//   gradle,
+//   groovy,
+//   http,
+//   java,
+//   javascript,
+//   json,
+//   julia,
+//   kotlin,
+//   livescript,
+//   markdown,
+//   mathematica,
+//   matlab,
+//   mercury,
+//   nginx,
+//   objectivec,
+//   perl,
+//   pgsql,
+//   php,
+//   powershell,
+//   profile,
+//   properties,
+//   python,
+//   qml,
+//   r,
+//   ruby,
+//   rust,
+//   sas,
+//   scala,
+//   scheme,
+//   scss,
+//   shell,
+//   sql,
+//   swift,
+//   typescript,
+//   vim,
+//   x86asm,
+//   xml,
+//   xquery,
+//   yaml,
+//   vue,
+//   graphql,
+//   solidity
+// }
