@@ -72,6 +72,7 @@ for (let x of cars) {
             ),
 
             CodeEditor(codeColor: codeColor, codeText: codeText),
+            CodeEditor(codeColor: codeColor, codeText: codeText),
 
             // SizedBox(height: 10),
             // Container(
