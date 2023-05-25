@@ -6,7 +6,8 @@ class DesignSystemColors {
   static const Color primaryColorDark = Color(0xFF9887EA);
   // secondaryColor
   static const Color secondaryColor = Color(0xFFFFFFFF);
-  static const Color secondaryColorDark = Color(0xFF1A1A1A);
+  // static const Color secondaryColorDark = Color(0xFF1A1A1A);
+  static const Color secondaryColorDark = Color(0xFF121212);
   // static const Color actionColor = Color(0xFFA492FC);
   static const Color actionColor = Color(0xFFD0FE42);
   static const Color tertiaryColor = Color(0xFF1B1A22);
