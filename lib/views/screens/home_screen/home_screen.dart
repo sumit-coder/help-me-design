@@ -24,7 +24,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  SideTabType activeButton = SideTabType.codeSnippet;
+  SideTabType activeButton = SideTabType.docs;
 
   Widget switchTabs(SideTabType newActiveTab) {
     switch (newActiveTab) {

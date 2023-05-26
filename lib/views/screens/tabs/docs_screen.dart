@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:help_me_design/theme/my_colors.dart';
@@ -78,6 +79,7 @@ class DocsView extends StatelessWidget {
                 runSpacing: MySpaceSystem.spaceX3,
                 // direction: Axis.vertical,
                 children: [
+                  AddDocCard(themeData: themeData),
                   for (var i in _items)
                     const WebsiteCard(
                       title: 'Youtube-can-be-website.com',
@@ -147,3 +149,61 @@ class TechCard extends StatelessWidget {
 
 // https://i.ibb.co/pjzhF6F/nyt-puppeteer.jpg
 // https://www.rockstargames.com/favicon.ico
+
+class AddDocCard extends StatelessWidget {
+  const AddDocCard({
+    super.key,
+    required this.themeData,
+  });
+
+  final ThemeData themeData;
+
+  @override
+  Widget build(BuildContext context) {
+    return ButtonTapEffect(
+      onTap: () {},
+      child: Material(
+        elevation: 3,
+        borderRadius: const BorderRadius.all(Radius.circular(8)),
+        child: Container(
+          height: 298,
+          width: 300,
+          // padding: EdgeInsets.all(MySpaceSystem.spaceX2),
+          decoration: BoxDecoration(
+            boxShadow: cardShadow,
+            borderRadius: const BorderRadius.all(Radius.circular(8)),
+            color: DesignSystemColors.primaryColorDark,
+            // border: Border.all(width: 1, color: themeData.colorScheme.outline),
+          ),
+          child: DottedBorder(
+            color: themeData.colorScheme.outline,
+            radius: Radius.circular(8),
+            borderType: BorderType.RRect,
+            strokeWidth: 2,
+            dashPattern: [5, 4],
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.add_rounded,
+                    size: 44,
+                    color: themeData.colorScheme.secondary,
+                  ),
+                  SizedBox(height: MySpaceSystem.spaceX2),
+                  Text(
+                    'Documentation',
+                    style: themeData.textTheme.bodyMedium!.copyWith(
+                      color: themeData.colorScheme.secondary,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

@@ -1,4 +1,5 @@
 // import 'package:dart_code_viewer2/dart_code_viewer2.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:help_me_design/theme/my_colors.dart';
@@ -9,6 +10,8 @@ import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:code_text_field/code_text_field.dart';
 
 import '../../../constants/text_constants.dart';
+import '../../../theme/my_theme.dart';
+import '../../widgets/button_tap_effect.dart';
 import '../../widgets/code_editor/code_editor.dart';
 import '../../widgets/container_pattern_painter.dart';
 import 'widgets/tab_view_hero_card.dart';
@@ -52,6 +55,8 @@ for (let x of cars) {
 
   Color codeColor = Color(0xFF121212);
 
+  List snippetCollections = ["def"];
+
   @override
   Widget build(BuildContext context) {
     var themeData = Theme.of(context);
@@ -62,6 +67,7 @@ for (let x of cars) {
       // color: Colors.deepPurple,
       child: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TabViewHeroCard(
               // title: MyTextConstants.docsTabHeadline,
@@ -70,30 +76,80 @@ for (let x of cars) {
               posterImage: 'https://i.ibb.co/SNVPkKM/original-dd50f8430ab324b03b6af592e73ca6c7-removebg-preview.png',
               bgPattern: ContainerSquarePatternTwoPainter(44, context),
             ),
-
-            CodeEditor(codeColor: codeColor, codeText: codeText),
-            CodeEditor(codeColor: codeColor, codeText: codeText),
-
-            // SizedBox(height: 10),
-            // Container(
-            //   height: 300,
-            //   child: DartCodeViewer(
-            //     codeText,
-            //     showCopyButton: false,
-            //     backgroundColor: codeColor,
-            //   ),
-            // ),
-            // SizedBox(height: 10),
-            // SelectableCodeView(
-            //   code: codeText, // Code text
-            //   language: Language.JAVASCRIPT, // Language
-            //   languageTheme: LanguageTheme.gravityDark(), // Theme
-            //   fontSize: 16.0, // Font size
-            //   withZoom: false, // Enable/Disable zoom icon controls
-            //   withLinesCount: false, // Enable/Disable line number
-            //   expanded: false, // Enable/Disable container expansion
-            // ),
+            // CodeEditor(codeColor: codeColor, codeText: codeText),
+            // CodeEditor(codeColor: codeColor, codeText: codeText),
+            Container(
+              margin: EdgeInsets.only(left: MySpaceSystem.spaceX3),
+              // width: 660,
+              // height: 300,
+              child: Wrap(
+                spacing: MySpaceSystem.spaceX3,
+                runSpacing: MySpaceSystem.spaceX3,
+                // direction: Axis.vertical,
+                children: [
+                  for (var snippetCollection in snippetCollections) AddSnippetCard(themeData: themeData),
+                ],
+              ),
+            )
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class AddSnippetCard extends StatelessWidget {
+  const AddSnippetCard({
+    super.key,
+    required this.themeData,
+  });
+
+  final ThemeData themeData;
+
+  @override
+  Widget build(BuildContext context) {
+    return ButtonTapEffect(
+      onTap: () {},
+      child: Material(
+        elevation: 3,
+        borderRadius: const BorderRadius.all(Radius.circular(8)),
+        child: Container(
+          height: 200,
+          width: 200,
+          // padding: EdgeInsets.all(MySpaceSystem.spaceX2),
+          decoration: BoxDecoration(
+            boxShadow: cardShadow,
+            borderRadius: const BorderRadius.all(Radius.circular(8)),
+            color: DesignSystemColors.primaryColorDark,
+            // border: Border.all(width: 1, color: themeData.colorScheme.outline),
+          ),
+          child: DottedBorder(
+            color: themeData.colorScheme.outline,
+            radius: Radius.circular(8),
+            borderType: BorderType.RRect,
+            strokeWidth: 2,
+            dashPattern: [5, 4],
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.add_rounded,
+                    size: 44,
+                    color: themeData.colorScheme.secondary,
+                  ),
+                  SizedBox(height: MySpaceSystem.spaceX2),
+                  Text(
+                    'Snippet Collection',
+                    style: themeData.textTheme.bodyMedium!.copyWith(
+                      color: themeData.colorScheme.secondary,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );
