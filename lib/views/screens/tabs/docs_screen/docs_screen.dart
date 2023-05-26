@@ -8,10 +8,10 @@ import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/theme/my_theme.dart';
 import 'package:help_me_design/views/widgets/button_tap_effect.dart';
 
-import '../../../constants/text_constants.dart';
-import '../../widgets/container_pattern_painter.dart';
-import 'widgets/tab_view_hero_card.dart';
-import 'widgets/website_card.dart';
+import '../../../../constants/text_constants.dart';
+import '../../../widgets/container_pattern_painter.dart';
+import '../widgets/tab_view_hero_card.dart';
+import '../widgets/website_card.dart';
 
 class DocsView extends StatelessWidget {
   DocsView({Key? key}) : super(key: key);

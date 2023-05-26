@@ -4,7 +4,7 @@ import 'package:help_me_design/theme/my_colors.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/theme/my_theme.dart';
 
-import '../../widgets/container_pattern_painter.dart';
+import '../../../widgets/container_pattern_painter.dart';
 
 class ExploreView extends StatelessWidget {
   ExploreView({Key? key}) : super(key: key);
