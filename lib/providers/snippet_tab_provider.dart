@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SnippetTabProvider with ChangeNotifier {
-  bool openActiveSnippetCollectionView = false;
+  bool openActiveSnippetCollectionView = true;
 
   changeCollectionView(bool newValue) {
     openActiveSnippetCollectionView = newValue;

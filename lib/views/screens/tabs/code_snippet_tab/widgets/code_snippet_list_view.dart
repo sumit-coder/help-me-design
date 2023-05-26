@@ -20,7 +20,6 @@ class CodeSnippetsListView extends StatelessWidget {
     "def",
     "def",
     "def",
-    "def",
   ];
   @override
   Widget build(BuildContext context) {

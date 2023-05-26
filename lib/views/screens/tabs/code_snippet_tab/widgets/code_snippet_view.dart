@@ -9,12 +9,7 @@ import 'package:provider/provider.dart';
 class CodeSnippetView extends StatelessWidget {
   const CodeSnippetView({
     super.key,
-    required this.codeColor,
-    required this.codeText,
   });
-
-  final Color codeColor;
-  final String codeText;
 
   @override
   Widget build(BuildContext context) {
@@ -55,9 +50,49 @@ class CodeSnippetView extends StatelessWidget {
             ],
           ),
         ),
-        CodeEditor(codeColor: codeColor, codeText: codeText),
-        CodeEditor(codeColor: codeColor, codeText: codeText),
+        CodeEditor(codeText: codeText2),
+        CodeEditor(codeText: codeText),
       ],
     );
   }
 }
+
+final String codeText2 = '''
+MaterialButton(
+  child: Text("Click here"),
+  onPressed: () {
+    print("Clicked")
+  },
+),
+''';
+
+final String codeText = '''
+MaterialButton(
+  child: Text("Click here"),
+  onPressed: () {
+    print("Clicked")
+  },
+),
+
+
+f
+
+// TabViewHeroCard(
+//   title: "Code Snippet.",
+//   shortDescription: MyTextConstants.docsTabShortDescription,
+//   posterImage: 'https://i.ibb.co/SNVPkKM/original-dd50f8430ab324b03b6af592e73ca6c7-removebg-preview.png',
+//   bgPattern: ContainerSquarePatternTwoPainter(44, context),
+// ),
+
+// function car(){
+//   return 'Hy!';
+// }
+
+// const cars = ["BMW", "Volvo", "Mini"];
+
+// let text = "";
+// for (let x of cars) {
+//   text += x;
+// }
+
+// ''';

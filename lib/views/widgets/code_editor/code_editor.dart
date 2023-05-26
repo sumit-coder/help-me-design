@@ -20,11 +20,9 @@ import 'language_import.dart';
 class CodeEditor extends StatefulWidget {
   const CodeEditor({
     super.key,
-    required this.codeColor,
     required this.codeText,
   });
 
-  final Color codeColor;
   final String codeText;
 
   @override
@@ -45,25 +43,29 @@ class _CodeEditorState extends State<CodeEditor> {
             // height: 100,
             padding: EdgeInsets.all(MySpaceSystem.spaceX3),
             width: double.maxFinite,
-            decoration: BoxDecoration(color: widget.codeColor, borderRadius: BorderRadius.circular(8)),
+            decoration: BoxDecoration(
+              color: themeData.colorScheme.secondary,
+              borderRadius: BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8)),
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text("Flutter alert widget", style: themeData.textTheme.titleMedium),
-                SizedBox(height: MySpaceSystem.spaceX2),
+                SizedBox(height: MySpaceSystem.spaceX1),
                 Text("Flutter alert widget description", style: themeData.textTheme.bodyMedium),
               ],
             ),
           ),
+          Divider(height: 1, thickness: 1, color: themeData.colorScheme.outline),
           // SizedBox(height: MySpaceSystem.spaceX2),
           Container(
-            // height: 100,
-            constraints: const BoxConstraints(maxHeight: 450),
+            // height: double.,
+            // constraints: const BoxConstraints(maxHeight: 450),
             width: double.maxFinite,
             clipBehavior: Clip.antiAlias,
             decoration: BoxDecoration(
-              color: widget.codeColor,
-              borderRadius: BorderRadius.circular(8),
+              color: DesignSystemColors.secondaryColorDark,
+              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(8), bottomRight: Radius.circular(8)),
             ),
             child: Column(
               children: [
@@ -125,21 +127,22 @@ class _CodeEditorState extends State<CodeEditor> {
                   ),
                 ),
                 Divider(height: 1, thickness: 1, color: themeData.colorScheme.outline),
-                Expanded(
-                  child: CodeTheme(
-                    data: const CodeThemeData(styles: atomOneDarkTheme),
-                    child: CodeField(
-                      wrap: true,
-                      textSelectionTheme: const TextSelectionThemeData(),
-                      lineNumberStyle: const LineNumberStyle(margin: 16),
-                      background: DesignSystemColors.secondaryColorDark,
-                      controller: CodeController(
-                        text: widget.codeText,
-                        // language: javascript,
-                        language: allLanguages[selectedLanguage],
-                      ),
-                      textStyle: GoogleFonts.sourceCodePro(),
+                CodeTheme(
+                  data: const CodeThemeData(styles: atomOneDarkTheme),
+                  child: CodeField(
+                    wrap: false,
+                    horizontalScroll: true,
+                    maxLines: 20,
+                    minLines: 1,
+                    textSelectionTheme: const TextSelectionThemeData(),
+                    lineNumberStyle: const LineNumberStyle(margin: 16),
+                    background: DesignSystemColors.secondaryColorDark,
+                    controller: CodeController(
+                      text: widget.codeText,
+                      // language: javascript,
+                      language: allLanguages[selectedLanguage],
                     ),
+                    textStyle: GoogleFonts.sourceCodePro(),
                   ),
                 ),
               ],
