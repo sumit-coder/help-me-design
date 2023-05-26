@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:help_me_design/views/widgets/tag_widget.dart';
 
 import '../../../../theme/my_colors.dart';
 import '../../../../theme/my_design_system.dart';
@@ -102,18 +103,19 @@ class WebsiteCard extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: themeData.textTheme.bodySmall,
                       ),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: themeData.colorScheme.onSecondary,
-                          borderRadius: const BorderRadius.all(Radius.circular(4)),
-                        ),
-                        child: Text(
-                          'Dart',
-                          overflow: TextOverflow.ellipsis,
-                          style: themeData.textTheme.bodyMedium,
-                        ),
-                      ),
+                      // Container(
+                      //   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      //   decoration: BoxDecoration(
+                      //     color: themeData.colorScheme.onSecondary,
+                      //     borderRadius: const BorderRadius.all(Radius.circular(4)),
+                      //   ),
+                      //   child: Text(
+                      //     'Dart',
+                      //     overflow: TextOverflow.ellipsis,
+                      //     style: themeData.textTheme.bodyMedium,
+                      //   ),
+                      // ),
+                      const Tag(title: 'Dart'),
                     ],
                   ),
                 ],

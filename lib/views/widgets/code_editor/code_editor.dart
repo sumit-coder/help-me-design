@@ -45,7 +45,7 @@ class _CodeEditorState extends State<CodeEditor> {
             width: double.maxFinite,
             decoration: BoxDecoration(
               color: themeData.colorScheme.secondary,
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8)),
+              borderRadius: const BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8)),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,7 +63,7 @@ class _CodeEditorState extends State<CodeEditor> {
             // constraints: const BoxConstraints(maxHeight: 450),
             width: double.maxFinite,
             clipBehavior: Clip.antiAlias,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: DesignSystemColors.secondaryColorDark,
               borderRadius: BorderRadius.only(bottomLeft: Radius.circular(8), bottomRight: Radius.circular(8)),
             ),
@@ -120,7 +120,7 @@ class _CodeEditorState extends State<CodeEditor> {
                             borderRadius: BorderRadius.circular(4),
                             color: themeData.colorScheme.primary,
                           ),
-                          child: Icon(Icons.copy_all_rounded, size: 28),
+                          child: const Icon(Icons.copy_all_rounded, size: 28),
                         ),
                       )
                     ],

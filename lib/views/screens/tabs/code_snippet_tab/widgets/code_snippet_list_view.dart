@@ -4,6 +4,7 @@ import 'package:help_me_design/providers/snippet_tab_provider.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/theme/my_theme.dart';
 import 'package:help_me_design/views/widgets/button_tap_effect.dart';
+import 'package:help_me_design/views/widgets/tag_widget.dart';
 import 'package:provider/provider.dart';
 
 class CodeSnippetsListView extends StatelessWidget {
@@ -55,15 +56,8 @@ class CodeSnippetsListView extends StatelessWidget {
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Container(
-                          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                          decoration: BoxDecoration(
-                            color: themeData.colorScheme.primary,
-                            borderRadius: const BorderRadius.all(Radius.circular(2)),
-                          ),
-                          child: Text('Flutter', style: themeData.textTheme.bodyMedium),
-                        )
+                      children: const [
+                        Tag(title: 'Flutter'),
                       ],
                     ),
                     Column(
@@ -119,7 +113,7 @@ class AddCodeSnippetCard extends StatelessWidget {
             radius: Radius.circular(8),
             borderType: BorderType.RRect,
             strokeWidth: 2,
-            dashPattern: [5, 4],
+            dashPattern: const [5, 4],
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
