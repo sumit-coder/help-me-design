@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../widgets/container_pattern_painter.dart';
 import '../tabs/categories_screens.dart';
-import '../tabs/code_snippet_screen/code_snippet_screen.dart';
+import '../tabs/code_snippet_tab/code_snippet_tab.dart';
 import '../tabs/docs_screen/docs_screen.dart';
 import '../tabs/explore_screen/explore_screen.dart';
 import 'widgets/admin_view_sideBar.dart';

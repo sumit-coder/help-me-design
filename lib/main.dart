@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:help_me_design/theme/my_theme.dart';
 import 'package:provider/provider.dart';
 
+import 'providers/snippet_tab_provider.dart';
 import 'views/screens/home_screen/home_screen.dart';
 
 void main() {
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<ThemeManager>(create: (_) => ThemeManager()),
+        ChangeNotifierProvider<SnippetTabProvider>(create: (_) => SnippetTabProvider()),
       ],
       child: Consumer<ThemeManager>(builder: (context, value, snapshot) {
         return MaterialApp(
