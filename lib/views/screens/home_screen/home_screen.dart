@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/theme/my_theme.dart';
+import 'package:help_me_design/views/screens/tabs/components_tab/components_tab.dart';
 import 'package:provider/provider.dart';
 
 import '../../widgets/container_pattern_painter.dart';
@@ -34,6 +35,9 @@ class _MyHomePageState extends State<MyHomePage> {
         return DocsView();
       case SideTabType.codeSnippet:
         return CodeSnippetScreen();
+
+      case SideTabType.components:
+        return ComponentsTab();
 
       default:
         return CategoriesView();
