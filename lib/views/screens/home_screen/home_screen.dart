@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:help_me_design/theme/my_design_system.dart';
-import 'package:help_me_design/theme/my_theme.dart';
 import 'package:help_me_design/views/screens/tabs/components_tab/components_tab.dart';
-import 'package:provider/provider.dart';
 
-import '../../widgets/container_pattern_painter.dart';
 import '../tabs/categories_screens.dart';
 import '../tabs/code_snippet_tab/code_snippet_tab.dart';
-import '../tabs/docs_screen/docs_screen.dart';
-import '../tabs/explore_screen/explore_screen.dart';
+import '../tabs/docs_tab/docs_tab.dart';
+import '../tabs/explore_tab/explore_tab.dart';
 import 'widgets/admin_view_sideBar.dart';
-import 'widgets/sidebar_button.dart';
 
 // save youtube videos
 // save websites
@@ -25,7 +20,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  SideTabType activeButton = SideTabType.codeSnippet;
+  SideTabType activeButton = SideTabType.components;
 
   Widget switchTabs(SideTabType newActiveTab) {
     switch (newActiveTab) {

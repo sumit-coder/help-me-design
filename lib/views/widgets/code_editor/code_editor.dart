@@ -1,5 +1,4 @@
 import 'package:code_text_field/code_text_field.dart';
-import 'package:dropdown_button2/custom_dropdown_button2.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,10 +8,6 @@ import 'package:highlight/highlight.dart';
 
 import '../../../theme/my_design_system.dart';
 
-import 'package:highlight/languages/dart.dart';
-import 'package:highlight/languages/javascript.dart';
-import 'package:flutter_highlight/themes/monokai-sublime.dart';
-import 'package:flutter_highlight/themes/atom-one-dark-reasonable.dart';
 import 'package:flutter_highlight/themes/atom-one-dark.dart';
 
 import 'language_import.dart';
