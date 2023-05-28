@@ -3,7 +3,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:help_me_design/views/screens/tabs/widgets/tab_view_hero_card.dart';
 import 'package:help_me_design/views/widgets/container_pattern_painter.dart';
 
-import 'widgets/code_snippet_list_view.dart';
+import 'widgets/component_view.dart';
+import 'widgets/components_list_view.dart';
 
 class ComponentsTab extends StatelessWidget {
   const ComponentsTab({Key? key}) : super(key: key);
@@ -29,7 +30,8 @@ class ComponentsTab extends StatelessWidget {
             AnimatedSwitcher(
               duration: 300.ms,
               switchInCurve: Curves.easeIn,
-              child: ComponentsListView(),
+              // child: ComponentsListView(),
+              child: ComponentView(),
             ),
           ],
         ),
