@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:help_me_design/theme/my_colors.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/theme/my_theme.dart';
+import 'package:help_me_design/views/widgets/button_tap_effect.dart';
 
 import '../../../widgets/container_pattern_painter.dart';
 import '../widgets/tab_view_hero_card.dart';
@@ -10,7 +11,16 @@ import '../widgets/tab_view_hero_card.dart';
 class ExploreView extends StatelessWidget {
   ExploreView({Key? key}) : super(key: key);
 
-  List<String> _items = ['q', 'm', '007', 'J', 'q', 'm'];
+  List<String> _items = [
+    'q',
+    'm',
+    '007',
+    'J',
+    'q',
+    'm',
+    'm',
+    'm',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -42,15 +52,39 @@ class ExploreView extends StatelessWidget {
                 // direction: Axis.vertical,
                 children: [
                   for (var i in _items)
-                    Container(
-                      height: 200,
-                      width: 220,
-                      decoration: BoxDecoration(
-                        boxShadow: cardShadow,
-                        borderRadius: BorderRadius.circular(8),
-                        color: themeData.colorScheme.secondary,
+                    ButtonTapEffect(
+                      onTap: () {},
+                      child: Container(
+                        height: 230,
+                        width: 220,
+                        padding: EdgeInsets.all(MySpaceSystem.spaceX3),
+                        decoration: BoxDecoration(
+                          boxShadow: cardShadow,
+                          borderRadius: BorderRadius.circular(8),
+                          color: themeData.colorScheme.secondary,
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Icon(Icons.design_services),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Design Systems - new on lodading form here lkjldkf',
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 2,
+                                  style: themeData.textTheme.bodyLarge,
+                                ),
+                                SizedBox(height: MySpaceSystem.spaceX2),
+                                Text('Count: 4', style: themeData.textTheme.bodySmall),
+                                SizedBox(height: MySpaceSystem.spaceX1),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                      child: Text('adf'),
                     ),
                 ],
               ),
