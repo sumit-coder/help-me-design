@@ -27,6 +27,27 @@ class CodeEditor extends StatefulWidget {
 class _CodeEditorState extends State<CodeEditor> {
   String selectedLanguage = "dart";
 
+  late CodeController codeController;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    codeController = CodeController(
+      text: widget.codeText,
+      // language: javascript,
+      language: allLanguages[selectedLanguage],
+    );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    codeController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     var themeData = Theme.of(context);
@@ -107,7 +128,9 @@ class _CodeEditorState extends State<CodeEditor> {
                         ),
                       ),
                       ButtonTapEffect(
-                        onTap: () {},
+                        onTap: () {
+                          print('object');
+                        },
                         child: Container(
                           height: 53,
                           width: 53,
@@ -132,11 +155,12 @@ class _CodeEditorState extends State<CodeEditor> {
                     textSelectionTheme: const TextSelectionThemeData(),
                     lineNumberStyle: const LineNumberStyle(margin: 16),
                     background: DesignSystemColors.secondaryColorDark,
-                    controller: CodeController(
-                      text: widget.codeText,
-                      // language: javascript,
-                      language: allLanguages[selectedLanguage],
-                    ),
+                    // controller: CodeController(
+                    //   text: widget.codeText,
+                    //   // language: javascript,
+                    //   language: allLanguages[selectedLanguage],
+                    // ),
+                    controller: codeController,
                     textStyle: GoogleFonts.sourceCodePro(),
                   ),
                 ),
