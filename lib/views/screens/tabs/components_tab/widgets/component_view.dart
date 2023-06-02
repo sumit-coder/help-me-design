@@ -63,52 +63,51 @@ class ComponentView extends StatelessWidget {
               ),
             ),
           ),
-          // Column(
-          //   children: [
-          //     Container(
-          //       height: 200,
-          //       width: double.maxFinite,
-          //       margin: EdgeInsets.only(left: MySpaceSystem.spaceX3, bottom: MySpaceSystem.spaceX2),
-          //       padding: EdgeInsets.all(MySpaceSystem.spaceX2),
-          //       decoration: BoxDecoration(
-          //         color: themeData.colorScheme.secondary,
-          //         boxShadow: cardShadow,
-          //         borderRadius: const BorderRadius.all(Radius.circular(8)),
-          //       ),
-          //       child: Column(
-          //         children: [
-          //           Positioned(
-          //             top: 8,
-          //             left: 8,
-          //             child: Text(
-          //               'Preview',
-          //               maxLines: 2,
-          //               style: themeData.textTheme.titleSmall,
-          //             ),
-          //           ),
-          //         ],
-          //       ),
-          //     ),
-          //     Container(
-          //       height: 500,
-          //       width: 300,
-          //       child: CodeEditor(
-          //         codeText: '''
-          //                 Positioned(
-          //                 top: 8,
-          //                 left: 8,
-          //                 child: Text(
-          //                 'Preview',
-          //                 maxLines: 2,
-          //                 style: themeData.textTheme.titleSmall,
-          //                 ),
-          //                 ),
-
-          //           ''',
-          //       ),
-          //     ),
-          //   ],
-          // ),
+          Expanded(
+            child: Container(
+              width: 300,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      height: 200,
+                      width: double.maxFinite,
+                      margin: EdgeInsets.only(left: MySpaceSystem.spaceX3, bottom: MySpaceSystem.spaceX2),
+                      padding: EdgeInsets.all(MySpaceSystem.spaceX2),
+                      decoration: BoxDecoration(
+                        color: themeData.colorScheme.secondary,
+                        boxShadow: cardShadow,
+                        borderRadius: const BorderRadius.all(Radius.circular(8)),
+                      ),
+                      child: Column(
+                        children: [
+                          Text(
+                            'Preview',
+                            maxLines: 2,
+                            style: themeData.textTheme.titleSmall,
+                          ),
+                        ],
+                      ),
+                    ),
+                    const CodeEditor(
+                      codeText: '''
+                              Positioned(
+                              top: 8,
+                              left: 8,
+                              child: Text(
+                              'Preview',
+                              maxLines: 2,
+                              style: themeData.textTheme.titleSmall,
+                              ),
+                              ),
+                    
+                        ''',
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
