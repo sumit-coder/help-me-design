@@ -5,7 +5,7 @@ import 'package:help_me_design/views/screens/tabs/widgets/tab_view_hero_card.dar
 import 'package:help_me_design/views/widgets/container_pattern_painter.dart';
 import 'package:provider/provider.dart';
 
-import 'widgets/component_view.dart';
+import 'widgets/components_view.dart';
 import 'widgets/components_list_view.dart';
 
 class ComponentsTab extends StatelessWidget {

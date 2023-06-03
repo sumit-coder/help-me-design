@@ -123,6 +123,12 @@ class _CodeEditorState extends State<CodeEditor> {
                           onChanged: (value) {
                             setState(() {
                               selectedLanguage = value ?? "dart";
+
+                              codeController = CodeController(
+                                text: widget.codeText,
+                                // language: javascript,
+                                language: allLanguages[selectedLanguage],
+                              );
                             });
                           },
                         ),
@@ -148,9 +154,9 @@ class _CodeEditorState extends State<CodeEditor> {
                 CodeTheme(
                   data: const CodeThemeData(styles: atomOneDarkTheme),
                   child: CodeField(
-                    wrap: false,
+                    wrap: true,
                     horizontalScroll: true,
-                    maxLines: 20,
+                    // maxLines: 20,
                     minLines: 1,
                     textSelectionTheme: const TextSelectionThemeData(),
                     lineNumberStyle: const LineNumberStyle(margin: 16),

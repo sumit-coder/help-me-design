@@ -23,6 +23,16 @@ class ComponentView extends StatelessWidget {
     "def",
     "def",
     "def",
+    "def",
+    "def",
+    "def",
+    "def",
+    "def",
+    "def",
+    "def",
+    "def",
+    "def",
+    "def",
   ];
 
   final int activeComponentViewIndex = 0;
@@ -46,27 +56,31 @@ class ComponentView extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  margin: EdgeInsets.only(left: MySpaceSystem.spaceX3),
-                  width: 250,
-                  height: 500,
-                  child: SingleChildScrollView(
-                    child: Wrap(
-                      clipBehavior: Clip.antiAlias,
-                      children: [
-                        for (var i = 0; i < snippetCollectionList.length; i++)
-                          ComponentInfoCard(
-                            isActive: componentTabProvider.activeComponentViewIndex == i,
-                            onTap: () {
-                              componentTabProvider.changeActiveComponentViewIndex(i);
-                            },
-                            title: '',
-                          ),
-                      ],
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    margin: EdgeInsets.only(left: MySpaceSystem.spaceX3),
+                    width: 250,
+                    // height: 500,
+                    child: SingleChildScrollView(
+                      child: Wrap(
+                        clipBehavior: Clip.antiAlias,
+                        children: [
+                          for (var i = 0; i < snippetCollectionList.length; i++)
+                            ComponentInfoCard(
+                              isActive: componentTabProvider.activeComponentViewIndex == i,
+                              onTap: () {
+                                componentTabProvider.changeActiveComponentViewIndex(i);
+                              },
+                              title: '',
+                            ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
                 Expanded(
+                  flex: 5,
                   child: Container(
                     width: 300,
                     child: SingleChildScrollView(
@@ -100,6 +114,36 @@ class ComponentView extends StatelessWidget {
                           ),
                           const CodeEditor(
                             codeText: '''
+           Positioned(
+           top: 8,
+           left: 8,
+           child: Text(
+           'Preview',
+           maxLines: 2,
+           style: themeData.textTheme.titleSmall,
+           ),
+           ),
+
+           Positioned(
+           top: 8,
+           left: 8,
+           child: Text(
+           'Preview',
+           maxLines: 2,
+           style: themeData.textTheme.titleSmall,
+           ),
+           ),
+
+           Positioned(
+           top: 8,
+           left: 8,
+           child: Text(
+           'Preview',
+           maxLines: 2,
+           style: themeData.textTheme.titleSmall,
+           ),
+           ),
+
            Positioned(
            top: 8,
            left: 8,
