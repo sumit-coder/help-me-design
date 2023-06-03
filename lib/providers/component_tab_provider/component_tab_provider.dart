@@ -11,7 +11,13 @@ class ComponentTabProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  changeActiveComponentCollectionView(bool newValue) {
+  changeActiveComponentCollectionIndex(int newValue) {
+    activeComponentCollectionIndex = newValue;
+
+    notifyListeners();
+  }
+
+  changeOpenActiveComponentCollectionView(bool newValue) {
     openActiveComponentCollectionView = newValue;
 
     notifyListeners();

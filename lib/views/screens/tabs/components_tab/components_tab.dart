@@ -23,13 +23,15 @@ class ComponentsTab extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TabViewHeroCard(
-            // title: MyTextConstants.docsTabHeadline,
-            title: "Components.",
-            shortDescription: "MyTextConstants.docsTabShortDescription",
-            posterImage: 'https://i.ibb.co/SNVPkKM/original-dd50f8430ab324b03b6af592e73ca6c7-removebg-preview.png',
-            bgPattern: ContainerSquarePatternTwoPainter(44, context),
-          ),
+          componentTabProvider.openActiveComponentCollectionView
+              ? SizedBox()
+              : TabViewHeroCard(
+                  // title: MyTextConstants.docsTabHeadline,
+                  title: "Components.",
+                  shortDescription: "MyTextConstants.docsTabShortDescription",
+                  posterImage: 'https://i.ibb.co/SNVPkKM/original-dd50f8430ab324b03b6af592e73ca6c7-removebg-preview.png',
+                  bgPattern: ContainerSquarePatternTwoPainter(44, context),
+                ),
           Expanded(
             child: AnimatedSwitcher(
               duration: 300.ms,

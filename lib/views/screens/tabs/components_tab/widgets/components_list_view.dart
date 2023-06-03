@@ -42,8 +42,8 @@ class ComponentsListView extends StatelessWidget {
           for (var i = 0; i < snippetCollectionList.length; i++)
             ButtonTapEffect(
               onTap: () {
-                componentTabProvider.changeActiveComponentViewIndex(i);
-                componentTabProvider.changeActiveComponentCollectionView(true);
+                componentTabProvider.changeActiveComponentCollectionIndex(i);
+                componentTabProvider.changeOpenActiveComponentCollectionView(true);
               },
               child: Container(
                 height: 154,

@@ -39,6 +39,7 @@ class ComponentView extends StatelessWidget {
             title: "Flutter Code Snippets",
             onTap: () {
               // snippetTabProvider.changeCollectionView(false);
+              componentTabProvider.changeOpenActiveComponentCollectionView(false);
             },
           ),
           Expanded(
