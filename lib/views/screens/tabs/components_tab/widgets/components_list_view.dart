@@ -1,5 +1,6 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:help_me_design/providers/component_tab_provider/component_tab_provider.dart';
 import 'package:help_me_design/providers/snippet_tab_provider.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/theme/my_theme.dart';
@@ -25,21 +26,24 @@ class ComponentsListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var themeData = Theme.of(context);
-    var snippetTabProvider = Provider.of<SnippetTabProvider>(context);
+    var componentTabProvider = Provider.of<ComponentTabProvider>(context);
     return Container(
+      alignment: Alignment.topCenter,
       margin: EdgeInsets.only(left: MySpaceSystem.spaceX3),
       // width: 660,
       // height: 300,
       child: Wrap(
+        alignment: WrapAlignment.start,
         spacing: MySpaceSystem.spaceX3,
         runSpacing: MySpaceSystem.spaceX3,
         // direction: Axis.vertical,
         children: [
           AddComponentCollectionCard(),
-          for (var snippetCollection in snippetCollectionList)
+          for (var i = 0; i < snippetCollectionList.length; i++)
             ButtonTapEffect(
               onTap: () {
-                snippetTabProvider.changeCollectionView(true);
+                componentTabProvider.changeActiveComponentCollectionIndex(i);
+                componentTabProvider.changeOpenActiveComponentCollectionView(true);
               },
               child: Container(
                 height: 154,

@@ -39,13 +39,15 @@ class _CodeSnippetScreenState extends State<CodeSnippetScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TabViewHeroCard(
-              // title: MyTextConstants.docsTabHeadline,
-              title: "Code Snippet.",
-              shortDescription: MyTextConstants.docsTabShortDescription,
-              posterImage: 'https://i.ibb.co/SNVPkKM/original-dd50f8430ab324b03b6af592e73ca6c7-removebg-preview.png',
-              bgPattern: ContainerSquarePatternTwoPainter(44, context),
-            ),
+            snippetTabProvider.openActiveSnippetCollectionView
+                ? SizedBox()
+                : TabViewHeroCard(
+                    // title: MyTextConstants.docsTabHeadline,
+                    title: "Code Snippet.",
+                    shortDescription: MyTextConstants.docsTabShortDescription,
+                    posterImage: 'https://i.ibb.co/SNVPkKM/original-dd50f8430ab324b03b6af592e73ca6c7-removebg-preview.png',
+                    bgPattern: ContainerSquarePatternTwoPainter(44, context),
+                  ),
             AnimatedSwitcher(
               duration: 300.ms,
               switchInCurve: Curves.easeIn,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:help_me_design/providers/component_tab_provider/component_tab_provider.dart';
 import 'package:help_me_design/theme/my_theme.dart';
 import 'package:provider/provider.dart';
 
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<ThemeManager>(create: (_) => ThemeManager()),
         ChangeNotifierProvider<SnippetTabProvider>(create: (_) => SnippetTabProvider()),
+        ChangeNotifierProvider<ComponentTabProvider>(create: (_) => ComponentTabProvider()),
       ],
       child: Consumer<ThemeManager>(builder: (context, value, snapshot) {
         return MaterialApp(
@@ -25,6 +27,7 @@ class MyApp extends StatelessWidget {
           title: 'Help Me Design',
           darkTheme: darkTheme,
           theme: lightTheme,
+          scrollBehavior: const ScrollBehavior().copyWith(scrollbars: false),
           themeMode: Provider.of<ThemeManager>(context).getThemeMode,
           home: const MyHomePage(),
         );
