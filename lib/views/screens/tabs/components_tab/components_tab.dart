@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:help_me_design/providers/component_tab_provider/component_tab_provider.dart';
 import 'package:help_me_design/views/screens/tabs/widgets/tab_view_hero_card.dart';
 import 'package:help_me_design/views/widgets/container_pattern_painter.dart';
+import 'package:provider/provider.dart';
 
 import 'widgets/component_view.dart';
 import 'widgets/components_list_view.dart';
@@ -11,11 +13,13 @@ class ComponentsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var componentTabProvider = Provider.of<ComponentTabProvider>(context);
     return Container(
       // margin: EdgeInsets.only(left: MySpaceSystem.spaceX3),
       // width: 200,
       // height: 200,
       // color: Colors.deepPurple,
+
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -31,7 +35,7 @@ class ComponentsTab extends StatelessWidget {
               duration: 300.ms,
               switchInCurve: Curves.easeIn,
               // child: ComponentsListView(),
-              child: ComponentView(),
+              child: componentTabProvider.openActiveComponentCollectionView ? ComponentView() : ComponentsListView(),
             ),
           ),
         ],

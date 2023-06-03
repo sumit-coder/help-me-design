@@ -4,6 +4,7 @@ import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/theme/my_theme.dart';
 import 'package:help_me_design/views/widgets/button_tap_effect.dart';
 import 'package:help_me_design/views/widgets/code_editor/code_editor.dart';
+import 'package:help_me_design/views/widgets/send_back_bar_with_title.dart';
 import 'package:help_me_design/views/widgets/tag_widget.dart';
 import 'package:highlight/languages/d.dart';
 import 'package:provider/provider.dart';
@@ -31,78 +32,91 @@ class ComponentView extends StatelessWidget {
     var themeData = Theme.of(context);
     var componentTabProvider = Provider.of<ComponentTabProvider>(context);
     return Container(
-      margin: EdgeInsets.only(left: MySpaceSystem.spaceX3),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      // margin: EdgeInsets.only(left: MySpaceSystem.spaceX3),
+      child: Column(
         children: [
-          Container(
-            width: 250,
-            height: 500,
-            child: SingleChildScrollView(
-              child: Wrap(
-                clipBehavior: Clip.antiAlias,
-                children: [
-                  for (var i = 0; i < snippetCollectionList.length; i++)
-                    ComponentInfoCard(
-                      isActive: componentTabProvider.activeComponentViewIndex == i,
-                      onTap: () {
-                        componentTabProvider.changeActiveComponentViewIndex(i);
-                      },
-                      title: '',
-                    ),
-                ],
-              ),
-            ),
+          SendBackBarWithTitle(
+            title: "Flutter Code Snippets",
+            onTap: () {
+              // snippetTabProvider.changeCollectionView(false);
+            },
           ),
           Expanded(
-            child: Container(
-              width: 300,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Container(
-                      height: 154,
-                      width: double.maxFinite,
-                      margin: EdgeInsets.only(left: MySpaceSystem.spaceX3, bottom: MySpaceSystem.spaceX2),
-                      padding: EdgeInsets.all(MySpaceSystem.spaceX2),
-                      decoration: BoxDecoration(
-                        color: themeData.colorScheme.secondary,
-                        boxShadow: cardShadow,
-                        borderRadius: const BorderRadius.all(Radius.circular(8)),
-                      ),
-                      child: Stack(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(left: MySpaceSystem.spaceX3),
+                  width: 250,
+                  height: 500,
+                  child: SingleChildScrollView(
+                    child: Wrap(
+                      clipBehavior: Clip.antiAlias,
+                      children: [
+                        for (var i = 0; i < snippetCollectionList.length; i++)
+                          ComponentInfoCard(
+                            isActive: componentTabProvider.activeComponentViewIndex == i,
+                            onTap: () {
+                              componentTabProvider.changeActiveComponentViewIndex(i);
+                            },
+                            title: '',
+                          ),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    width: 300,
+                    child: SingleChildScrollView(
+                      child: Column(
                         children: [
-                          Positioned(
-                            left: MySpaceSystem.spaceX2,
-                            top: MySpaceSystem.spaceX2,
-                            child: Text(
-                              'Preview',
-                              maxLines: 2,
-                              style: themeData.textTheme.titleSmall,
+                          Container(
+                            height: 154,
+                            width: double.maxFinite,
+                            margin: EdgeInsets.only(left: MySpaceSystem.spaceX3, bottom: MySpaceSystem.spaceX2),
+                            padding: EdgeInsets.all(MySpaceSystem.spaceX2),
+                            decoration: BoxDecoration(
+                              color: themeData.colorScheme.secondary,
+                              boxShadow: cardShadow,
+                              borderRadius: const BorderRadius.all(Radius.circular(8)),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned(
+                                  left: MySpaceSystem.spaceX2,
+                                  top: MySpaceSystem.spaceX2,
+                                  child: Text(
+                                    'Preview',
+                                    maxLines: 2,
+                                    style: themeData.textTheme.titleSmall,
+                                  ),
+                                ),
+                                // Component Preview
+                                Container(),
+                              ],
                             ),
                           ),
-                          // Component Preview
-                          Container(),
+                          const CodeEditor(
+                            codeText: '''
+           Positioned(
+           top: 8,
+           left: 8,
+           child: Text(
+           'Preview',
+           maxLines: 2,
+           style: themeData.textTheme.titleSmall,
+           ),
+           ),
+                          
+                              ''',
+                          ),
                         ],
                       ),
                     ),
-                    const CodeEditor(
-                      codeText: '''
- Positioned(
- top: 8,
- left: 8,
- child: Text(
- 'Preview',
- maxLines: 2,
- style: themeData.textTheme.titleSmall,
- ),
- ),
-                    
-                        ''',
-                    ),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
           ),
         ],
