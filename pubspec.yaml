@@ -52,6 +52,8 @@ dependencies:
   dropdown_button2: ^1.0.0
   dotted_border: ^2.0.0+3
 
+  web_scraper: ^0.1.4
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
