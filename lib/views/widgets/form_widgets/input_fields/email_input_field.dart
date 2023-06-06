@@ -5,13 +5,16 @@ import 'package:help_me_design/theme/my_design_system.dart';
 class EmailInputField extends StatelessWidget {
   const EmailInputField({
     super.key,
+    required this.emailEditingController,
   });
+
+  final TextEditingController emailEditingController;
 
   @override
   Widget build(BuildContext context) {
     var themeData = Theme.of(context);
     return TextFormField(
-      // controller: nameEditingController,
+      controller: emailEditingController,
       cursorColor: MyColors.actionColor,
       maxLines: 1,
       style: themeData.textTheme.bodyLarge!.copyWith(decoration: TextDecoration.none),

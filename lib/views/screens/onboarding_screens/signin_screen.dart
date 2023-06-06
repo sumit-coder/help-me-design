@@ -136,9 +136,13 @@ class _SignInScreenState extends State<SignInScreen> {
                         children: [
                           // Text('Email*', style: themeData.textTheme.titleSmall),
                           // SizedBox(height: MySpaceSystem.spaceX1),
-                          EmailInputField(),
+                          EmailInputField(
+                            emailEditingController: TextEditingController(),
+                          ),
                           SizedBox(height: MySpaceSystem.spaceX2),
-                          PasswordInputField(),
+                          PasswordInputField(
+                            passwordEditingController: TextEditingController(),
+                          ),
                           SizedBox(height: MySpaceSystem.spaceX2),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,

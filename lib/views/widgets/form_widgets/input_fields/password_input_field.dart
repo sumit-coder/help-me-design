@@ -3,24 +3,42 @@ import 'package:help_me_design/theme/my_colors.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/views/widgets/button_tap_effect.dart';
 
-class PasswordInputField extends StatelessWidget {
+class PasswordInputField extends StatefulWidget {
   const PasswordInputField({
     super.key,
+    required this.passwordEditingController,
   });
+
+  final TextEditingController passwordEditingController;
+
+  @override
+  State<PasswordInputField> createState() => _PasswordInputFieldState();
+}
+
+class _PasswordInputFieldState extends State<PasswordInputField> {
+  bool isObscurePassword = true;
 
   @override
   Widget build(BuildContext context) {
     var themeData = Theme.of(context);
     return TextFormField(
-      // controller: nameEditingController,
+      controller: widget.passwordEditingController,
       cursorColor: MyColors.actionColor,
       maxLines: 1,
       style: themeData.textTheme.bodyLarge!.copyWith(decoration: TextDecoration.none),
+      obscureText: isObscurePassword,
       decoration: InputDecoration(
         suffixIcon: ButtonTapEffect(
           margin: EdgeInsets.only(right: 4),
-          onTap: () {},
-          child: Icon(Icons.visibility_off_rounded, color: themeData.colorScheme.outline),
+          onTap: () {
+            setState(() {
+              isObscurePassword = !isObscurePassword;
+            });
+          },
+          child: Icon(
+            isObscurePassword ? Icons.visibility_off_rounded : Icons.visibility_rounded,
+            color: themeData.colorScheme.outline,
+          ),
         ),
         filled: true,
         fillColor: themeData.colorScheme.secondary,
