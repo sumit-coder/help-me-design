@@ -7,9 +7,13 @@ class PasswordInputField extends StatefulWidget {
   const PasswordInputField({
     super.key,
     required this.passwordEditingController,
+    this.isNeedVisibilityButton,
+    this.customHintText,
   });
 
   final TextEditingController passwordEditingController;
+  final bool? isNeedVisibilityButton;
+  final String? customHintText;
 
   @override
   State<PasswordInputField> createState() => _PasswordInputFieldState();
@@ -17,6 +21,15 @@ class PasswordInputField extends StatefulWidget {
 
 class _PasswordInputFieldState extends State<PasswordInputField> {
   bool isObscurePassword = true;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setState(() {
+      isObscurePassword = widget.isNeedVisibilityButton != true ? false : true;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,23 +41,25 @@ class _PasswordInputFieldState extends State<PasswordInputField> {
       style: themeData.textTheme.bodyLarge!.copyWith(decoration: TextDecoration.none),
       obscureText: isObscurePassword,
       decoration: InputDecoration(
-        suffixIcon: ButtonTapEffect(
-          margin: EdgeInsets.only(right: 4),
-          onTap: () {
-            setState(() {
-              isObscurePassword = !isObscurePassword;
-            });
-          },
-          child: Icon(
-            isObscurePassword ? Icons.visibility_off_rounded : Icons.visibility_rounded,
-            color: themeData.colorScheme.outline,
-          ),
-        ),
+        suffixIcon: widget.isNeedVisibilityButton == true
+            ? ButtonTapEffect(
+                margin: EdgeInsets.only(right: 4),
+                onTap: () {
+                  setState(() {
+                    isObscurePassword = !isObscurePassword;
+                  });
+                },
+                child: Icon(
+                  isObscurePassword ? Icons.visibility_off_rounded : Icons.visibility_rounded,
+                  color: themeData.colorScheme.outline,
+                ),
+              )
+            : SizedBox(),
         filled: true,
         fillColor: themeData.colorScheme.secondary,
         border: InputBorder.none,
         contentPadding: EdgeInsets.symmetric(horizontal: MySpaceSystem.spaceX3, vertical: MySpaceSystem.spaceX3),
-        hintText: 'Password',
+        hintText: widget.customHintText ?? 'Password',
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(width: 2, color: themeData.colorScheme.outline), //<-- SEE HERE
           borderRadius: BorderRadius.circular(4.0),
