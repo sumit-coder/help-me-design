@@ -5,12 +5,14 @@ import 'package:appwrite/appwrite.dart';
 import 'package:favicon/favicon.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/theme/my_theme.dart';
+import 'package:help_me_design/views/widgets/button_tap_effect.dart';
 import 'package:help_me_design/views/widgets/container_pattern_painter.dart';
 import 'package:html/parser.dart';
 import 'package:image/image.dart' as img;
 
 // import 'package:favicon/favicon.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:web_scraper/web_scraper.dart';
 
 import 'package:http/http.dart' as http;
@@ -30,6 +32,7 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     var themeData = Theme.of(context);
+    var themeMangerProvider = Provider.of<ThemeManager>(context, listen: false);
     return Scaffold(
       body: SafeArea(
         // child: Column(
@@ -88,7 +91,7 @@ class _SignInScreenState extends State<SignInScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                height: 500,
+                // height: 500,
                 width: 500,
                 // padding: EdgeInsets.all(MySpaceSystem.spaceX3),
                 decoration: BoxDecoration(
@@ -103,46 +106,182 @@ class _SignInScreenState extends State<SignInScreen> {
                       height: 500,
                       child: CustomPaint(
                         painter: ContainerSquarePatternTwoPainter(50, context),
-                        child: Container(),
+                        child: Container(
+                          padding: EdgeInsets.all(MySpaceSystem.spaceX3),
+                        ),
                       ),
                     ),
                     // Login Form
-                    Container(
-                      height: 300,
-                      width: 300,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Name*', style: themeData.textTheme.titleMedium),
-                          SizedBox(height: MySpaceSystem.spaceX2),
-                          TextFormField(
-                            // controller: nameEditingController,
-                            cursorColor: MyColors.actionColor,
-                            maxLines: 1,
-                            style: MyTextTypeSystem.bodyXLarge.copyWith(decoration: TextDecoration.none),
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: MyColors.secondaryTintColor,
-                              border: InputBorder.none,
-                              contentPadding: EdgeInsets.symmetric(horizontal: MySpaceSystem.spaceX3, vertical: MySpaceSystem.spaceX3),
-                              hintText: 'Your name (required)',
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(width: 2, color: MyColors.secondaryShadeColor), //<-- SEE HERE
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(width: 2, color: MyColors.secondaryShadeColor), //<-- SEE HERE
-                                borderRadius: BorderRadius.circular(8.0),
+                    Expanded(
+                      child: Container(
+                        padding: EdgeInsets.all(MySpaceSystem.spaceX3),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          // mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(bottom: MySpaceSystem.spaceX5),
+                              child: Text("Sign In".toUpperCase(), style: themeData.textTheme.titleLarge),
+                            ),
+
+                            // Text('Email*', style: themeData.textTheme.titleSmall),
+                            // SizedBox(height: MySpaceSystem.spaceX1),
+                            TextFormField(
+                              // controller: nameEditingController,
+                              cursorColor: MyColors.actionColor,
+                              maxLines: 1,
+                              style: themeData.textTheme.bodyLarge!.copyWith(decoration: TextDecoration.none),
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: themeData.colorScheme.secondary,
+                                border: InputBorder.none,
+                                contentPadding: EdgeInsets.symmetric(horizontal: MySpaceSystem.spaceX3, vertical: MySpaceSystem.spaceX3),
+                                hintText: 'Email',
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(width: 2, color: themeData.colorScheme.outline), //<-- SEE HERE
+                                  borderRadius: BorderRadius.circular(4.0),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(width: 2, color: themeData.colorScheme.primary), //<-- SEE HERE
+                                  borderRadius: BorderRadius.circular(4.0),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                            SizedBox(height: MySpaceSystem.spaceX2),
+                            TextFormField(
+                              // controller: nameEditingController,
+                              cursorColor: MyColors.actionColor,
+                              maxLines: 1,
+                              style: themeData.textTheme.bodyLarge!.copyWith(decoration: TextDecoration.none),
+                              decoration: InputDecoration(
+                                suffixIcon: ButtonTapEffect(
+                                  margin: EdgeInsets.only(right: 4),
+                                  onTap: () {},
+                                  child: Icon(Icons.visibility_off_rounded, color: themeData.colorScheme.outline),
+                                ),
+                                filled: true,
+                                fillColor: themeData.colorScheme.secondary,
+                                border: InputBorder.none,
+                                contentPadding: EdgeInsets.symmetric(horizontal: MySpaceSystem.spaceX3, vertical: MySpaceSystem.spaceX3),
+                                hintText: 'Password',
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(width: 2, color: themeData.colorScheme.outline), //<-- SEE HERE
+                                  borderRadius: BorderRadius.circular(4.0),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(width: 2, color: themeData.colorScheme.primary), //<-- SEE HERE
+                                  borderRadius: BorderRadius.circular(4.0),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: MySpaceSystem.spaceX3),
+                            ButtonTapEffect(
+                              onTap: () {},
+                              child: Container(
+                                height: 44,
+                                padding: EdgeInsets.all(MySpaceSystem.spaceX2),
+                                decoration: BoxDecoration(
+                                  color: themeData.colorScheme.primary,
+                                  // color: themeData.colorScheme.secondary,
+                                  boxShadow: cardShadow,
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                                child: Center(child: Text("Sign In", style: MyTextTypeSystem.bodyLarge)),
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.symmetric(vertical: MySpaceSystem.spaceX4),
+                              child: Row(
+                                children: [
+                                  Expanded(child: Divider(thickness: 1, color: themeData.colorScheme.outline)),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(horizontal: MySpaceSystem.spaceX1),
+                                    child: Text("Continue With", style: themeData.textTheme.bodySmall),
+                                  ),
+                                  Expanded(child: Divider(thickness: 1, height: 1, color: themeData.colorScheme.outline)),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              // margin: EdgeInsets.only(top: MySpaceSystem.spaceX3),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: ButtonTapEffect(
+                                      onTap: () {},
+                                      child: Container(
+                                        height: 44,
+                                        padding: EdgeInsets.all(MySpaceSystem.spaceX2),
+                                        decoration: BoxDecoration(
+                                          color: themeData.colorScheme.primary,
+                                          // color: themeData.colorScheme.secondary,
+                                          boxShadow: cardShadow,
+                                          borderRadius: BorderRadius.circular(4),
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Image.asset("assets/images/google-icon.png"),
+                                            SizedBox(width: MySpaceSystem.spaceX1),
+                                            Text("Google", style: MyTextTypeSystem.bodyLarge),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(width: MySpaceSystem.spaceX2),
+                                  Expanded(
+                                    child: ButtonTapEffect(
+                                      onTap: () {},
+                                      child: Container(
+                                        height: 44,
+                                        padding: EdgeInsets.all(MySpaceSystem.spaceX2),
+                                        decoration: BoxDecoration(
+                                          color: themeData.colorScheme.primary,
+                                          // color: themeData.colorScheme.secondary,
+                                          boxShadow: cardShadow,
+                                          borderRadius: BorderRadius.circular(4),
+                                        ),
+                                        child: Center(
+                                            child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            ClipRRect(
+                                              borderRadius: BorderRadius.circular(24),
+                                              child: Image.asset("assets/images/github-icon.png"),
+                                            ),
+                                            SizedBox(width: MySpaceSystem.spaceX1),
+                                            Text("Github", style: MyTextTypeSystem.bodyLarge),
+                                          ],
+                                        )),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            // SizedBox(height: 64)
+                          ],
+                        ),
                       ),
                     )
                   ],
                 ),
               ),
-              Text('LOgin')
+              ButtonTapEffect(
+                  onTap: () {
+                    if (themeMangerProvider.isDarkMode) {
+                      themeMangerProvider.changeThemeMode(ThemeMode.light);
+                      setState(() {});
+                      return;
+                    }
+                    themeMangerProvider.changeThemeMode(ThemeMode.dark);
+                    setState(() {});
+
+                    print(themeMangerProvider.getThemeMode);
+                  },
+                  child: Text('LOgin'))
             ],
           ),
         ),
