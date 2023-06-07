@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../theme/my_colors.dart';
 import '../../../../theme/my_design_system.dart';
 import '../../../../theme/my_theme.dart';
-import '../../../widgets/container_pattern_painter.dart';
 import 'sidebar_button.dart';
 
-enum SideTabType { explore, category, manageMedia, learning, codeSnippet, designSystem, components, docs }
+enum SideTabType { explore, settings, learning, codeSnippet, designSystem, components, docs }
 
 class AdminViewSideBar extends StatefulWidget {
-  AdminViewSideBar({Key? key, required this.onSideTabButtonChange, required this.activeButtonType}) : super(key: key);
+  const AdminViewSideBar({Key? key, required this.onSideTabButtonChange, required this.activeButtonType}) : super(key: key);
 
   final Function(SideTabType newTabChange) onSideTabButtonChange;
   final SideTabType activeButtonType;
@@ -49,8 +47,6 @@ class _AdminViewSideBarState extends State<AdminViewSideBar> {
             ),
           ),
           Divider(height: 2, thickness: 1, color: themeData.colorScheme.outline),
-          // SizedBox(height: MySpaceSystem.spaceX3),
-          // Group A
 
           SideBarButtonsGroupWidget(
             groupTitle: 'Public',
@@ -63,30 +59,6 @@ class _AdminViewSideBarState extends State<AdminViewSideBar> {
                   widget.onSideTabButtonChange(SideTabType.explore);
                 },
               ),
-              SideBarButton(
-                title: 'Category',
-                iconData: Icons.category_rounded,
-                isActive: widget.activeButtonType == SideTabType.category ? true : false,
-                onTap: () {
-                  widget.onSideTabButtonChange(SideTabType.category);
-                },
-              ),
-              // SideBarButton(
-              //   title: 'Leaderboard',
-              //   iconData: Icons.leaderboard_rounded,
-              //   isActive: widget.activeButtonType == SideTabType.leaderboard ? true : false,
-              //   onTap: () {
-              //     widget.onSideTabButtonChange(SideTabType.leaderboard);
-              //   },
-              // ),
-              // SideBarButton(
-              //   title: 'Media',
-              //   iconData: Icons.perm_media_rounded,
-              //   isActive: widget.activeButtonType == SideTabType.manageMedia ? true : false,
-              //   onTap: () {
-              //     widget.onSideTabButtonChange(SideTabType.manageMedia);
-              //   },
-              // ),
             ],
           ),
           // Group B
@@ -135,16 +107,23 @@ class _AdminViewSideBarState extends State<AdminViewSideBar> {
               ),
             ],
           ),
+          SizedBox(height: MySpaceSystem.spaceX2),
+          SideBarButton(
+            title: 'Settings',
+            iconData: Icons.settings_rounded,
+            isActive: widget.activeButtonType == SideTabType.settings ? true : false,
+            onTap: () {
+              widget.onSideTabButtonChange(SideTabType.settings);
+            },
+          ),
 
           IconButton(
             onPressed: () {
               if (themeMangerProvider.isDarkMode) {
                 themeMangerProvider.changeThemeMode(ThemeMode.light);
-                setState(() {});
                 return;
               }
               themeMangerProvider.changeThemeMode(ThemeMode.dark);
-              setState(() {});
 
               print(themeMangerProvider.getThemeMode);
             },
