@@ -1,3 +1,4 @@
+import 'package:appwrite/appwrite.dart';
 import 'package:flutter/material.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/theme/my_theme.dart';
@@ -103,7 +104,9 @@ class SignInView extends StatelessWidget {
                       SizedBox(width: MySpaceSystem.spaceX2),
                       Expanded(
                         child: ButtonWithTitleAndIcon(
-                          onTap: () {},
+                          onTap: () {
+                            signInGithub(context);
+                          },
                           buttonTitle: "Github",
                           icon: Image.asset("assets/images/github-icon-light.png"),
                         ),
@@ -134,5 +137,28 @@ class SignInView extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  signInGithub(BuildContext context) async {
+    final client = Client()
+        .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+        .setProject('64803e0044c9826d779b'); // Your project ID
+
+    final account = Account(client);
+
+    // Go to OAuth provider login page
+
+    try {
+      await account.createOAuth2Session(provider: 'github', success: "http://localhost:50423/#/");
+
+      Navigator.pop(context);
+      const snackbar = SnackBar(content: Text('Account created!'));
+      ScaffoldMessenger.of(context).showSnackBar(snackbar);
+    } on AppwriteException catch (e) {
+      Navigator.pop(context);
+    }
+
+    // account.get();
+    // account.deleteSession(sessionId: "current");
   }
 }

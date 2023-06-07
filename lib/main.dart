@@ -4,6 +4,7 @@ import 'package:help_me_design/theme/my_theme.dart';
 import 'package:help_me_design/views/screens/onboarding_screens/signin_screen.dart';
 import 'package:help_me_design/views/screens/onboarding_screens/signin_signup_screen/signin_signup_screen.dart';
 import 'package:help_me_design/views/screens/onboarding_screens/signup_screen.dart';
+import 'package:help_me_design/views/welcome_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/snippet_tab_provider.dart';
@@ -29,12 +30,14 @@ class MyApp extends StatelessWidget {
           title: 'Help Me Design',
           darkTheme: darkTheme,
           theme: lightTheme,
+
           scrollBehavior: const ScrollBehavior().copyWith(scrollbars: false),
           themeMode: Provider.of<ThemeManager>(context).getThemeMode,
           // home: const MyHomePage(),
           // home: const SignInScreen(),
           // home: SignUpScreen(),
           home: SignInSignUpScreen(),
+          // home: WelcomeScreen(),
         );
       }),
     );
