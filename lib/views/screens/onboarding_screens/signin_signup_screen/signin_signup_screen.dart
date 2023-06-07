@@ -53,6 +53,7 @@ class _SignInSignUpScreenState extends State<SignInSignUpScreen> {
                 child: PageView(
                   controller: _pageController,
                   children: [
+                    // SignIn View
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -63,6 +64,7 @@ class _SignInSignUpScreenState extends State<SignInSignUpScreen> {
                         ).animate().rotate(begin: -0.07, alignment: Alignment.bottomLeft),
                       ],
                     ),
+                    // SignUp View
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -72,7 +74,7 @@ class _SignInSignUpScreenState extends State<SignInSignUpScreen> {
                           },
                         ).animate().rotate(begin: -0.07, alignment: Alignment.bottomRight),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),
