@@ -116,12 +116,12 @@ class SignInView extends StatelessWidget {
                       UtilityHelper.toastMessage(message: "You Are in");
                       clearTextFields();
 
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => MyHomePage(),
-                        ),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => MyHomePage(),
+                      //   ),
+                      // );
                     }
 
                     // print(user.);
