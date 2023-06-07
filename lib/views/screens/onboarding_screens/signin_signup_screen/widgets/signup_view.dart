@@ -1,3 +1,4 @@
+import 'package:appwrite/models.dart';
 import 'package:help_me_design/appwrite_service/auth_service.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/theme/my_theme.dart';
@@ -89,26 +90,47 @@ class SignUpView extends StatelessWidget {
                 SizedBox(height: MySpaceSystem.spaceX3),
                 SimpleButton(
                   buttonTitle: "Sign Up",
-                  onTap: () {
+                  onTap: () async {
                     // if text is fields are empty sho error
-                    if (emailController.text.isEmpty || passwordController.text.isEmpty || conformPasswordController.text.isEmpty) return;
-                    if (passwordController.text != conformPasswordController.text) {
-                      print("Password don't Match");
-                      UtilityHelper.toastMessage("Password don't Match");
+                    if (emailController.text.isEmpty || passwordController.text.isEmpty || conformPasswordController.text.isEmpty) {
+                      UtilityHelper.toastMessage(message: "Fill all the Fields");
                       return;
                     }
                     if (!isEmailValid(emailController.text)) {
-                      print("InValidEmail");
-                      UtilityHelper.toastMessage("Email is InValid");
+                      UtilityHelper.toastMessage(message: "Email is InValid");
                       return;
                     }
-                    // authService.createUser(email: "", password: "");
+                    if (passwordController.text != conformPasswordController.text) {
+                      UtilityHelper.toastMessage(message: "Password don't Match");
+                      return;
+                    }
+                    if (passwordController.text.length < 8) {
+                      UtilityHelper.toastMessage(message: "Password Must be at least 8 chars");
+                      return;
+                    }
+
+                    User userInfo = await authService.createUser(
+                      email: emailController.text,
+                      password: passwordController.text,
+                    );
+
+                    if (userInfo.$id.isNotEmpty) {
+                      clearTextFields();
+                      UtilityHelper.toastMessage(
+                        message: "SignUp is Successful, SignIn Now",
+                        msgDuration: Duration(seconds: 3),
+                      );
+                      // send user to signIn View
+                      onTapSignIn();
+                    }
                     print("object");
-                    clearTextFields();
                   },
                 ),
 
-                DividerWithTitle(title: 'Continue With', margin: EdgeInsets.symmetric(vertical: MySpaceSystem.spaceX4)),
+                DividerWithTitle(
+                  title: 'Continue With',
+                  margin: EdgeInsets.symmetric(vertical: MySpaceSystem.spaceX4),
+                ),
 
                 Container(
                   // margin: EdgeInsets.only(top: MySpaceSystem.spaceX3),
@@ -116,7 +138,9 @@ class SignUpView extends StatelessWidget {
                     children: [
                       Expanded(
                         child: ButtonWithTitleAndIcon(
-                          onTap: () {},
+                          onTap: () {
+                            authService.signOut();
+                          },
                           buttonTitle: "Google",
                           icon: Image.asset("assets/images/google-icon.png"),
                         ),
@@ -156,4 +180,6 @@ class SignUpView extends StatelessWidget {
       ),
     );
   }
+
+  singUpUser() {}
 }

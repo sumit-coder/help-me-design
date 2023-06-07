@@ -4,7 +4,7 @@ import 'package:help_me_design/theme/my_colors.dart';
 import '../constants/app_constants.dart';
 
 class UtilityHelper {
-  static toastMessage(myMessage) {
+  static toastMessage({required String message, Duration? msgDuration}) {
     SnackBar snackBar = SnackBar(
       // shape: RoundedRectangleBorder(
       //     // borderRadius: BorderRadius.circular(100),
@@ -14,11 +14,11 @@ class UtilityHelper {
       width: 404,
       behavior: SnackBarBehavior.floating,
 
-      duration: const Duration(milliseconds: 1500),
+      duration: msgDuration ?? Duration(milliseconds: 1500),
       backgroundColor: Colors.transparent,
       dismissDirection: DismissDirection.horizontal,
       content: Material(
-        borderRadius: BorderRadius.circular(4),
+        borderRadius: BorderRadius.circular(8),
         color: DesignSystemColors.secondaryColorDark,
         elevation: 4,
         child: Container(
@@ -26,7 +26,7 @@ class UtilityHelper {
           padding: const EdgeInsets.only(left: 18, right: 18),
           alignment: Alignment.centerLeft,
           child: Text(
-            myMessage,
+            message,
             maxLines: 1,
             style: const TextStyle(
               overflow: TextOverflow.ellipsis,
@@ -39,7 +39,7 @@ class UtilityHelper {
         ),
       ),
     );
-    if (myMessage != 'N/A' && myMessage != '') {
+    if (message != 'N/A' && message != '') {
       scaffoldMessengerKey.currentState?.showSnackBar(snackBar);
     } else {
       // do something when message is empty but don't show snackBar
