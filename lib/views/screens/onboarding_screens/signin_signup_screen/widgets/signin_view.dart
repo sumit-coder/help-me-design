@@ -1,5 +1,7 @@
 import 'package:appwrite/appwrite.dart';
+import 'package:appwrite/models.dart';
 import 'package:flutter/material.dart';
+import 'package:help_me_design/appwrite_service/auth_service.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/theme/my_theme.dart';
 import 'package:help_me_design/views/widgets/button_tap_effect.dart';
@@ -9,15 +11,20 @@ import 'package:help_me_design/views/widgets/form_widgets/buttons/button_with_ti
 import 'package:help_me_design/views/widgets/form_widgets/buttons/simple_button.dart';
 import 'package:help_me_design/views/widgets/form_widgets/input_fields/email_input_field.dart';
 import 'package:help_me_design/views/widgets/form_widgets/input_fields/password_input_field.dart';
+import 'package:provider/provider.dart';
 
 class SignInView extends StatelessWidget {
-  const SignInView({Key? key, required this.onTapSignUp}) : super(key: key);
+  SignInView({Key? key, required this.onTapSignUp}) : super(key: key);
 
   final VoidCallback onTapSignUp;
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     var themeData = Theme.of(context);
+    var authService = Provider.of<AuthService>(context);
     return Container(
       // height: 500,
       width: 374,
@@ -60,12 +67,12 @@ class SignInView extends StatelessWidget {
                 // Text('Email*', style: themeData.textTheme.titleSmall),
                 // SizedBox(height: MySpaceSystem.spaceX1),
                 EmailInputField(
-                  emailEditingController: TextEditingController(),
+                  emailEditingController: emailController,
                 ),
                 SizedBox(height: MySpaceSystem.spaceX2),
                 PasswordInputField(
                   isNeedVisibilityButton: true,
-                  passwordEditingController: TextEditingController(),
+                  passwordEditingController: passwordController,
                 ),
                 SizedBox(height: MySpaceSystem.spaceX2),
                 Row(
@@ -83,8 +90,14 @@ class SignInView extends StatelessWidget {
                 SizedBox(height: MySpaceSystem.spaceX3),
                 SimpleButton(
                   buttonTitle: "Sign In",
-                  onTap: () {
-                    print("object");
+                  onTap: () async {
+                    // print("object");
+                    User user = await authService.createUser(
+                      email: emailController.text,
+                      password: passwordController.text,
+                    );
+
+                    print(user.email);
                   },
                 ),
 
@@ -96,7 +109,9 @@ class SignInView extends StatelessWidget {
                     children: [
                       Expanded(
                         child: ButtonWithTitleAndIcon(
-                          onTap: () {},
+                          onTap: () {
+                            authService.createVerification();
+                          },
                           buttonTitle: "Google",
                           icon: Image.asset("assets/images/google-icon.png"),
                         ),
@@ -104,8 +119,9 @@ class SignInView extends StatelessWidget {
                       SizedBox(width: MySpaceSystem.spaceX2),
                       Expanded(
                         child: ButtonWithTitleAndIcon(
-                          onTap: () {
-                            signInGithub(context);
+                          onTap: () async {
+                            // signInGithub(context);
+                            authService.createEmailSession(email: emailController.text, password: passwordController.text);
                           },
                           buttonTitle: "Github",
                           icon: Image.asset("assets/images/github-icon-light.png"),

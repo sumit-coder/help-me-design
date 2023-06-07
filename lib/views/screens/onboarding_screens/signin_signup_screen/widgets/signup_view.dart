@@ -1,5 +1,8 @@
+import 'package:help_me_design/appwrite_service/auth_service.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/theme/my_theme.dart';
+import 'package:help_me_design/utility/email_validation.dart';
+import 'package:help_me_design/utility/utility_helper.dart';
 import 'package:help_me_design/views/widgets/button_tap_effect.dart';
 import 'package:help_me_design/views/widgets/container_pattern_painter.dart';
 import 'package:help_me_design/views/widgets/divider_with_title.dart';
@@ -13,14 +16,24 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class SignUpView extends StatelessWidget {
-  const SignUpView({Key? key, required this.onTapSignIn}) : super(key: key);
+  SignUpView({Key? key, required this.onTapSignIn}) : super(key: key);
 
   final VoidCallback onTapSignIn;
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController conformPasswordController = TextEditingController();
+
+  clearTextFields() {
+    emailController.clear();
+    passwordController.clear();
+    conformPasswordController.clear();
+  }
 
   @override
   Widget build(BuildContext context) {
     var themeData = Theme.of(context);
-    var themeMangerProvider = Provider.of<ThemeManager>(context, listen: false);
+    var authService = Provider.of<AuthService>(context);
     return Container(
       // height: 500,
       width: 374,
@@ -61,23 +74,37 @@ class SignUpView extends StatelessWidget {
               // mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 EmailInputField(
-                  emailEditingController: TextEditingController(),
+                  emailEditingController: emailController,
                 ),
                 SizedBox(height: MySpaceSystem.spaceX2),
                 PasswordInputField(
-                  passwordEditingController: TextEditingController(),
+                  passwordEditingController: passwordController,
                 ),
                 SizedBox(height: MySpaceSystem.spaceX2),
                 PasswordInputField(
                   customHintText: "Conform Password",
-                  passwordEditingController: TextEditingController(),
+                  passwordEditingController: conformPasswordController,
                 ),
 
                 SizedBox(height: MySpaceSystem.spaceX3),
                 SimpleButton(
                   buttonTitle: "Sign Up",
                   onTap: () {
+                    // if text is fields are empty sho error
+                    if (emailController.text.isEmpty || passwordController.text.isEmpty || conformPasswordController.text.isEmpty) return;
+                    if (passwordController.text != conformPasswordController.text) {
+                      print("Password don't Match");
+                      UtilityHelper.toastMessage("Password don't Match");
+                      return;
+                    }
+                    if (!isEmailValid(emailController.text)) {
+                      print("InValidEmail");
+                      UtilityHelper.toastMessage("Email is InValid");
+                      return;
+                    }
+                    // authService.createUser(email: "", password: "");
                     print("object");
+                    clearTextFields();
                   },
                 ),
 

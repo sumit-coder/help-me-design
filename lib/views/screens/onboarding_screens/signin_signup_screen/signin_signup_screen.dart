@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:appwrite/appwrite.dart';
 import 'package:favicon/favicon.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:help_me_design/appwrite_service/auth_service.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/theme/my_theme.dart';
 import 'package:help_me_design/views/screens/onboarding_screens/signin_signup_screen/widgets/signup_view.dart';
@@ -38,9 +39,21 @@ class _SignInSignUpScreenState extends State<SignInSignUpScreen> {
   final PageController _pageController = PageController();
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    var authService = Provider.of<AuthService>(context, listen: false);
+
+    if (authService.status == AuthStatus.authenticated) {
+      log("message");
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     var themeData = Theme.of(context);
     var themeMangerProvider = Provider.of<ThemeManager>(context, listen: false);
+
     return Scaffold(
       body: SafeArea(
         child: Container(
