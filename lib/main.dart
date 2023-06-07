@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:help_me_design/appwrite_service/auth_service.dart';
 import 'package:help_me_design/providers/component_tab_provider/component_tab_provider.dart';
 import 'package:help_me_design/theme/my_theme.dart';
 import 'package:help_me_design/views/screens/onboarding_screens/signin_screen.dart';
@@ -7,6 +8,7 @@ import 'package:help_me_design/views/screens/onboarding_screens/signup_screen.da
 import 'package:help_me_design/views/welcome_screen.dart';
 import 'package:provider/provider.dart';
 
+import 'constants/app_constants.dart';
 import 'providers/snippet_tab_provider.dart';
 
 void main() {
@@ -23,6 +25,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<ThemeManager>(create: (_) => ThemeManager()),
         ChangeNotifierProvider<SnippetTabProvider>(create: (_) => SnippetTabProvider()),
         ChangeNotifierProvider<ComponentTabProvider>(create: (_) => ComponentTabProvider()),
+        ChangeNotifierProvider<AuthService>(create: (_) => AuthService()),
       ],
       child: Consumer<ThemeManager>(builder: (context, value, snapshot) {
         return MaterialApp(
@@ -30,7 +33,7 @@ class MyApp extends StatelessWidget {
           title: 'Help Me Design',
           darkTheme: darkTheme,
           theme: lightTheme,
-
+          scaffoldMessengerKey: scaffoldMessengerKey,
           scrollBehavior: const ScrollBehavior().copyWith(scrollbars: false),
           themeMode: Provider.of<ThemeManager>(context).getThemeMode,
           // home: const MyHomePage(),
