@@ -1,9 +1,11 @@
 import 'package:appwrite/appwrite.dart';
-import 'package:appwrite/models.dart';
 import 'package:flutter/material.dart';
 import 'package:help_me_design/appwrite_service/auth_service.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/theme/my_theme.dart';
+import 'package:help_me_design/utility/email_validation.dart';
+import 'package:help_me_design/utility/utility_helper.dart';
+import 'package:help_me_design/views/screens/home_screen/home_screen.dart';
 import 'package:help_me_design/views/widgets/button_tap_effect.dart';
 import 'package:help_me_design/views/widgets/container_pattern_painter.dart';
 import 'package:help_me_design/views/widgets/divider_with_title.dart';
@@ -20,6 +22,11 @@ class SignInView extends StatelessWidget {
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  clearTextFields() {
+    emailController.clear();
+    passwordController.clear();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,8 +71,6 @@ class SignInView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               // mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Text('Email*', style: themeData.textTheme.titleSmall),
-                // SizedBox(height: MySpaceSystem.spaceX1),
                 EmailInputField(
                   emailEditingController: emailController,
                 ),
@@ -91,13 +96,35 @@ class SignInView extends StatelessWidget {
                 SimpleButton(
                   buttonTitle: "Sign In",
                   onTap: () async {
-                    // print("object");
-                    User user = await authService.createUser(
+                    // if text is fields are empty sho error
+                    if (emailController.text.isEmpty || passwordController.text.isEmpty) {
+                      UtilityHelper.toastMessage(message: "Fill all the Fields");
+                      return;
+                    }
+                    if (!isEmailValid(emailController.text)) {
+                      UtilityHelper.toastMessage(message: "Email is InValid");
+                      return;
+                    }
+                    // Try to SignIn User
+                    await authService.createEmailSession(
                       email: emailController.text,
                       password: passwordController.text,
                     );
+                    // if User id SignedIn and Send to Next Screen
+                    if (authService.status == AuthStatus.authenticated) {
+                      // Send To Next Screen;
+                      UtilityHelper.toastMessage(message: "You Are in");
+                      clearTextFields();
 
-                    print(user.email);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MyHomePage(),
+                        ),
+                      );
+                    }
+
+                    // print(user.);
                   },
                 ),
 
@@ -110,7 +137,7 @@ class SignInView extends StatelessWidget {
                       Expanded(
                         child: ButtonWithTitleAndIcon(
                           onTap: () {
-                            authService.createVerification();
+                            // authService.createVerification();
                           },
                           buttonTitle: "Google",
                           icon: Image.asset("assets/images/google-icon.png"),
@@ -119,10 +146,7 @@ class SignInView extends StatelessWidget {
                       SizedBox(width: MySpaceSystem.spaceX2),
                       Expanded(
                         child: ButtonWithTitleAndIcon(
-                          onTap: () async {
-                            // signInGithub(context);
-                            authService.createEmailSession(email: emailController.text, password: passwordController.text);
-                          },
+                          onTap: () async {},
                           buttonTitle: "Github",
                           icon: Image.asset("assets/images/github-icon-light.png"),
                         ),
