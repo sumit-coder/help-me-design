@@ -1,6 +1,7 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
 import 'package:flutter/material.dart';
+import 'package:help_me_design/utility/utility_helper.dart';
 
 import 'appwrite_constants.dart';
 
@@ -84,7 +85,7 @@ class AuthService extends ChangeNotifier {
     }
   }
 
-  Future<Session> createEmailSession({required String email, required String password}) async {
+  Future<Session?> createEmailSession({required String email, required String password}) async {
     notifyListeners();
 
     try {
@@ -92,6 +93,8 @@ class AuthService extends ChangeNotifier {
       _currentUser = await account.get();
       _status = AuthStatus.authenticated;
       return session;
+    } on AppwriteException catch (e) {
+      UtilityHelper.toastMessage(message: e.message.toString());
     } finally {
       notifyListeners();
     }

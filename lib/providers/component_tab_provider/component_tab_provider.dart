@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ComponentTabProvider with ChangeNotifier {
-  bool openActiveComponentCollectionView = true;
+  bool openActiveComponentCollectionView = false;
   int activeComponentCollectionIndex = 0;
   int activeComponentViewIndex = 0;
 

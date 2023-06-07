@@ -10,14 +10,20 @@ import 'package:provider/provider.dart';
 
 import 'constants/app_constants.dart';
 import 'providers/snippet_tab_provider.dart';
+import 'views/screens/home_screen/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -27,7 +33,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<ComponentTabProvider>(create: (_) => ComponentTabProvider()),
         ChangeNotifierProvider<AuthService>(create: (_) => AuthService()),
       ],
-      child: Consumer<ThemeManager>(builder: (context, value, snapshot) {
+      child: Consumer2<ThemeManager, AuthService>(builder: (context, themeManagerProvider, authServiceProvider, snapshot) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Help Me Design',
@@ -35,11 +41,15 @@ class MyApp extends StatelessWidget {
           theme: lightTheme,
           scaffoldMessengerKey: scaffoldMessengerKey,
           scrollBehavior: const ScrollBehavior().copyWith(scrollbars: false),
-          themeMode: Provider.of<ThemeManager>(context).getThemeMode,
+          themeMode: themeManagerProvider.getThemeMode,
           // home: const MyHomePage(),
           // home: const SignInScreen(),
           // home: SignUpScreen(),
-          home: SignInSignUpScreen(),
+          home: authServiceProvider.status == AuthStatus.unauthenticated
+              ? const SignInSignUpScreen()
+              : authServiceProvider.status == AuthStatus.authenticated
+                  ? const MyHomePage()
+                  : WelcomeScreen(),
           // home: WelcomeScreen(),
         );
       }),

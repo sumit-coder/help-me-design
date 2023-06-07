@@ -6,7 +6,7 @@ import '../tabs/categories_screens.dart';
 import '../tabs/code_snippet_tab/code_snippet_tab.dart';
 import '../tabs/docs_tab/docs_tab.dart';
 import '../tabs/explore_tab/explore_tab.dart';
-import 'widgets/admin_view_sideBar.dart';
+import 'widgets/admin_view_sidebar.dart';
 
 // save youtube videos
 // save websites
@@ -32,10 +32,10 @@ class _MyHomePageState extends State<MyHomePage> {
         return CodeSnippetScreen();
 
       case SideTabType.components:
-        return ComponentsTab();
+        return const ComponentsTab();
 
       default:
-        return CategoriesView();
+        return const CategoriesView();
     }
   }
 
@@ -48,8 +48,8 @@ class _MyHomePageState extends State<MyHomePage> {
           // width: double.maxFinite,
           height: size.height,
           // clipBehavior: Clip.antiAlias,
-          constraints: BoxConstraints(maxWidth: 1200, minWidth: 1200),
-          margin: EdgeInsets.all(44),
+          constraints: const BoxConstraints(maxWidth: 1200, minWidth: 1200),
+          margin: const EdgeInsets.all(44),
           // padding: EdgeInsets.all(24),
           decoration: BoxDecoration(
             // border: Border.all(width: 1, color: Colors.black54),
