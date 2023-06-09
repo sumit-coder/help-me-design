@@ -9,7 +9,10 @@ class DesignResourcesCollection {
 
   DesignResourcesCollection.fromJson(List<Document> listOfDocument) {
     data = <ResourceCollection>[];
+    // data.add(ResourceCollection.fromJson(listOfDocument[0].data));
+    // print(listOfDocument[0].data);
     listOfDocument.forEach((element) {
+      // print(element.data);
       data.add(ResourceCollection.fromJson(element.data));
     });
   }
@@ -33,6 +36,7 @@ class ResourceCollection {
     if (json['resourcesList'] != null) {
       resourcesList = <ResourceData>[];
       json['resourcesList'].forEach((v) {
+        // print(v);
         resourcesList.add(ResourceData.fromJson(jsonDecode(v)));
       });
     } else {
