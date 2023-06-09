@@ -36,6 +36,7 @@ class _CodeSnippetScreenState extends State<CodeSnippetScreen> {
       // height: 200,
       // color: Colors.deepPurple,
       child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

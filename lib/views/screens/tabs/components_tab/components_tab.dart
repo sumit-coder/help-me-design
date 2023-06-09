@@ -16,31 +16,30 @@ class ComponentsTab extends StatelessWidget {
     var componentTabProvider = Provider.of<ComponentTabProvider>(context);
     return Container(
       // margin: EdgeInsets.only(left: MySpaceSystem.spaceX3),
-      // width: 200,
+      // width: 500,
       // height: 200,
       // color: Colors.deepPurple,
 
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          componentTabProvider.openActiveComponentCollectionView
-              ? SizedBox()
-              : TabViewHeroCard(
-                  // title: MyTextConstants.docsTabHeadline,
-                  title: "Components.",
-                  shortDescription: "MyTextConstants.docsTabShortDescription",
-                  posterImage: 'https://i.ibb.co/SNVPkKM/original-dd50f8430ab324b03b6af592e73ca6c7-removebg-preview.png',
-                  bgPattern: ContainerSquarePatternTwoPainter(44, context),
+      child: AnimatedSwitcher(
+        duration: 300.ms,
+        child: !componentTabProvider.openActiveComponentCollectionView
+            ? SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TabViewHeroCard(
+                      // title: MyTextConstants.docsTabHeadline,
+                      title: "Components.",
+                      shortDescription: "MyTextConstants.docsTabShortDescription",
+                      posterImage: 'https://i.ibb.co/SNVPkKM/original-dd50f8430ab324b03b6af592e73ca6c7-removebg-preview.png',
+                      bgPattern: ContainerSquarePatternTwoPainter(44, context),
+                    ),
+                    ComponentsListView()
+                  ],
                 ),
-          Expanded(
-            child: AnimatedSwitcher(
-              duration: 300.ms,
-              switchInCurve: Curves.easeIn,
-              // child: ComponentsListView(),
-              child: componentTabProvider.openActiveComponentCollectionView ? ComponentView() : ComponentsListView(),
-            ),
-          ),
-        ],
+              )
+            : ComponentView(),
       ),
     );
     ;
