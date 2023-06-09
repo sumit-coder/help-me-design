@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:help_me_design/appwrite_service/auth_service.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../theme/my_design_system.dart';
@@ -21,6 +22,7 @@ class _AdminViewSideBarState extends State<AdminViewSideBar> {
   @override
   Widget build(BuildContext context) {
     var themeMangerProvider = Provider.of<ThemeManager>(context, listen: false);
+    var authService = Provider.of<AuthService>(context);
     var themeData = Theme.of(context);
     return Container(
       width: 244,
@@ -117,20 +119,33 @@ class _AdminViewSideBarState extends State<AdminViewSideBar> {
             },
           ),
 
-          IconButton(
-            onPressed: () {
-              if (themeMangerProvider.isDarkMode) {
-                themeMangerProvider.changeThemeMode(ThemeMode.light);
-                return;
-              }
-              themeMangerProvider.changeThemeMode(ThemeMode.dark);
+          Row(
+            children: [
+              IconButton(
+                onPressed: () {
+                  if (themeMangerProvider.isDarkMode) {
+                    themeMangerProvider.changeThemeMode(ThemeMode.light);
+                    return;
+                  }
+                  themeMangerProvider.changeThemeMode(ThemeMode.dark);
 
-              print(themeMangerProvider.getThemeMode);
-            },
-            icon: Icon(
-              Icons.dark_mode,
-              color: Theme.of(context).colorScheme.secondary,
-            ),
+                  print(themeMangerProvider.getThemeMode);
+                },
+                icon: Icon(
+                  Icons.dark_mode,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+              IconButton(
+                onPressed: () {
+                  authService.signOut();
+                },
+                icon: Icon(
+                  Icons.logout_rounded,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+            ],
           ),
         ],
       ),
