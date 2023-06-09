@@ -40,7 +40,18 @@ class ExploreListView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Icon(Icons.design_services),
+                    // const Icon(Icons.design_services),
+                    SizedBox(
+                      width: 38,
+                      height: 38,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(4),
+                        child: Image.network(
+                          "http://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${exploreTapProvider.designResourcesCollection!.data[i].resourcesList.first.url}&size=128",
+                          errorBuilder: (context, error, stackTrace) => Icon(Icons.design_services),
+                        ),
+                      ),
+                    ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -52,7 +63,7 @@ class ExploreListView extends StatelessWidget {
                         ),
                         SizedBox(height: MySpaceSystem.spaceX2),
                         Text(
-                          exploreTapProvider.designResourcesCollection!.data[i].description,
+                          '${exploreTapProvider.designResourcesCollection!.data[i].description}',
                           maxLines: 2,
                           style: themeData.textTheme.bodySmall,
                         ),

@@ -33,6 +33,10 @@ class ExploreView extends StatelessWidget {
     var themeData = Theme.of(context);
     var exploreTapProvider = Provider.of<ExploreTabProvider>(context);
 
+    if (exploreTapProvider.designResourcesCollection!.data.isEmpty) {
+      exploreTapProvider.initDesignResourcesData();
+    }
+
     return Container(
       alignment: Alignment.topCenter,
       // color: Colors.red,

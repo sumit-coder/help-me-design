@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:help_me_design/providers/explore_tab_provider/explore_tab_provider.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/theme/my_theme.dart';
+import 'package:help_me_design/utility/utility_helper.dart';
 import 'package:help_me_design/views/widgets/button_tap_effect.dart';
 import 'package:help_me_design/views/widgets/send_back_bar_with_title.dart';
 import 'package:provider/provider.dart';
@@ -51,16 +52,28 @@ class ExploreListItemView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // const Icon(Icons.design_services),
-                    SizedBox(
-                      width: 34,
-                      height: 34,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(4),
-                        child: Image.network(
-                          "http://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${activeItemData.resourcesList[i].url}&size=128",
-                          errorBuilder: (context, error, stackTrace) => Icon(Icons.design_services),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 38,
+                          height: 38,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(4),
+                            child: Image.network(
+                              "http://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${activeItemData.resourcesList[i].url}&size=128",
+                              errorBuilder: (context, error, stackTrace) => Icon(Icons.design_services),
+                            ),
+                          ),
                         ),
-                      ),
+                        ButtonTapEffect(
+                          child: Icon(Icons.open_in_new_rounded, color: themeData.colorScheme.primary),
+                          onTap: () {
+                            UtilityHelper.launchUrlNow(activeItemData.resourcesList[i].url);
+                          },
+                        )
+                      ],
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,14 +85,7 @@ class ExploreListItemView extends StatelessWidget {
                           style: themeData.textTheme.titleSmall,
                         ),
                         SizedBox(height: MySpaceSystem.spaceX2),
-                        // Text(
-                        //   activeItemData.resourcesList[i].title,
-                        //   maxLines: 2,
-                        //   style: themeData.textTheme.bodySmall,
-                        // ),
                         SizedBox(
-                          // height: 28,
-
                           child: Text(
                             activeItemData.resourcesList[i].description,
                             maxLines: 3,
