@@ -20,7 +20,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  SideTabType activeButton = SideTabType.components;
+  SideTabType activeButton = SideTabType.explore;
 
   Widget switchTabs(SideTabType newActiveTab) {
     switch (newActiveTab) {
@@ -49,7 +49,8 @@ class _MyHomePageState extends State<MyHomePage> {
           height: size.height,
           // clipBehavior: Clip.antiAlias,
           constraints: const BoxConstraints(maxWidth: 1200, minWidth: 1200),
-          margin: const EdgeInsets.all(44),
+          // margin: const EdgeInsets.all(44), //web
+          margin: const EdgeInsets.all(22), // MObile
           // padding: EdgeInsets.all(24),
           decoration: BoxDecoration(
             // border: Border.all(width: 1, color: Colors.black54),

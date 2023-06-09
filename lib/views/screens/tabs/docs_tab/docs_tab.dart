@@ -114,7 +114,7 @@ class TechCard extends StatelessWidget {
   Widget build(BuildContext context) {
     var themeData = Theme.of(context);
     return ButtonTapEffect(
-      onTap: () async {},
+      onTap: () {},
       child: Container(
         // height: 54,
         margin: const EdgeInsets.only(right: 8),

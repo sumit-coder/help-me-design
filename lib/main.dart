@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:help_me_design/appwrite_service/auth_service.dart';
 import 'package:help_me_design/providers/component_tab_provider/component_tab_provider.dart';
+import 'package:help_me_design/providers/explore_tab_provider/explore_tab_provider.dart';
 import 'package:help_me_design/theme/my_theme.dart';
 import 'package:help_me_design/views/screens/onboarding_screens/signin_screen.dart';
 import 'package:help_me_design/views/screens/onboarding_screens/signin_signup_screen/signin_signup_screen.dart';
@@ -32,6 +33,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider<SnippetTabProvider>(create: (_) => SnippetTabProvider()),
         ChangeNotifierProvider<ComponentTabProvider>(create: (_) => ComponentTabProvider()),
         ChangeNotifierProvider<AuthService>(create: (_) => AuthService()),
+        ChangeNotifierProvider<ExploreTabProvider>(create: (_) => ExploreTabProvider()),
       ],
       child: Consumer2<ThemeManager, AuthService>(builder: (context, themeManagerProvider, authServiceProvider, snapshot) {
         return MaterialApp(
@@ -42,14 +44,14 @@ class _MyAppState extends State<MyApp> {
           scaffoldMessengerKey: scaffoldMessengerKey,
           scrollBehavior: const ScrollBehavior().copyWith(scrollbars: false),
           themeMode: themeManagerProvider.getThemeMode,
-          // home: const MyHomePage(),
+          home: const MyHomePage(),
           // home: const SignInScreen(),
           // home: SignUpScreen(),
-          home: authServiceProvider.status == AuthStatus.unauthenticated
-              ? const SignInSignUpScreen()
-              : authServiceProvider.status == AuthStatus.authenticated
-                  ? const MyHomePage()
-                  : WelcomeScreen(),
+          // home: authServiceProvider.status == AuthStatus.unauthenticated
+          //     ? const SignInSignUpScreen()
+          //     : authServiceProvider.status == AuthStatus.authenticated
+          //         ? const MyHomePage()
+          //         : WelcomeScreen(),
           // home: WelcomeScreen(),
         );
       }),

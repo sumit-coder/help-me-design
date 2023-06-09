@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:help_me_design/theme/my_colors.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../constants/app_constants.dart';
 
 class UtilityHelper {
+  static launchUrlNow(String url) async {
+    if (!await launchUrl(Uri.parse(url), webViewConfiguration: WebViewConfiguration(enableJavaScript: true))) {
+      toastMessage(message: "Could not launch $url");
+    }
+  }
+
   static toastMessage({required String message, Duration? msgDuration}) {
     SnackBar snackBar = SnackBar(
       // shape: RoundedRectangleBorder(
