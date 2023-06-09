@@ -11,6 +11,8 @@ import 'package:provider/provider.dart';
 import '../../../../models/design_resources_model.dart';
 import '../../../widgets/container_pattern_painter.dart';
 import '../widgets/tab_view_hero_card.dart';
+import 'widgets/explore_list_item_view.dart';
+import 'widgets/explore_list_view.dart';
 
 class ExploreView extends StatelessWidget {
   ExploreView({Key? key}) : super(key: key);
@@ -40,14 +42,16 @@ class ExploreView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            TabViewHeroCard(
-              // title: MyTextConstants.docsTabHeadline,
-              title: "Explore.",
-              shortDescription:
-                  "Welcome to HelpMeDesign, \nHere you can Explore, Add & Create. Design Resources, Design Systems, UI Components etc.",
-              posterImage: 'https://i.ibb.co/SNVPkKM/original-dd50f8430ab324b03b6af592e73ca6c7-removebg-preview.png',
-              bgPattern: ContainerPatternPainter(70, context),
-            ),
+            exploreTapProvider.showListItemView
+                ? SizedBox()
+                : TabViewHeroCard(
+                    // title: MyTextConstants.docsTabHeadline,
+                    title: "Explore.",
+                    shortDescription:
+                        "Welcome to HelpMeDesign, \nHere you can Explore, Add & Create. Design Resources, Design Systems, UI Components etc.",
+                    posterImage: 'https://i.ibb.co/SNVPkKM/original-dd50f8430ab324b03b6af592e73ca6c7-removebg-preview.png',
+                    bgPattern: ContainerPatternPainter(70, context),
+                  ),
             IconButton(
               onPressed: () {
                 // DatabasesService().getDesignResourcesData();
@@ -55,61 +59,10 @@ class ExploreView extends StatelessWidget {
               },
               icon: const Icon(Icons.abc),
             ),
-            Container(
-              margin: EdgeInsets.only(left: MySpaceSystem.spaceX3),
-              // width: 660,
-              // height: 300,
-              child: exploreTapProvider.designResourcesCollection == null
-                  ? const SizedBox(
-                      child: CircularProgressIndicator(
-                        color: Colors.black,
-                      ),
-                    )
-                  : Wrap(
-                      spacing: MySpaceSystem.spaceX3,
-                      runSpacing: MySpaceSystem.spaceX3,
-                      // direction: Axis.vertical,
-                      children: [
-                        for (var iteam in exploreTapProvider.designResourcesCollection!.data)
-                          ButtonTapEffect(
-                            onTap: () {},
-                            child: Container(
-                              height: 230,
-                              width: 220,
-                              padding: EdgeInsets.all(MySpaceSystem.spaceX3),
-                              decoration: BoxDecoration(
-                                boxShadow: cardShadow,
-                                borderRadius: BorderRadius.circular(8),
-                                color: themeData.colorScheme.secondary,
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Icon(Icons.design_services),
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        iteam.title,
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 2,
-                                        style: themeData.textTheme.titleSmall,
-                                      ),
-                                      SizedBox(height: MySpaceSystem.spaceX2),
-                                      Text(iteam.description, maxLines: 2, style: themeData.textTheme.bodySmall),
-                                      SizedBox(height: MySpaceSystem.spaceX2),
-                                      Text('Count: ${iteam.resourcesCount}', style: themeData.textTheme.bodySmall),
-                                      SizedBox(height: MySpaceSystem.spaceX1),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                      ],
-                    ),
-            )
+            AnimatedSwitcher(
+              duration: 500.ms,
+              child: exploreTapProvider.showListItemView ? ExploreListItemView() : ExploreListView(),
+            ),
           ],
         ).animate().scaleXY(begin: 0.1).move(begin: const Offset(-300, -100)).flipH(begin: -0.1),
       ),

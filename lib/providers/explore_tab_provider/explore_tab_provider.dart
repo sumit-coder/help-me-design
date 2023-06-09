@@ -4,12 +4,21 @@ import 'package:help_me_design/appwrite_service/databases_service.dart';
 import '../../models/design_resources_model.dart';
 
 class ExploreTabProvider with ChangeNotifier {
-  DesignResourcesCollection? designResourcesCollection;
+  bool showListItemView = false;
+  int showListItemViewIndex = 0;
+  DesignResourcesCollection? designResourcesCollection = DesignResourcesCollection.empty();
 
   initDesignResourcesData() async {
     designResourcesCollection = await DatabasesService().getDesignResourcesData();
 
     print(designResourcesCollection!.data);
+
+    notifyListeners();
+  }
+
+  setActiveItemView(int index) {
+    showListItemView = true;
+    showListItemViewIndex = index;
 
     notifyListeners();
   }
