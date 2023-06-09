@@ -6,7 +6,7 @@ import '../constants/app_constants.dart';
 
 class UtilityHelper {
   static launchUrlNow(String url) async {
-    if (!await launchUrl(Uri.parse(url), webViewConfiguration: WebViewConfiguration(enableJavaScript: true))) {
+    if (!await launchUrl(Uri.parse(url), webViewConfiguration: const WebViewConfiguration(enableJavaScript: true))) {
       toastMessage(message: "Could not launch $url");
     }
   }
@@ -20,8 +20,7 @@ class UtilityHelper {
       // behavior: SnackBarBehavior.floating,
       width: 404,
       behavior: SnackBarBehavior.floating,
-
-      duration: msgDuration ?? Duration(milliseconds: 1500),
+      duration: msgDuration ?? const Duration(milliseconds: 1500),
       backgroundColor: Colors.transparent,
       dismissDirection: DismissDirection.horizontal,
       content: Material(

@@ -39,7 +39,7 @@ class ExploreListItemView extends StatelessWidget {
                 // exploreTapProvider.setActiveItemView(i);
               },
               child: Container(
-                height: 230,
+                height: 240,
                 width: 220,
                 padding: EdgeInsets.all(MySpaceSystem.spaceX3),
                 decoration: BoxDecoration(
@@ -81,15 +81,15 @@ class ExploreListItemView extends StatelessWidget {
                         Text(
                           activeItemData.resourcesList[i].title,
                           overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                          style: themeData.textTheme.titleSmall,
+                          maxLines: 1,
+                          style: themeData.textTheme.titleMedium,
                         ),
                         SizedBox(height: MySpaceSystem.spaceX2),
                         SizedBox(
                           child: Text(
                             activeItemData.resourcesList[i].description,
-                            maxLines: 3,
-                            style: themeData.textTheme.bodySmall,
+                            maxLines: 2,
+                            style: themeData.textTheme.bodyMedium,
                           ),
                         ),
                         SizedBox(height: MySpaceSystem.spaceX1),

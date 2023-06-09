@@ -28,7 +28,7 @@ class ExploreListView extends StatelessWidget {
                 exploreTapProvider.setActiveItemView(index: i, viewValue: true);
               },
               child: Container(
-                height: 230,
+                height: 240,
                 width: 220,
                 padding: EdgeInsets.all(MySpaceSystem.spaceX3),
                 decoration: BoxDecoration(
@@ -47,7 +47,7 @@ class ExploreListView extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(4),
                         child: Image.network(
-                          "http://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${exploreTapProvider.designResourcesCollection!.data[i].resourcesList.first.url}&size=128",
+                          "http://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${exploreTapProvider.designResourcesCollection!.data[i].popularResourceUrl}&size=128",
                           errorBuilder: (context, error, stackTrace) => Icon(Icons.design_services),
                         ),
                       ),
@@ -59,13 +59,14 @@ class ExploreListView extends StatelessWidget {
                           exploreTapProvider.designResourcesCollection!.data[i].title,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
-                          style: themeData.textTheme.titleSmall,
+                          style: themeData.textTheme.titleMedium,
                         ),
                         SizedBox(height: MySpaceSystem.spaceX2),
                         Text(
                           '${exploreTapProvider.designResourcesCollection!.data[i].description}',
                           maxLines: 2,
-                          style: themeData.textTheme.bodySmall,
+                          overflow: TextOverflow.ellipsis,
+                          style: themeData.textTheme.bodyMedium,
                         ),
                         SizedBox(height: MySpaceSystem.spaceX2),
                         Text(
