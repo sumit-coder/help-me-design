@@ -52,13 +52,13 @@ class ExploreView extends StatelessWidget {
                     posterImage: 'https://i.ibb.co/SNVPkKM/original-dd50f8430ab324b03b6af592e73ca6c7-removebg-preview.png',
                     bgPattern: ContainerPatternPainter(70, context),
                   ),
-            IconButton(
-              onPressed: () {
-                // DatabasesService().getDesignResourcesData();
-                exploreTapProvider.initDesignResourcesData();
-              },
-              icon: const Icon(Icons.abc),
-            ),
+            // IconButton(
+            //   onPressed: () {
+            //     // DatabasesService().getDesignResourcesData();
+            //     exploreTapProvider.initDesignResourcesData();
+            //   },
+            //   icon: const Icon(Icons.abc),
+            // ),
             AnimatedSwitcher(
               duration: 500.ms,
               child: exploreTapProvider.showListItemView ? ExploreListItemView() : ExploreListView(),

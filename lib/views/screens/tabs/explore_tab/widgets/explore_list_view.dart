@@ -3,6 +3,7 @@ import 'package:help_me_design/providers/explore_tab_provider/explore_tab_provid
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/theme/my_theme.dart';
 import 'package:help_me_design/views/widgets/button_tap_effect.dart';
+import 'package:help_me_design/views/widgets/send_back_bar_with_title.dart';
 import 'package:provider/provider.dart';
 
 class ExploreListView extends StatelessWidget {
@@ -24,7 +25,7 @@ class ExploreListView extends StatelessWidget {
           for (var i = 0; i < exploreTapProvider.designResourcesCollection!.data.length; i++)
             ButtonTapEffect(
               onTap: () {
-                exploreTapProvider.setActiveItemView(i);
+                exploreTapProvider.setActiveItemView(index: i, viewValue: true);
               },
               child: Container(
                 height: 230,

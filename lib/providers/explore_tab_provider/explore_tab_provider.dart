@@ -16,8 +16,8 @@ class ExploreTabProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  setActiveItemView(int index) {
-    showListItemView = true;
+  setActiveItemView({required int index, required bool viewValue}) {
+    showListItemView = viewValue;
     showListItemViewIndex = index;
 
     notifyListeners();

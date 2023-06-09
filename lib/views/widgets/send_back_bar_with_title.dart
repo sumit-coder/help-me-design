@@ -8,10 +8,12 @@ class SendBackBarWithTitle extends StatelessWidget {
     super.key,
     required this.title,
     required this.onTap,
+    this.margin,
   });
 
   final String title;
   final VoidCallback onTap;
+  final EdgeInsets? margin;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class SendBackBarWithTitle extends StatelessWidget {
     return Container(
       height: 64,
       padding: EdgeInsets.all(MySpaceSystem.spaceX1),
-      margin: EdgeInsets.only(left: MySpaceSystem.spaceX3, bottom: MySpaceSystem.spaceX3),
+      margin: margin ?? EdgeInsets.only(left: MySpaceSystem.spaceX3, bottom: MySpaceSystem.spaceX3),
       width: double.maxFinite,
       decoration: BoxDecoration(
         color: themeData.colorScheme.secondary,

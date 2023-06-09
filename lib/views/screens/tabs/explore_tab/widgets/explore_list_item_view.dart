@@ -3,6 +3,7 @@ import 'package:help_me_design/providers/explore_tab_provider/explore_tab_provid
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/theme/my_theme.dart';
 import 'package:help_me_design/views/widgets/button_tap_effect.dart';
+import 'package:help_me_design/views/widgets/send_back_bar_with_title.dart';
 import 'package:provider/provider.dart';
 
 class ExploreListItemView extends StatelessWidget {
@@ -22,6 +23,15 @@ class ExploreListItemView extends StatelessWidget {
         runSpacing: MySpaceSystem.spaceX3,
         // direction: Axis.vertical,
         children: [
+          SendBackBarWithTitle(
+            title: activeItemData.title,
+            margin: EdgeInsets.only(bottom: MySpaceSystem.spaceX1),
+            onTap: () {
+              exploreTapProvider.setActiveItemView(index: 0, viewValue: false);
+              // snippetTabProvider.changeCollectionView(false);
+              // componentTabProvider.changeOpenActiveComponentCollectionView(false);
+            },
+          ),
           for (var i = 0; i < activeItemData.resourcesList.length; i++)
             ButtonTapEffect(
               onTap: () {
