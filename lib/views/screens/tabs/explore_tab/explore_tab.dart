@@ -70,7 +70,7 @@ class ExploreView extends StatelessWidget {
                       runSpacing: MySpaceSystem.spaceX3,
                       // direction: Axis.vertical,
                       children: [
-                        for (var i = 0; i < exploreTapProvider.designResourcesCollection!.data.length; i++)
+                        for (var iteam in exploreTapProvider.designResourcesCollection!.data)
                           ButtonTapEffect(
                             onTap: () {},
                             child: Container(
@@ -91,13 +91,15 @@ class ExploreView extends StatelessWidget {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'Design Systems - new on lodading form here lkjldkf',
+                                        iteam.title,
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 2,
-                                        style: themeData.textTheme.bodyLarge,
+                                        style: themeData.textTheme.titleSmall,
                                       ),
                                       SizedBox(height: MySpaceSystem.spaceX2),
-                                      Text('Count: 4', style: themeData.textTheme.bodySmall),
+                                      Text(iteam.description, maxLines: 2, style: themeData.textTheme.bodySmall),
+                                      SizedBox(height: MySpaceSystem.spaceX2),
+                                      Text('Count: ${iteam.resourcesCount}', style: themeData.textTheme.bodySmall),
                                       SizedBox(height: MySpaceSystem.spaceX1),
                                     ],
                                   ),
