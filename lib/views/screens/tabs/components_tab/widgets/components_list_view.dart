@@ -1,7 +1,6 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:help_me_design/providers/component_tab_provider/component_tab_provider.dart';
-import 'package:help_me_design/providers/snippet_tab_provider.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/theme/my_theme.dart';
 import 'package:help_me_design/utility/utility_helper.dart';
@@ -9,7 +8,7 @@ import 'package:help_me_design/views/widgets/button_tap_effect.dart';
 import 'package:help_me_design/views/widgets/tag_widget.dart';
 import 'package:provider/provider.dart';
 
-import 'add_component_collection_card.dart';
+import 'add_component_collection_alert.dart';
 
 class ComponentsListView extends StatelessWidget {
   ComponentsListView({
