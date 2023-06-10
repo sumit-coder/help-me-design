@@ -26,12 +26,14 @@ class ResourceCollection {
   late int resourcesCount;
   late String description;
   late List<ResourceData> resourcesList;
+  late String popularResourceUrl;
 
   ResourceCollection({required this.title, required this.resourcesCount, required this.description, required this.resourcesList});
 
   ResourceCollection.fromJson(Map<String, dynamic> json) {
     title = json['resourceTitle'] ?? "Def";
     description = json['resourceDescription'] ?? "Def";
+    popularResourceUrl = json['popularResourceUrl'] ?? "popularResourceUrl";
     resourcesCount = json['resourcesCount'] ?? 0;
     if (json['resourcesList'] != null) {
       resourcesList = <ResourceData>[];
