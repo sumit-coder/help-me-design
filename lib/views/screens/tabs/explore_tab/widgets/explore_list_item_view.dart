@@ -38,7 +38,7 @@ class ExploreListItemView extends StatelessWidget {
             ExploreResourceCard(
               onTap: () {},
               title: activeItemData.resourcesList[i].title,
-              description: activeItemData.resourcesList[i].title,
+              description: activeItemData.resourcesList[i].description,
               resourceUrl: activeItemData.resourcesList[i].url,
             ),
         ],

@@ -4,6 +4,7 @@ import 'package:help_me_design/providers/component_tab_provider/component_tab_pr
 import 'package:help_me_design/providers/snippet_tab_provider.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/theme/my_theme.dart';
+import 'package:help_me_design/utility/utility_helper.dart';
 import 'package:help_me_design/views/widgets/button_tap_effect.dart';
 import 'package:help_me_design/views/widgets/tag_widget.dart';
 import 'package:provider/provider.dart';
@@ -95,7 +96,9 @@ class AddComponentCollectionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     var themeData = Theme.of(context);
     return ButtonTapEffect(
-      onTap: () {},
+      onTap: () {
+        UtilityHelper.showAlertMyDialog(context: context);
+      },
       child: Material(
         elevation: 3,
         borderRadius: const BorderRadius.all(Radius.circular(8)),
