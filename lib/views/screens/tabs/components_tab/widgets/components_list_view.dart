@@ -9,6 +9,8 @@ import 'package:help_me_design/views/widgets/button_tap_effect.dart';
 import 'package:help_me_design/views/widgets/tag_widget.dart';
 import 'package:provider/provider.dart';
 
+import 'add_component_collection_card.dart';
+
 class ComponentsListView extends StatelessWidget {
   ComponentsListView({
     super.key,
@@ -39,7 +41,14 @@ class ComponentsListView extends StatelessWidget {
         runSpacing: MySpaceSystem.spaceX3,
         // direction: Axis.vertical,
         children: [
-          AddComponentCollectionCard(),
+          AddComponentCollectionCard(
+            onTap: () {
+              UtilityHelper.showAlertMyDialog(
+                context: context,
+                bodyWidget: const AddComponentCollectionAlert(),
+              );
+            },
+          ),
           for (var i = 0; i < snippetCollectionList.length; i++)
             ButtonTapEffect(
               onTap: () {
@@ -90,15 +99,16 @@ class ComponentsListView extends StatelessWidget {
 class AddComponentCollectionCard extends StatelessWidget {
   const AddComponentCollectionCard({
     super.key,
+    required this.onTap,
   });
+
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     var themeData = Theme.of(context);
     return ButtonTapEffect(
-      onTap: () {
-        UtilityHelper.showAlertMyDialog(context: context);
-      },
+      onTap: onTap,
       child: Material(
         elevation: 3,
         borderRadius: const BorderRadius.all(Radius.circular(8)),
