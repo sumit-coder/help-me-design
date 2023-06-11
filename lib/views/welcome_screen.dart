@@ -31,7 +31,7 @@ class WelcomeScreen extends StatelessWidget {
                 ),
                 TextButton(
                   onPressed: () {
-                    DatabasesService.get.componentsCollection();
+                    DatabasesService.get.componentsCollection(userId: '');
                     // DatabasesService.add.componentsCollection();
                   },
                   child: Text(

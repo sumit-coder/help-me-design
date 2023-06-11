@@ -44,7 +44,7 @@ class ComponentsListView extends StatelessWidget {
             onTap: () {
               UtilityHelper.showAlertMyDialog(
                 context: context,
-                bodyWidget: const AddComponentCollectionAlert(),
+                bodyWidget: AddComponentCollectionAlert(),
               );
             },
           ),

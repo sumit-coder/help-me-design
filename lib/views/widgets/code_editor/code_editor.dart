@@ -136,10 +136,10 @@ class _CodeEditorState extends State<CodeEditor> {
                       ),
                       ButtonTapEffect(
                         onTap: () async {
-                          print('object');
-                          var dat = await DatabasesService.get.componentsCollection();
-                          codeController.setCursor(1);
-                          codeController.insertStr(dat);
+                          // print('object');
+                          // var dat = await DatabasesService.get.componentsCollection();
+                          // codeController.setCursor(1);
+                          // codeController.insertStr(dat);
                         },
                         child: Container(
                           height: 53,

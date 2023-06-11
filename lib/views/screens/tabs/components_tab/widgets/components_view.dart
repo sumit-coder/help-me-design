@@ -10,7 +10,7 @@ import 'package:help_me_design/views/widgets/code_editor/code_editor.dart';
 import 'package:help_me_design/views/widgets/send_back_bar_with_title.dart';
 import 'package:provider/provider.dart';
 
-import 'add_componen_alert.dart';
+import 'add_component_alert.dart';
 
 class ComponentView extends StatelessWidget {
   ComponentView({Key? key}) : super(key: key);
@@ -73,13 +73,8 @@ class ComponentView extends StatelessWidget {
                             onTap: () {
                               UtilityHelper.showAlertMyDialog(
                                 context: context,
-                                bodyWidget: const AddComponentAlert(),
+                                bodyWidget: AddComponentAlert(),
                               );
-                              // DatabasesService.add.componentsCollection(
-                              //   title: "title",
-                              //   tags: "tags",
-                              //   userId: "userId",
-                              // );
                             },
                           ),
                           for (var i = 0; i < snippetCollectionList.length; i++)

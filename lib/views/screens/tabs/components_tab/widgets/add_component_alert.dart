@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:help_me_design/appwrite_service/databases_service.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/views/widgets/button_tap_effect.dart';
 import 'package:help_me_design/views/widgets/form_widgets/buttons/simple_button.dart';
 import 'package:help_me_design/views/widgets/form_widgets/input_fields/text_input_field.dart';
 
 class AddComponentAlert extends StatelessWidget {
-  const AddComponentAlert({Key? key}) : super(key: key);
+  AddComponentAlert({Key? key}) : super(key: key);
+
+  final TextEditingController _titleEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +37,7 @@ class AddComponentAlert extends StatelessWidget {
           ),
           SizedBox(height: MySpaceSystem.spaceX4),
           TextInputField(
-            emailEditingController: TextEditingController(),
+            emailEditingController: _titleEditingController,
             hintText: 'Component title',
           ),
           SizedBox(height: MySpaceSystem.spaceX2),
@@ -56,7 +59,19 @@ class AddComponentAlert extends StatelessWidget {
           //   ),
           // ),
           SizedBox(height: MySpaceSystem.spaceX3),
-          SimpleButton(onTap: () {}, buttonTitle: "Add Component")
+          SimpleButton(
+            onTap: () {
+              if (_titleEditingController.text.isEmpty) return;
+
+              DatabasesService.add.component(
+                title: _titleEditingController.text,
+                // tags: "Flutter, Dart",
+                collectionId: "6480b6027d54e9a9d96b",
+              );
+              Navigator.pop(context);
+            },
+            buttonTitle: "Add Component",
+          )
         ],
       ),
     );
