@@ -3,4 +3,7 @@ class AppWriteConst {
   static const String APPWRITE_ENDPOINT = "https://cloud.appwrite.io/v1";
   static const String APPWRITE_DATABASE_ID = "";
   static const String COLLECTION_MESSAGES = "";
+
+  // databases
+  static const usersDataDatabaseID = '648450950ccd47af09ca';
 }
