@@ -1,5 +1,6 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:help_me_design/appwrite_service/databases_service.dart';
 import 'package:help_me_design/providers/component_tab_provider/component_tab_provider.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/theme/my_theme.dart';
@@ -74,6 +75,11 @@ class ComponentView extends StatelessWidget {
                                 context: context,
                                 bodyWidget: const AddComponentAlert(),
                               );
+                              // DatabasesService.add.componentsCollection(
+                              //   title: "title",
+                              //   tags: "tags",
+                              //   userId: "userId",
+                              // );
                             },
                           ),
                           for (var i = 0; i < snippetCollectionList.length; i++)

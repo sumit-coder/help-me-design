@@ -31,7 +31,7 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
-/lib/appwrite_service/appwrite_constants.dart
+/lib/appwrite_service/appwrite_constants_all.dart
 
 # Symbolication related
 app.*.symbols
