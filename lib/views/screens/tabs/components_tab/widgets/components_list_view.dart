@@ -17,20 +17,13 @@ class ComponentsListView extends StatelessWidget {
 
   final List snippetCollectionList = [
     "def",
-    "def",
-    "def",
-    "def",
-    "def",
-    "def",
-    "def",
-    "def",
   ];
   @override
   Widget build(BuildContext context) {
     var themeData = Theme.of(context);
     var componentTabProvider = Provider.of<ComponentTabProvider>(context);
     return Container(
-      alignment: Alignment.topCenter,
+      alignment: Alignment.topLeft,
       margin: EdgeInsets.only(left: MySpaceSystem.spaceX3),
       // width: 660,
       // height: 300,

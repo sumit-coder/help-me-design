@@ -87,7 +87,7 @@ class Add {
     try {
       final document = await databases.createDocument(
         databaseId: AppWriteConst.usersDataDatabaseID,
-        collectionId: AppWriteConst.savedComponentsCollectionId,
+        collectionId: AppWriteConst.savedSnippetCollectionId,
         documentId: ID.unique(),
         data: {
           "userId": userId,
@@ -103,17 +103,17 @@ class Add {
     }
   }
 
-  snippets({required String title, required String collectionId}) async {
+  snippets({required String title, required String description, required String collectionId}) async {
     final databases = Databases(client);
     try {
       final document = await databases.createDocument(
         databaseId: AppWriteConst.usersDataDatabaseID,
-        collectionId: AppWriteConst.savedComponentsId,
+        collectionId: AppWriteConst.savedSnippetId,
         documentId: ID.unique(),
         data: {
           "collectionId": collectionId,
           "title": title,
-          "description": "",
+          "description": description,
           "code": "",
           "codeLanguage": "",
         },

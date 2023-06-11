@@ -44,14 +44,12 @@ class _MyAppState extends State<MyApp> {
           scaffoldMessengerKey: scaffoldMessengerKey,
           scrollBehavior: const ScrollBehavior().copyWith(scrollbars: false),
           themeMode: themeManagerProvider.getThemeMode,
-          home: const MyHomePage(),
-          // home: const SignInScreen(),
-          // home: SignUpScreen(),
-          // home: authServiceProvider.status == AuthStatus.unauthenticated
-          //     ? const SignInSignUpScreen()
-          //     : authServiceProvider.status == AuthStatus.authenticated
-          //         ? const MyHomePage()
-          //         : WelcomeScreen(),
+          // home: const MyHomePage(),
+          home: authServiceProvider.status == AuthStatus.unauthenticated
+              ? const SignInSignUpScreen()
+              : authServiceProvider.status == AuthStatus.authenticated
+                  ? const MyHomePage()
+                  : WelcomeScreen(),
           // home: WelcomeScreen(),
         );
       }),

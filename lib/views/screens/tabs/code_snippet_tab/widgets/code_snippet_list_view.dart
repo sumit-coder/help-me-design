@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:help_me_design/providers/snippet_tab_provider.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/theme/my_theme.dart';
+import 'package:help_me_design/utility/utility_helper.dart';
 import 'package:help_me_design/views/widgets/button_tap_effect.dart';
 import 'package:help_me_design/views/widgets/tag_widget.dart';
 import 'package:provider/provider.dart';
+
+import 'add_code_snippet_collection_alert.dart';
 
 class CodeSnippetsListView extends StatelessWidget {
   CodeSnippetsListView({
@@ -13,13 +16,6 @@ class CodeSnippetsListView extends StatelessWidget {
   });
 
   final List snippetCollectionList = [
-    "def",
-    "def",
-    "def",
-    "def",
-    "def",
-    "def",
-    "def",
     "def",
   ];
   @override
@@ -35,7 +31,14 @@ class CodeSnippetsListView extends StatelessWidget {
         runSpacing: MySpaceSystem.spaceX3,
         // direction: Axis.vertical,
         children: [
-          AddCodeSnippetCard(themeData: themeData),
+          AddCodeSnippetCard(
+            onTap: () {
+              UtilityHelper.showAlertMyDialog(
+                context: context,
+                bodyWidget: AddCodeSnippetCollectionAlert(),
+              );
+            },
+          ),
           for (var snippetCollection in snippetCollectionList)
             ButtonTapEffect(
               onTap: () {
@@ -85,16 +88,16 @@ class CodeSnippetsListView extends StatelessWidget {
 class AddCodeSnippetCard extends StatelessWidget {
   const AddCodeSnippetCard({
     super.key,
-    required this.themeData,
+    required this.onTap,
   });
 
-  final ThemeData themeData;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     var themeData = Theme.of(context);
     return ButtonTapEffect(
-      onTap: () {},
+      onTap: onTap,
       child: Material(
         elevation: 3,
         borderRadius: const BorderRadius.all(Radius.circular(8)),
