@@ -2,6 +2,7 @@ import 'package:code_text_field/code_text_field.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:help_me_design/appwrite_service/databases_service.dart';
 import 'package:help_me_design/theme/my_colors.dart';
 import 'package:help_me_design/views/widgets/button_tap_effect.dart';
 import 'package:highlight/highlight.dart';
@@ -134,8 +135,11 @@ class _CodeEditorState extends State<CodeEditor> {
                         ),
                       ),
                       ButtonTapEffect(
-                        onTap: () {
-                          print('object');
+                        onTap: () async {
+                          // print('object');
+                          // var dat = await DatabasesService.get.componentsCollection();
+                          // codeController.setCursor(1);
+                          // codeController.insertStr(dat);
                         },
                         child: Container(
                           height: 53,

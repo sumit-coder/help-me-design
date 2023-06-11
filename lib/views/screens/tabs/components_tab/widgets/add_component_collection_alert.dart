@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:help_me_design/appwrite_service/databases_service.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/views/widgets/button_tap_effect.dart';
 import 'package:help_me_design/views/widgets/form_widgets/buttons/simple_button.dart';
 import 'package:help_me_design/views/widgets/form_widgets/input_fields/text_input_field.dart';
 
 class AddComponentCollectionAlert extends StatelessWidget {
-  const AddComponentCollectionAlert({Key? key}) : super(key: key);
+  AddComponentCollectionAlert({Key? key}) : super(key: key);
+
+  final TextEditingController _titleEditingController = TextEditingController();
+  final TextEditingController _tagEditingController = TextEditingController();
+  final TextEditingController _tagTwoEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +39,7 @@ class AddComponentCollectionAlert extends StatelessWidget {
           ),
           SizedBox(height: MySpaceSystem.spaceX4),
           TextInputField(
-            emailEditingController: TextEditingController(),
+            emailEditingController: _titleEditingController,
             hintText: 'Collection title',
           ),
           SizedBox(height: MySpaceSystem.spaceX2),
@@ -43,20 +48,36 @@ class AddComponentCollectionAlert extends StatelessWidget {
               children: [
                 Expanded(
                     child: TextInputField(
-                  emailEditingController: TextEditingController(),
+                  emailEditingController: _tagEditingController,
                   hintText: 'Tag 1',
                 )),
                 SizedBox(width: MySpaceSystem.spaceX2),
                 Expanded(
                     child: TextInputField(
-                  emailEditingController: TextEditingController(),
+                  emailEditingController: _tagTwoEditingController,
                   hintText: 'Tag 2 (Optional)',
                 )),
               ],
             ),
           ),
           SizedBox(height: MySpaceSystem.spaceX3),
-          SimpleButton(onTap: () {}, buttonTitle: "Add Collection")
+          SimpleButton(
+            onTap: () {
+              if (_titleEditingController.text.isEmpty || _tagEditingController.text.isEmpty) return;
+              print("object");
+
+              DatabasesService.add.componentsCollection(
+                userId: '',
+                title: _titleEditingController.text.trim(),
+                tags: _tagTwoEditingController.text.isNotEmpty
+                    ? '${_tagEditingController.text},${_tagTwoEditingController.text}'
+                    : _tagEditingController.text.trim(),
+              );
+
+              Navigator.pop(context);
+            },
+            buttonTitle: "Add Collection",
+          )
         ],
       ),
     );

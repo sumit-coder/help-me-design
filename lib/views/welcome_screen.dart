@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../appwrite_service/databases_service.dart';
 import '../theme/my_design_system.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -27,7 +28,17 @@ class WelcomeScreen extends StatelessWidget {
                     "Help me Design App for to Help Developer Design and save there Reusable Code, Work in Progress",
                     style: MyTextTypeSystem.titleLargeDark,
                   ),
-                )
+                ),
+                TextButton(
+                  onPressed: () {
+                    DatabasesService.get.componentsCollection(userId: '');
+                    // DatabasesService.add.componentsCollection();
+                  },
+                  child: Text(
+                    "hy",
+                    style: MyTextTypeSystem.bodyLarge,
+                  ),
+                ),
               ],
             ),
           ),

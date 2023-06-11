@@ -1,13 +1,16 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:help_me_design/appwrite_service/databases_service.dart';
 import 'package:help_me_design/providers/component_tab_provider/component_tab_provider.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/theme/my_theme.dart';
+import 'package:help_me_design/utility/utility_helper.dart';
 import 'package:help_me_design/views/widgets/button_tap_effect.dart';
 import 'package:help_me_design/views/widgets/code_editor/code_editor.dart';
 import 'package:help_me_design/views/widgets/send_back_bar_with_title.dart';
-import 'package:help_me_design/views/widgets/tag_widget.dart';
-import 'package:highlight/languages/d.dart';
 import 'package:provider/provider.dart';
+
+import 'add_component_alert.dart';
 
 class ComponentView extends StatelessWidget {
   ComponentView({Key? key}) : super(key: key);
@@ -66,8 +69,16 @@ class ComponentView extends StatelessWidget {
                       child: Wrap(
                         clipBehavior: Clip.antiAlias,
                         children: [
+                          AddComponentCard(
+                            onTap: () {
+                              UtilityHelper.showAlertMyDialog(
+                                context: context,
+                                bodyWidget: AddComponentAlert(),
+                              );
+                            },
+                          ),
                           for (var i = 0; i < snippetCollectionList.length; i++)
-                            ComponentInfoCard(
+                            ComponentCard(
                               isActive: componentTabProvider.activeComponentViewIndex == i,
                               onTap: () {
                                 componentTabProvider.changeActiveComponentViewIndex(i);
@@ -170,8 +181,62 @@ class ComponentView extends StatelessWidget {
   }
 }
 
-class ComponentInfoCard extends StatelessWidget {
-  const ComponentInfoCard({
+class AddComponentCard extends StatelessWidget {
+  const AddComponentCard({
+    super.key,
+    required this.onTap,
+  });
+
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    var themeData = Theme.of(context);
+    return ButtonTapEffect(
+      margin: EdgeInsets.only(bottom: MySpaceSystem.spaceX2 + 4),
+      onTap: onTap,
+      child: Container(
+        height: 64,
+        width: 300,
+        padding: const EdgeInsets.all(0.5),
+        decoration: BoxDecoration(
+          color: themeData.colorScheme.primary,
+          boxShadow: cardShadow,
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
+        ),
+        child: DottedBorder(
+          // color: themeData.colorScheme.primary,
+          color: themeData.colorScheme.outline,
+          radius: const Radius.circular(8),
+          borderType: BorderType.RRect,
+          strokeWidth: 2,
+          dashPattern: const [5, 4],
+          padding: EdgeInsets.all(MySpaceSystem.spaceX2),
+          child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(Icons.add_rounded, color: themeData.colorScheme.secondary),
+                SizedBox(width: MySpaceSystem.spaceX1),
+                Text(
+                  'Component',
+                  maxLines: 2,
+                  style: themeData.textTheme.titleSmall!.copyWith(
+                    color: themeData.colorScheme.secondary,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ComponentCard extends StatelessWidget {
+  const ComponentCard({
     super.key,
     required this.onTap,
     required this.title,
@@ -209,7 +274,7 @@ class ComponentInfoCard extends StatelessWidget {
                       size: 8,
                     ),
                   )
-                : SizedBox(),
+                : const SizedBox(),
             Center(
               child: Text(
                 'Flutter utility widgets',
