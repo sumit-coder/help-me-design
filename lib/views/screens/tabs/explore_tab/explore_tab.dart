@@ -14,28 +14,30 @@ import '../widgets/tab_view_hero_card.dart';
 import 'widgets/explore_list_item_view.dart';
 import 'widgets/explore_list_view.dart';
 
-class ExploreView extends StatelessWidget {
-  ExploreView({Key? key}) : super(key: key);
+class ExploreView extends StatefulWidget {
+  const ExploreView({Key? key}) : super(key: key);
 
-  List<String> _items = [
-    'q',
-    'm',
-    '007',
-    'J',
-    'q',
-    'm',
-    'm',
-    'm',
-  ];
+  @override
+  State<ExploreView> createState() => _ExploreViewState();
+}
+
+class _ExploreViewState extends State<ExploreView> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    var exploreTapProvider = Provider.of<ExploreTabProvider>(context, listen: false);
+    exploreTapProvider.initDesignResourcesData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     var themeData = Theme.of(context);
     var exploreTapProvider = Provider.of<ExploreTabProvider>(context);
 
-    if (exploreTapProvider.designResourcesCollection!.data.isEmpty) {
-      exploreTapProvider.initDesignResourcesData();
-    }
+    // if (exploreTapProvider.designResourcesCollection!.data.isEmpty) {
+    //   exploreTapProvider.initDesignResourcesData();
+    // }
 
     return Container(
       alignment: Alignment.topCenter,

@@ -12,28 +12,15 @@ import 'package:provider/provider.dart';
 
 import 'add_component_alert.dart';
 
-class ComponentView extends StatelessWidget {
+class ComponentView extends StatefulWidget {
   ComponentView({Key? key}) : super(key: key);
 
+  @override
+  State<ComponentView> createState() => _ComponentViewState();
+}
+
+class _ComponentViewState extends State<ComponentView> {
   final List snippetCollectionList = [
-    "def",
-    "def",
-    "def",
-    "def",
-    "def",
-    "def",
-    "def",
-    "def",
-    "def",
-    "def",
-    "def",
-    "def",
-    "def",
-    "def",
-    "def",
-    "def",
-    "def",
-    "def",
     "def",
     "def",
   ];
@@ -41,9 +28,19 @@ class ComponentView extends StatelessWidget {
   final int activeComponentViewIndex = 0;
 
   @override
+  void initState() {
+    // TODO: implement initState
+    var componentTabProvider = Provider.of<ComponentTabProvider>(context, listen: false);
+    componentTabProvider.getActiveCollectionComponentsData();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var themeData = Theme.of(context);
-    var componentTabProvider = Provider.of<ComponentTabProvider>(context);
+    var componentTabProvider = Provider.of<ComponentTabProvider>(context, listen: true);
+
+    var activeCollectionData = componentTabProvider.activeCollectionComponentsData;
     return Container(
       // margin: EdgeInsets.only(left: MySpaceSystem.spaceX3),
       child: Column(
@@ -52,7 +49,7 @@ class ComponentView extends StatelessWidget {
             title: "Flutter Code Snippets",
             onTap: () {
               // snippetTabProvider.changeCollectionView(false);
-              componentTabProvider.changeOpenActiveComponentCollectionView(false);
+              componentTabProvider.changeOpenActiveComponentCollectionView(false, -1);
             },
           ),
           Expanded(
@@ -77,13 +74,14 @@ class ComponentView extends StatelessWidget {
                               );
                             },
                           ),
-                          for (var i = 0; i < snippetCollectionList.length; i++)
+                          for (var i = 0; i < componentTabProvider.activeCollectionComponentsData.length; i++)
                             ComponentCard(
                               isActive: componentTabProvider.activeComponentViewIndex == i,
                               onTap: () {
                                 componentTabProvider.changeActiveComponentViewIndex(i);
+                                setState(() {});
                               },
-                              title: '',
+                              title: componentTabProvider.activeCollectionComponentsData[i].data['title'],
                             ),
                         ],
                       ),
@@ -123,50 +121,38 @@ class ComponentView extends StatelessWidget {
                               ],
                             ),
                           ),
-                          const CodeEditor(
-                            codeText: '''
-           Positioned(
-           top: 8,
-           left: 8,
-           child: Text(
-           'Preview',
-           maxLines: 2,
-           style: themeData.textTheme.titleSmall,
-           ),
-           ),
-
-           Positioned(
-           top: 8,
-           left: 8,
-           child: Text(
-           'Preview',
-           maxLines: 2,
-           style: themeData.textTheme.titleSmall,
-           ),
-           ),
-
-           Positioned(
-           top: 8,
-           left: 8,
-           child: Text(
-           'Preview',
-           maxLines: 2,
-           style: themeData.textTheme.titleSmall,
-           ),
-           ),
-
-           Positioned(
-           top: 8,
-           left: 8,
-           child: Text(
-           'Preview',
-           maxLines: 2,
-           style: themeData.textTheme.titleSmall,
-           ),
-           ),
-                          
-                              ''',
+                          Column(
+                            children: [
+                              for (var i = 0; i < activeCollectionData.length; i++)
+                                Visibility(
+                                  visible: i == componentTabProvider.activeComponentViewIndex ? true : false,
+                                  child: CodeEditor(
+                                    onTapUpdateButton: ({newCode, newLanguage}) async {
+                                      var updateResponse = await DatabasesService.update.component(
+                                        componentId: activeCollectionData[componentTabProvider.activeComponentViewIndex].$id,
+                                        code: newCode,
+                                        codeLanguage: newLanguage,
+                                        previewType: null,
+                                        previewUrl: null,
+                                      );
+                                      if (updateResponse) {
+                                        componentTabProvider.getActiveCollectionComponentsData();
+                                      }
+                                    },
+                                    codeText: activeCollectionData[componentTabProvider.activeComponentViewIndex].data['code'],
+                                    description: '',
+                                    title: activeCollectionData[componentTabProvider.activeComponentViewIndex].data['title'],
+                                    codeLanguage: activeCollectionData[componentTabProvider.activeComponentViewIndex].data['codeLanguage'],
+                                  ),
+                                )
+                            ],
                           ),
+                          // CodeEditor(
+                          //   codeText: activeCollectionData[componentTabProvider.activeComponentViewIndex].data['code'],
+                          //   description: '',
+                          //   title: activeCollectionData[componentTabProvider.activeComponentViewIndex].data['title'],
+                          //   codeLanguage: activeCollectionData[componentTabProvider.activeComponentViewIndex].data['codeLanguage'],
+                          // ),
                         ],
                       ),
                     ),
@@ -277,7 +263,7 @@ class ComponentCard extends StatelessWidget {
                 : const SizedBox(),
             Center(
               child: Text(
-                'Flutter utility widgets',
+                title,
                 maxLines: 2,
                 style: themeData.textTheme.titleSmall,
               ),

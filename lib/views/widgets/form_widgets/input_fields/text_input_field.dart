@@ -7,10 +7,12 @@ class TextInputField extends StatelessWidget {
     super.key,
     required this.emailEditingController,
     required this.hintText,
+    this.maxLines,
   });
 
   final TextEditingController emailEditingController;
   final String hintText;
+  final int? maxLines;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class TextInputField extends StatelessWidget {
     return TextFormField(
       controller: emailEditingController,
       cursorColor: MyColors.actionColor,
-      maxLines: 1,
+      maxLines: maxLines,
       style: themeData.textTheme.bodyLarge!.copyWith(decoration: TextDecoration.none),
       decoration: InputDecoration(
         filled: true,

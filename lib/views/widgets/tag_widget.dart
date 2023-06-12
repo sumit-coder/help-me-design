@@ -11,6 +11,7 @@ class Tag extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+      margin: EdgeInsets.only(left: MySpaceSystem.spaceX1),
       decoration: const BoxDecoration(
         color: DesignSystemColors.primaryColor,
         borderRadius: BorderRadius.all(Radius.circular(2)),

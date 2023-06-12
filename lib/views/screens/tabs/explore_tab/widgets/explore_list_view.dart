@@ -29,7 +29,7 @@ class ExploreListView extends StatelessWidget {
               onTap: () {
                 exploreTapProvider.setActiveItemView(index: i, viewValue: true);
               },
-              popularResourceUrl: exploreTapProvider.designResourcesCollection!.data[i].popularResourceUrl,
+              popularResourceUrl: exploreTapProvider.designResourcesCollection!.data[i].resourcesList.first.url,
               resourcesCount: exploreTapProvider.designResourcesCollection!.data[i].resourcesCount.toString(),
               title: exploreTapProvider.designResourcesCollection!.data[i].title,
             ),

@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:help_me_design/appwrite_service/databases_service.dart';
-import 'package:help_me_design/providers/component_tab_provider/component_tab_provider.dart';
+import 'package:help_me_design/providers/snippet_tab_provider.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/views/widgets/button_tap_effect.dart';
 import 'package:help_me_design/views/widgets/form_widgets/buttons/simple_button.dart';
 import 'package:help_me_design/views/widgets/form_widgets/input_fields/text_input_field.dart';
 import 'package:provider/provider.dart';
 
-class AddComponentAlert extends StatelessWidget {
-  AddComponentAlert({Key? key}) : super(key: key);
+class AddCodeSnippetAlert extends StatelessWidget {
+  AddCodeSnippetAlert({Key? key}) : super(key: key);
 
   final TextEditingController _titleEditingController = TextEditingController();
+  final TextEditingController _descriptionEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    var componentTabProvider = Provider.of<ComponentTabProvider>(context, listen: false);
     var themeData = Theme.of(context);
+    var snippetTabProvider = Provider.of<SnippetTabProvider>(context);
     return Container(
       padding: EdgeInsets.all(MySpaceSystem.spaceX4),
       width: 404,
@@ -41,40 +42,28 @@ class AddComponentAlert extends StatelessWidget {
           SizedBox(height: MySpaceSystem.spaceX4),
           TextInputField(
             emailEditingController: _titleEditingController,
-            hintText: 'Component title',
+            hintText: 'Snippet title',
           ),
           SizedBox(height: MySpaceSystem.spaceX2),
-          // SizedBox(
-          //   child: Row(
-          //     children: [
-          //       Expanded(
-          //           child: TextInputField(
-          //         emailEditingController: TextEditingController(),
-          //         hintText: 'Tag 1',
-          //       )),
-          //       SizedBox(width: MySpaceSystem.spaceX2),
-          //       Expanded(
-          //           child: TextInputField(
-          //         emailEditingController: TextEditingController(),
-          //         hintText: 'Tag 2 (Optional)',
-          //       )),
-          //     ],
-          //   ),
-          // ),
+          TextInputField(
+            maxLines: 3,
+            emailEditingController: _descriptionEditingController,
+            hintText: 'Snippet Description',
+          ),
           SizedBox(height: MySpaceSystem.spaceX3),
           SimpleButton(
             onTap: () async {
-              if (_titleEditingController.text.isEmpty) return;
+              if (_titleEditingController.text.isEmpty || _descriptionEditingController.text.isEmpty) return;
 
-              var addResponse = await DatabasesService.add.component(
+              var addResponse = await DatabasesService.add.snippets(
+                collectionId: snippetTabProvider.snippetsCollectionData[snippetTabProvider.indexOfClickedSnippetCollection].$id,
                 title: _titleEditingController.text,
-                // tags: "Flutter, Dart",
-                collectionId: componentTabProvider.componentsCollectionData[componentTabProvider.activeComponentCollectionIndex].$id,
+                description: _descriptionEditingController.text,
               );
               Navigator.pop(context);
 
               if (addResponse) {
-                componentTabProvider.getActiveCollectionComponentsData();
+                snippetTabProvider.getActiveSnippetsCollectionData();
               }
             },
             buttonTitle: "Add Component",
