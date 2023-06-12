@@ -19,6 +19,7 @@ class DatabasesService {
   static Add add = Add();
   static Get get = Get();
   static Update update = Update();
+  static DeleteData delete = DeleteData();
 
   Future<DesignResourcesCollection> getDesignResourcesData() async {
     Databases databases = Databases(client);
@@ -139,6 +140,37 @@ class Example{
       return false;
     }
   }
+
+  Future<bool> inspirationsFileInfo({
+    required String fileUrl,
+    required String userId,
+    required String fileTitle,
+    required String fileType,
+    required String fileId,
+  }) async {
+    final databases = Databases(client);
+    try {
+      final document = await databases.createDocument(
+        databaseId: AppWriteConst.usersDataDatabaseID,
+        collectionId: AppWriteConst.inspirationsFilesCollectionID,
+        documentId: ID.unique(),
+        data: {
+          "fileUrl": fileUrl,
+          "userId": userId,
+          "fileTitle": fileTitle,
+          "fileType": fileType,
+          "fileId": fileId,
+        },
+      );
+      UtilityHelper.toastMessage(message: "inspirationsFile Added");
+
+      return true;
+    } on AppwriteException catch (e) {
+      UtilityHelper.toastMessage(message: e.message ?? "add.inspirationsFileInfo() null message");
+      log(e.toString());
+      return false;
+    }
+  }
 }
 
 class Get {
@@ -225,6 +257,26 @@ class Get {
       return [];
     }
   }
+
+  Future<List<Document>> inspirationFiles({required String userId}) async {
+    final databases = Databases(client);
+    try {
+      final data = await databases.listDocuments(
+        databaseId: AppWriteConst.usersDataDatabaseID,
+        collectionId: AppWriteConst.inspirationsFilesCollectionID,
+        queries: [
+          Query.equal('userId', userId),
+          Query.orderDesc('\$createdAt'),
+        ],
+      );
+      log("Get.inspirationFiles");
+      return data.documents;
+    } on AppwriteException catch (e) {
+      print(e);
+      UtilityHelper.toastMessage(message: e.message ?? "get.inspirationFiles() null message");
+      return [];
+    }
+  }
 }
 
 class Update {
@@ -283,6 +335,31 @@ class Update {
     } on AppwriteException catch (e) {
       print(e);
       UtilityHelper.toastMessage(message: e.message ?? "update.snippet() null message");
+      return false;
+    }
+  }
+}
+
+class DeleteData {
+  final Client client = Client()
+      .setEndpoint(AppWriteConst.APPWRITE_ENDPOINT) // Your API Endpoint
+      .setProject(AppWriteConst.APPWRITE_PROJECT_ID);
+
+  Future<bool> deleteInspirationFileInfo({
+    required String fileInfoId,
+  }) async {
+    final databases = Databases(client);
+    try {
+      final data = await databases.deleteDocument(
+        databaseId: AppWriteConst.usersDataDatabaseID,
+        collectionId: AppWriteConst.inspirationsFilesCollectionID,
+        documentId: fileInfoId,
+      );
+      log("Delete.deleteInspirationFileInfo");
+      return true;
+    } on AppwriteException catch (e) {
+      print(e);
+      UtilityHelper.toastMessage(message: e.message ?? "delete.deleteInspirationFileInfo() null message");
       return false;
     }
   }

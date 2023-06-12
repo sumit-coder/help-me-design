@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:help_me_design/views/screens/tabs/components_tab/components_tab.dart';
+import 'package:help_me_design/views/screens/tabs/inspiration_tab/inspiration_tab.dart';
 
 import '../tabs/categories_screens.dart';
 import '../tabs/code_snippet_tab/code_snippet_tab.dart';
@@ -20,20 +21,20 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  SideTabType activeButton = SideTabType.codeSnippet;
+  SideTabType activeButton = SideTabType.inspiration;
 
   Widget switchTabs(SideTabType newActiveTab) {
     switch (newActiveTab) {
       case SideTabType.explore:
         return ExploreView();
+      case SideTabType.inspiration:
+        return InspirationTab();
       case SideTabType.docs:
         return DocsView();
       case SideTabType.codeSnippet:
         return CodeSnippetScreen();
-
       case SideTabType.components:
         return const ComponentsTab();
-
       default:
         return const CategoriesView();
     }

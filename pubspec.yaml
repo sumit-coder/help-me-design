@@ -51,7 +51,7 @@ dependencies:
   highlight: ^0.7.0
   dropdown_button2: ^1.0.0
   dotted_border: ^2.0.0+3
-  cached_network_image: ^3.2.3
+  file_picker: ^5.3.1
 
   web_scraper: ^0.1.4
 

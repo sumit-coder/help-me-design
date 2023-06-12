@@ -3,12 +3,14 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:help_me_design/theme/my_theme.dart';
 
 class ButtonTapEffect extends StatefulWidget {
-  const ButtonTapEffect({Key? key, required this.child, required this.onTap, this.margin, this.borderRadius}) : super(key: key);
+  const ButtonTapEffect({Key? key, required this.child, required this.onTap, this.margin, this.borderRadius, this.onHover})
+      : super(key: key);
 
   final Widget child;
   final VoidCallback onTap;
   final EdgeInsets? margin;
   final double? borderRadius;
+  final Function(bool value)? onHover;
 
   @override
   State<ButtonTapEffect> createState() => _ButtonTapEffectState();
@@ -34,6 +36,7 @@ class _ButtonTapEffectState extends State<ButtonTapEffect> {
     return Container(
       margin: widget.margin,
       child: InkWell(
+        onHover: widget.onHover,
         onTap: () {
           onSimpleTapHappenedValue(true);
           setState(() {});

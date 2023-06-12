@@ -8,6 +8,7 @@ import 'package:help_me_design/views/welcome_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'constants/app_constants.dart';
+import 'providers/inspiration_tab_provider/inspiration_tab_provider.dart';
 import 'providers/snippet_tab_provider.dart';
 import 'views/screens/home_screen/home_screen.dart';
 
@@ -32,6 +33,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider<ComponentTabProvider>(create: (_) => ComponentTabProvider()),
         ChangeNotifierProvider<AuthService>(create: (_) => AuthService()),
         ChangeNotifierProvider<ExploreTabProvider>(create: (_) => ExploreTabProvider()),
+        ChangeNotifierProvider<InspirationTabProvider>(create: (_) => InspirationTabProvider()),
       ],
       child: Consumer2<ThemeManager, AuthService>(builder: (context, themeManagerProvider, authServiceProvider, snapshot) {
         return MaterialApp(
