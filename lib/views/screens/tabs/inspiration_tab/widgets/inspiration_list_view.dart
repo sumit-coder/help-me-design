@@ -11,11 +11,25 @@ import 'package:help_me_design/appwrite_service/storage_service.dart';
 import 'package:help_me_design/providers/inspiration_tab_provider/inspiration_tab_provider.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/theme/my_theme.dart';
+import 'package:help_me_design/utility/utility_helper.dart';
 import 'package:help_me_design/views/widgets/button_tap_effect.dart';
 import 'package:provider/provider.dart';
 
-class InspirationsListView extends StatelessWidget {
+class InspirationsListView extends StatefulWidget {
   const InspirationsListView({Key? key}) : super(key: key);
+
+  @override
+  State<InspirationsListView> createState() => _InspirationsListViewState();
+}
+
+class _InspirationsListViewState extends State<InspirationsListView> {
+  @override
+  void initState() {
+    var inspirationTabProvider = Provider.of<InspirationTabProvider>(context, listen: false);
+    var authService = Provider.of<AuthService>(context, listen: false);
+    inspirationTabProvider.getCurrentUsersInspirationsData(authService.currentUser.$id);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +72,7 @@ class InspirationsListView extends StatelessWidget {
           ),
           for (var i = 0; i < inspirationTabProvider.listOfCurrentUserInspirations.length; i++)
             InspirationCard(
+              onDelete: () {},
               onTap: () {},
               imageUrl:
                   "https://cloud.appwrite.io/v1/storage/buckets/${AppWriteConst.usersInspirationFilesBucketId}/files/${inspirationTabProvider.listOfCurrentUserInspirations[i].data['fileId']}/view?project=${AppWriteConst.APPWRITE_PROJECT_ID}",
@@ -69,21 +84,59 @@ class InspirationsListView extends StatelessWidget {
 }
 // https://cloud.appwrite.io/v1/storage/buckets/648767889784e9d8ae81/files/648774e4cbb5d98a135d/preview?project=64803e0044c9826d779b&width=500&height=600
 
-class InspirationCard extends StatelessWidget {
+class InspirationCard extends StatefulWidget {
   const InspirationCard({
     super.key,
     required this.onTap,
     required this.imageUrl,
+    required this.onDelete,
   });
 
   final VoidCallback onTap;
+  final VoidCallback onDelete;
   final String imageUrl;
+
+  @override
+  State<InspirationCard> createState() => _InspirationCardState();
+}
+
+class _InspirationCardState extends State<InspirationCard> {
+  bool onHover = false;
 
   @override
   Widget build(BuildContext context) {
     var themeData = Theme.of(context);
+    var size = MediaQuery.of(context).size;
     return ButtonTapEffect(
-      onTap: onTap,
+      onHover: (value) {
+        onHover = value;
+        setState(() {});
+      },
+      onTap: () {
+        widget.onTap();
+        UtilityHelper.showAlertMyDialog(
+          context: context,
+          bodyWidget: Container(
+            child: Stack(
+              children: [
+                Container(
+                  constraints: BoxConstraints(maxHeight: size.height / 1.24, maxWidth: size.width / 1.24),
+                  child: Image.network(widget.imageUrl, fit: BoxFit.contain),
+                ),
+                Positioned(
+                  right: 20,
+                  top: 20,
+                  child: ButtonTapEffect(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Icon(Icons.clear_rounded, size: 44, color: themeData.colorScheme.secondary)),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
       child: Container(
         height: 350,
         width: 300,
@@ -99,11 +152,21 @@ class InspirationCard extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(4)),
                 child: Image.network(
-                  imageUrl,
+                  widget.imageUrl,
                   fit: BoxFit.cover,
                 ),
               ),
-            )
+            ),
+            onHover
+                ? Positioned(
+                    right: MySpaceSystem.spaceX2,
+                    top: MySpaceSystem.spaceX2,
+                    child: ButtonTapEffect(
+                      onTap: () {},
+                      child: Icon(Icons.delete_forever_rounded, size: 34, color: themeData.colorScheme.primary),
+                    ),
+                  )
+                : SizedBox(),
           ],
         ),
       ),
