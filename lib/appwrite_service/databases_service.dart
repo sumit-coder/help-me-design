@@ -19,6 +19,7 @@ class DatabasesService {
   static Add add = Add();
   static Get get = Get();
   static Update update = Update();
+  static DeleteData delete = DeleteData();
 
   Future<DesignResourcesCollection> getDesignResourcesData() async {
     Databases databases = Databases(client);
@@ -334,6 +335,31 @@ class Update {
     } on AppwriteException catch (e) {
       print(e);
       UtilityHelper.toastMessage(message: e.message ?? "update.snippet() null message");
+      return false;
+    }
+  }
+}
+
+class DeleteData {
+  final Client client = Client()
+      .setEndpoint(AppWriteConst.APPWRITE_ENDPOINT) // Your API Endpoint
+      .setProject(AppWriteConst.APPWRITE_PROJECT_ID);
+
+  Future<bool> deleteInspirationFileInfo({
+    required String fileInfoId,
+  }) async {
+    final databases = Databases(client);
+    try {
+      final data = await databases.deleteDocument(
+        databaseId: AppWriteConst.usersDataDatabaseID,
+        collectionId: AppWriteConst.inspirationsFilesCollectionID,
+        documentId: fileInfoId,
+      );
+      log("Delete.deleteInspirationFileInfo");
+      return true;
+    } on AppwriteException catch (e) {
+      print(e);
+      UtilityHelper.toastMessage(message: e.message ?? "delete.deleteInspirationFileInfo() null message");
       return false;
     }
   }

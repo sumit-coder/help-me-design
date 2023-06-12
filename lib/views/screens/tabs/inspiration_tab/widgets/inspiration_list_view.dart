@@ -51,7 +51,7 @@ class _InspirationsListViewState extends State<InspirationsListView> {
               if (result != null) {
                 var bytes = result.files.first.bytes!.toList();
 
-                var fileResponse = await StorageService().uploadInspirationsFile(bytes, result.files.first.name);
+                var fileResponse = await StorageService.upload.uploadInspirationsFile(bytes, result.files.first.name);
 
                 if (fileResponse != null) {
                   var addResponse = await DatabasesService.add.inspirationsFileInfo(
@@ -72,7 +72,16 @@ class _InspirationsListViewState extends State<InspirationsListView> {
           ),
           for (var i = 0; i < inspirationTabProvider.listOfCurrentUserInspirations.length; i++)
             InspirationCard(
-              onDelete: () {},
+              onDelete: () async {
+                DatabasesService.delete.deleteInspirationFileInfo(fileInfoId: inspirationTabProvider.listOfCurrentUserInspirations[i].$id);
+                var deleteResponse = await StorageService.delete.deleteInspirationFile(
+                  fileId: inspirationTabProvider.listOfCurrentUserInspirations[i].data['fileId'],
+                );
+                if (deleteResponse) {
+                  // get updated data after delete
+                  inspirationTabProvider.getCurrentUsersInspirationsData(authService.currentUser.$id);
+                }
+              },
               onTap: () {},
               imageUrl:
                   "https://cloud.appwrite.io/v1/storage/buckets/${AppWriteConst.usersInspirationFilesBucketId}/files/${inspirationTabProvider.listOfCurrentUserInspirations[i].data['fileId']}/view?project=${AppWriteConst.APPWRITE_PROJECT_ID}",
@@ -162,7 +171,7 @@ class _InspirationCardState extends State<InspirationCard> {
                     right: MySpaceSystem.spaceX2,
                     top: MySpaceSystem.spaceX2,
                     child: ButtonTapEffect(
-                      onTap: () {},
+                      onTap: widget.onDelete,
                       child: Icon(Icons.delete_forever_rounded, size: 34, color: themeData.colorScheme.primary),
                     ),
                   )
