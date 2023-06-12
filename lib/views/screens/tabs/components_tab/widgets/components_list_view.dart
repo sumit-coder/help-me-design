@@ -1,5 +1,6 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:help_me_design/appwrite_service/auth_service.dart';
 import 'package:help_me_design/providers/component_tab_provider/component_tab_provider.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/theme/my_theme.dart';
@@ -10,17 +11,31 @@ import 'package:provider/provider.dart';
 
 import 'add_component_collection_alert.dart';
 
-class ComponentsListView extends StatelessWidget {
+class ComponentsListView extends StatefulWidget {
   ComponentsListView({
     super.key,
   });
 
+  @override
+  State<ComponentsListView> createState() => _ComponentsListViewState();
+}
+
+class _ComponentsListViewState extends State<ComponentsListView> {
   final List snippetCollectionList = [
     "def",
   ];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    var authService = Provider.of<AuthService>(context, listen: false);
+    var componentTabProvider = Provider.of<ComponentTabProvider>(context, listen: false);
+    componentTabProvider.getComponentsCollectionData(authService.currentUser.$id);
+  }
+
   @override
   Widget build(BuildContext context) {
-    var themeData = Theme.of(context);
     var componentTabProvider = Provider.of<ComponentTabProvider>(context);
     return Container(
       alignment: Alignment.topLeft,
@@ -41,48 +56,81 @@ class ComponentsListView extends StatelessWidget {
               );
             },
           ),
-          for (var i = 0; i < snippetCollectionList.length; i++)
-            ButtonTapEffect(
+          for (var i = 0; i < componentTabProvider.componentsCollectionData.length; i++)
+            ComponentCollectionCard(
               onTap: () {
-                componentTabProvider.changeActiveComponentCollectionIndex(i);
-                componentTabProvider.changeOpenActiveComponentCollectionView(true);
+                componentTabProvider.changeOpenActiveComponentCollectionView(true, i);
               },
-              child: Container(
-                height: 154,
-                width: 300,
-                padding: EdgeInsets.all(MySpaceSystem.spaceX2),
-                decoration: BoxDecoration(
-                  color: themeData.colorScheme.secondary,
-                  boxShadow: cardShadow,
-                  borderRadius: const BorderRadius.all(Radius.circular(8)),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: const [
-                        Tag(title: 'Flutter'),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Flutter utility widgets',
-                          maxLines: 2,
-                          style: themeData.textTheme.titleSmall,
-                        ),
-                        SizedBox(height: MySpaceSystem.spaceX2),
-                        Text('20 Snippets', style: themeData.textTheme.bodyMedium),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
+              title: componentTabProvider.componentsCollectionData[i].data['title'],
+              tags: componentTabProvider.componentsCollectionData[i].data['tags'],
+              componentsCount: componentTabProvider.componentsCollectionData[i].data['collectionsCount'],
             ),
+          ComponentCollectionCard(
+            onTap: () {
+              componentTabProvider.changeOpenActiveComponentCollectionView(true, 0);
+            },
+            title: 'Flutter Components Demo',
+            tags: 'Flutter, Demo',
+            componentsCount: 0,
+          ),
         ],
+      ),
+    );
+  }
+}
+
+class ComponentCollectionCard extends StatelessWidget {
+  const ComponentCollectionCard({
+    super.key,
+    required this.onTap,
+    required this.title,
+    required this.tags,
+    required this.componentsCount,
+  });
+
+  final VoidCallback onTap;
+  final String title;
+  final String tags;
+  final int componentsCount;
+
+  @override
+  Widget build(BuildContext context) {
+    var themeData = Theme.of(context);
+    return ButtonTapEffect(
+      onTap: onTap,
+      child: Container(
+        height: 154,
+        width: 300,
+        padding: EdgeInsets.all(MySpaceSystem.spaceX2),
+        decoration: BoxDecoration(
+          color: themeData.colorScheme.secondary,
+          boxShadow: cardShadow,
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                for (var tag in tags.split(',')) Tag(title: tag),
+              ],
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  maxLines: 2,
+                  style: themeData.textTheme.titleSmall,
+                ),
+                SizedBox(height: MySpaceSystem.spaceX2),
+                Text('$componentsCount Components', style: themeData.textTheme.bodyMedium),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

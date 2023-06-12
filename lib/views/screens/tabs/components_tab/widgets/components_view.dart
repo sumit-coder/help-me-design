@@ -18,24 +18,6 @@ class ComponentView extends StatelessWidget {
   final List snippetCollectionList = [
     "def",
     "def",
-    "def",
-    "def",
-    "def",
-    "def",
-    "def",
-    "def",
-    "def",
-    "def",
-    "def",
-    "def",
-    "def",
-    "def",
-    "def",
-    "def",
-    "def",
-    "def",
-    "def",
-    "def",
   ];
 
   final int activeComponentViewIndex = 0;
@@ -52,7 +34,7 @@ class ComponentView extends StatelessWidget {
             title: "Flutter Code Snippets",
             onTap: () {
               // snippetTabProvider.changeCollectionView(false);
-              componentTabProvider.changeOpenActiveComponentCollectionView(false);
+              componentTabProvider.changeOpenActiveComponentCollectionView(false, -1);
             },
           ),
           Expanded(

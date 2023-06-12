@@ -36,7 +36,7 @@ class Add {
       .setEndpoint(AppWriteConst.APPWRITE_ENDPOINT) // Your API Endpoint
       .setProject(AppWriteConst.APPWRITE_PROJECT_ID);
 
-  componentsCollection({required String title, required String tags, required String userId}) async {
+  Future<bool> componentsCollection({required String title, required String tags, required String userId}) async {
     // componentsCollection() {
     final databases = Databases(client);
     try {
@@ -53,13 +53,15 @@ class Add {
       );
 
       UtilityHelper.toastMessage(message: "Components Collection Added");
+      return true;
     } on AppwriteException catch (e) {
       UtilityHelper.toastMessage(message: e.message ?? "add.componentsCollection() null message");
       print(e);
+      return false;
     }
   }
 
-  component({required String title, required String collectionId}) async {
+  Future<bool> component({required String title, required String collectionId}) async {
     final databases = Databases(client);
     try {
       final document = await databases.createDocument(
@@ -76,9 +78,11 @@ class Add {
         },
       );
       UtilityHelper.toastMessage(message: "Component Added");
+      return true;
     } on AppwriteException catch (e) {
       UtilityHelper.toastMessage(message: e.message ?? "add.component() null message");
       print(e);
+      return false;
     }
   }
 
@@ -145,9 +149,10 @@ class Get {
         collectionId: AppWriteConst.savedComponentsCollectionId,
         queries: [
           Query.equal('userId', userId),
+          Query.orderDesc('\$createdAt'),
         ],
       );
-
+      log("Get.componentsCollection");
       return data.documents;
     } on AppwriteException catch (e) {
       print(e);
@@ -166,7 +171,7 @@ class Get {
           Query.equal('collectionId', currentComponentsCollectionId),
         ],
       );
-
+      log("Get.components");
       return data.documents;
     } on AppwriteException catch (e) {
       print(e);
