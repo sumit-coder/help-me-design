@@ -4,7 +4,7 @@ import 'package:help_me_design/appwrite_service/databases_service.dart';
 
 class ComponentTabProvider with ChangeNotifier {
   List<Document> componentsCollectionData = [];
-  List<Document> activeComponentsCollectionsSnippetsData = [];
+  List<Document> activeCollectionComponentsData = [];
   // Nav
   bool openActiveComponentCollectionView = false;
   int activeComponentCollectionIndex = 0;
@@ -27,6 +27,13 @@ class ComponentTabProvider with ChangeNotifier {
   getComponentsCollectionData(String userId) async {
     componentsCollectionData = await DatabasesService.get.componentsCollection(
       userId: userId,
+    );
+    notifyListeners();
+  }
+
+  getActiveCollectionComponentsData() async {
+    activeCollectionComponentsData = await DatabasesService.get.components(
+      currentComponentsCollectionId: componentsCollectionData[activeComponentCollectionIndex].$id,
     );
     notifyListeners();
   }

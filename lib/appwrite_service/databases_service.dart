@@ -169,6 +169,7 @@ class Get {
         collectionId: AppWriteConst.savedComponentsId,
         queries: [
           Query.equal('collectionId', currentComponentsCollectionId),
+          Query.orderDesc('\$createdAt'),
         ],
       );
       log("Get.components");

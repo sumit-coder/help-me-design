@@ -12,15 +12,28 @@ import 'package:provider/provider.dart';
 
 import 'add_component_alert.dart';
 
-class ComponentView extends StatelessWidget {
+class ComponentView extends StatefulWidget {
   ComponentView({Key? key}) : super(key: key);
 
+  @override
+  State<ComponentView> createState() => _ComponentViewState();
+}
+
+class _ComponentViewState extends State<ComponentView> {
   final List snippetCollectionList = [
     "def",
     "def",
   ];
 
   final int activeComponentViewIndex = 0;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    var componentTabProvider = Provider.of<ComponentTabProvider>(context, listen: false);
+    componentTabProvider.getActiveCollectionComponentsData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,13 +72,13 @@ class ComponentView extends StatelessWidget {
                               );
                             },
                           ),
-                          for (var i = 0; i < snippetCollectionList.length; i++)
+                          for (var i = 0; i < componentTabProvider.activeCollectionComponentsData.length; i++)
                             ComponentCard(
                               isActive: componentTabProvider.activeComponentViewIndex == i,
                               onTap: () {
                                 componentTabProvider.changeActiveComponentViewIndex(i);
                               },
-                              title: '',
+                              title: componentTabProvider.activeCollectionComponentsData[i].data['title'],
                             ),
                         ],
                       ),
@@ -262,7 +275,7 @@ class ComponentCard extends StatelessWidget {
                 : const SizedBox(),
             Center(
               child: Text(
-                'Flutter utility widgets',
+                title,
                 maxLines: 2,
                 style: themeData.textTheme.titleSmall,
               ),

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:help_me_design/appwrite_service/databases_service.dart';
+import 'package:help_me_design/providers/component_tab_provider/component_tab_provider.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/views/widgets/button_tap_effect.dart';
 import 'package:help_me_design/views/widgets/form_widgets/buttons/simple_button.dart';
 import 'package:help_me_design/views/widgets/form_widgets/input_fields/text_input_field.dart';
+import 'package:provider/provider.dart';
 
 class AddComponentAlert extends StatelessWidget {
   AddComponentAlert({Key? key}) : super(key: key);
@@ -12,6 +14,7 @@ class AddComponentAlert extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var componentTabProvider = Provider.of<ComponentTabProvider>(context, listen: false);
     var themeData = Theme.of(context);
     return Container(
       padding: EdgeInsets.all(MySpaceSystem.spaceX4),
@@ -60,15 +63,19 @@ class AddComponentAlert extends StatelessWidget {
           // ),
           SizedBox(height: MySpaceSystem.spaceX3),
           SimpleButton(
-            onTap: () {
+            onTap: () async {
               if (_titleEditingController.text.isEmpty) return;
 
-              DatabasesService.add.component(
+              var addResponse = await DatabasesService.add.component(
                 title: _titleEditingController.text,
                 // tags: "Flutter, Dart",
-                collectionId: "6480b6027d54e9a9d96b",
+                collectionId: componentTabProvider.componentsCollectionData[componentTabProvider.activeComponentCollectionIndex].$id,
               );
               Navigator.pop(context);
+
+              if (addResponse) {
+                componentTabProvider.getActiveCollectionComponentsData();
+              }
             },
             buttonTitle: "Add Component",
           )
