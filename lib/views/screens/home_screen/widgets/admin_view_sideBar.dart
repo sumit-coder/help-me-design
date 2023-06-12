@@ -6,7 +6,7 @@ import '../../../../theme/my_design_system.dart';
 import '../../../../theme/my_theme.dart';
 import 'sidebar_button.dart';
 
-enum SideTabType { explore, settings, learning, codeSnippet, inspiration, components, docs }
+enum SideTabType { explore, settings, saved, codeSnippet, inspiration, components, docs }
 
 class AdminViewSideBar extends StatefulWidget {
   const AdminViewSideBar({Key? key, required this.onSideTabButtonChange, required this.activeButtonType}) : super(key: key);
@@ -26,7 +26,8 @@ class _AdminViewSideBarState extends State<AdminViewSideBar> {
     var themeData = Theme.of(context);
     return Container(
       width: 244,
-      constraints: BoxConstraints(minHeight: 800),
+      height: double.maxFinite,
+      // constraints: BoxConstraints(minHeight: 800),
       // padding: EdgeInsets.all(12),
       decoration: BoxDecoration(
         boxShadow: cardShadow,
@@ -93,21 +94,21 @@ class _AdminViewSideBarState extends State<AdminViewSideBar> {
                   },
                 ),
                 SideBarButton(
-                  title: 'Learning',
-                  iconData: Icons.video_library_rounded,
-                  isActive: widget.activeButtonType == SideTabType.learning ? true : false,
+                  title: 'Saved',
+                  iconData: Icons.bookmark_added_rounded,
+                  isActive: widget.activeButtonType == SideTabType.saved ? true : false,
                   onTap: () {
-                    widget.onSideTabButtonChange(SideTabType.learning);
+                    widget.onSideTabButtonChange(SideTabType.saved);
                   },
                 ),
-                SideBarButton(
-                  title: 'Docs',
-                  iconData: Icons.article_rounded,
-                  isActive: widget.activeButtonType == SideTabType.docs ? true : false,
-                  onTap: () {
-                    widget.onSideTabButtonChange(SideTabType.docs);
-                  },
-                ),
+                // SideBarButton(
+                //   title: 'Docs',
+                //   iconData: Icons.article_rounded,
+                //   isActive: widget.activeButtonType == SideTabType.docs ? true : false,
+                //   onTap: () {
+                //     widget.onSideTabButtonChange(SideTabType.docs);
+                //   },
+                // ),
               ],
             ),
             SizedBox(height: MySpaceSystem.spaceX2),
