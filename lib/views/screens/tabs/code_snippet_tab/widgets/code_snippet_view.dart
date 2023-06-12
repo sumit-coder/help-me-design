@@ -1,6 +1,7 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:help_me_design/appwrite_service/auth_service.dart';
+import 'package:help_me_design/appwrite_service/databases_service.dart';
 import 'package:help_me_design/providers/snippet_tab_provider.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/utility/utility_helper.dart';
@@ -31,6 +32,7 @@ class _CodeSnippetViewState extends State<CodeSnippetView> {
   @override
   Widget build(BuildContext context) {
     var snippetTabProvider = Provider.of<SnippetTabProvider>(context);
+    var activeSnippetCollectionData = snippetTabProvider.activeSnippetsCollectionsSnippetsData;
     var themeData = Theme.of(context);
     return Column(
       children: [
@@ -55,11 +57,21 @@ class _CodeSnippetViewState extends State<CodeSnippetView> {
           children: [
             for (var i = 0; i < snippetTabProvider.activeSnippetsCollectionsSnippetsData.length; i++)
               CodeEditor(
-                onTapUpdateButton: ({newCode, newLanguage}) {},
-                codeText: snippetTabProvider.activeSnippetsCollectionsSnippetsData[i].data['code'],
-                title: snippetTabProvider.activeSnippetsCollectionsSnippetsData[i].data['title'],
-                description: snippetTabProvider.activeSnippetsCollectionsSnippetsData[i].data['description'],
-                codeLanguage: snippetTabProvider.activeSnippetsCollectionsSnippetsData[i].data['codeLanguage'],
+                onTapUpdateButton: ({newCode, newLanguage}) async {
+                  var updateResponse = await DatabasesService.update.snippet(
+                    snippetId: activeSnippetCollectionData[i].$id,
+                    code: newCode,
+                    codeLanguage: newLanguage,
+                  );
+                  if (updateResponse) {
+                    snippetTabProvider.getActiveSnippetsCollectionData();
+                    UtilityHelper.toastMessage(message: "Code Updated");
+                  }
+                },
+                codeText: activeSnippetCollectionData[i].data['code'],
+                title: activeSnippetCollectionData[i].data['title'],
+                description: activeSnippetCollectionData[i].data['description'],
+                codeLanguage: activeSnippetCollectionData[i].data['codeLanguage'],
               ),
           ],
         ),

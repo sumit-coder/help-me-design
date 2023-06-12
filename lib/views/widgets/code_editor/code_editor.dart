@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:help_me_design/appwrite_service/databases_service.dart';
 import 'package:help_me_design/theme/my_colors.dart';
+import 'package:help_me_design/utility/utility_helper.dart';
 import 'package:help_me_design/views/widgets/button_tap_effect.dart';
 import 'package:highlight/highlight.dart';
 
@@ -175,6 +176,7 @@ class _CodeEditorState extends State<CodeEditor> {
                           ButtonTapEffect(
                             onTap: () async {
                               await Clipboard.setData(ClipboardData(text: newChangedCode ?? widget.codeText));
+                              UtilityHelper.toastMessage(message: "Code Copied to Clipboard");
                             },
                             child: Container(
                               height: 53,

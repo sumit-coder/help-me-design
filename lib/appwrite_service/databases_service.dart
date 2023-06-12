@@ -253,11 +253,36 @@ class Update {
         },
       );
       log("Update.component");
-      log(data.data[''].toString());
+
       return true;
     } on AppwriteException catch (e) {
       print(e);
       UtilityHelper.toastMessage(message: e.message ?? "update.components() null message");
+      return false;
+    }
+  }
+
+  Future<bool> snippet({
+    required String? code,
+    required String? codeLanguage,
+    required String snippetId,
+  }) async {
+    final databases = Databases(client);
+    try {
+      final data = await databases.updateDocument(
+        databaseId: AppWriteConst.usersDataDatabaseID,
+        collectionId: AppWriteConst.savedSnippetId,
+        documentId: snippetId,
+        data: {
+          if (code != null) "code": code,
+          if (codeLanguage != null) "codeLanguage": codeLanguage,
+        },
+      );
+      log("Update.snippet");
+      return true;
+    } on AppwriteException catch (e) {
+      print(e);
+      UtilityHelper.toastMessage(message: e.message ?? "update.snippet() null message");
       return false;
     }
   }

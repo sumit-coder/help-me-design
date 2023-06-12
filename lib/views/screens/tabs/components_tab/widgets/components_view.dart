@@ -50,6 +50,7 @@ class _ComponentViewState extends State<ComponentView> {
             onTap: () {
               // snippetTabProvider.changeCollectionView(false);
               componentTabProvider.changeOpenActiveComponentCollectionView(false, -1);
+              componentTabProvider.makeActiveCollectionDataEmpty();
             },
           ),
           Expanded(
@@ -137,6 +138,7 @@ class _ComponentViewState extends State<ComponentView> {
                                       );
                                       if (updateResponse) {
                                         componentTabProvider.getActiveCollectionComponentsData();
+                                        UtilityHelper.toastMessage(message: "Code Updated");
                                       }
                                     },
                                     codeText: activeCollectionData[componentTabProvider.activeComponentViewIndex].data['code'],
