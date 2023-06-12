@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:help_me_design/appwrite_service/auth_service.dart';
 import 'package:help_me_design/appwrite_service/databases_service.dart';
+import 'package:help_me_design/providers/snippet_tab_provider.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/utility/utility_helper.dart';
 import 'package:help_me_design/views/widgets/button_tap_effect.dart';
@@ -19,6 +20,7 @@ class AddCodeSnippetCollectionAlert extends StatelessWidget {
   Widget build(BuildContext context) {
     var themeData = Theme.of(context);
     var authProvider = Provider.of<AuthService>(context);
+    var snippetTabProvider = Provider.of<SnippetTabProvider>(context);
     return Container(
       padding: EdgeInsets.all(MySpaceSystem.spaceX4),
       width: 404,
@@ -66,19 +68,22 @@ class AddCodeSnippetCollectionAlert extends StatelessWidget {
           ),
           SizedBox(height: MySpaceSystem.spaceX3),
           SimpleButton(
-            onTap: () {
+            onTap: () async {
               if (_titleEditingController.text.isEmpty || _tagEditingController.text.isEmpty) return;
-              print("object");
 
-              DatabasesService.add.snippetsCollection(
+              // added database
+              var addResponse = await DatabasesService.add.snippetsCollection(
                 userId: authProvider.currentUser.$id,
                 title: _titleEditingController.text.trim(),
                 tags: _tagTwoEditingController.text.isNotEmpty
                     ? '${_tagEditingController.text},${_tagTwoEditingController.text}'
                     : _tagEditingController.text.trim(),
               );
-
               Navigator.pop(context);
+              // adding is successful then get new data back and show
+              if (addResponse) {
+                snippetTabProvider.getSnippetsData(authProvider.currentUser.$id);
+              }
             },
             buttonTitle: "Add Collection",
           )

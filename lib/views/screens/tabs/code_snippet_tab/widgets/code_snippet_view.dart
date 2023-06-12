@@ -1,8 +1,8 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:help_me_design/appwrite_service/auth_service.dart';
 import 'package:help_me_design/providers/snippet_tab_provider.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
-import 'package:help_me_design/theme/my_theme.dart';
 import 'package:help_me_design/utility/utility_helper.dart';
 import 'package:help_me_design/views/screens/tabs/code_snippet_tab/widgets/add_code_snippet_alert.dart';
 import 'package:help_me_design/views/widgets/button_tap_effect.dart';
@@ -17,14 +17,14 @@ class CodeSnippetView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var themeData = Theme.of(context);
     var snippetTabProvider = Provider.of<SnippetTabProvider>(context);
+
     return Column(
       children: [
         SendBackBarWithTitle(
           title: "Flutter Code Snippets",
           onTap: () {
-            snippetTabProvider.changeCollectionView(false);
+            snippetTabProvider.changeCollectionView(false, 0);
           },
         ),
         SizedBox(height: MySpaceSystem.spaceX2),
@@ -37,8 +37,12 @@ class CodeSnippetView extends StatelessWidget {
           },
         ),
         SizedBox(height: MySpaceSystem.spaceX3),
-        CodeEditor(codeText: codeText2),
-        CodeEditor(codeText: codeText),
+        Column(
+          children: [
+            CodeEditor(codeText: codeText2),
+            CodeEditor(codeText: codeText),
+          ],
+        ),
       ],
     );
   }

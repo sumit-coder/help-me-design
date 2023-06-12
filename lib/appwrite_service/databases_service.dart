@@ -81,7 +81,7 @@ class Add {
     }
   }
 
-  snippetsCollection({required String title, required String tags, required String userId}) async {
+  Future<bool> snippetsCollection({required String title, required String tags, required String userId}) async {
     // componentsCollection() {
     final databases = Databases(client);
     try {
@@ -97,9 +97,11 @@ class Add {
         },
       );
       UtilityHelper.toastMessage(message: "Snippets Collection Added");
+      return true;
     } on AppwriteException catch (e) {
       UtilityHelper.toastMessage(message: e.message ?? "add.snippetsCollection() null message");
       print(e);
+      return false;
     }
   }
 
@@ -176,7 +178,7 @@ class Get {
         databaseId: AppWriteConst.usersDataDatabaseID,
         collectionId: AppWriteConst.savedSnippetCollectionId,
         queries: [
-          Query.equal('userId', userId),
+          Query.equal('userId', [userId]),
         ],
       );
 

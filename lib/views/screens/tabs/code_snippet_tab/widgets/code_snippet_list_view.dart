@@ -1,5 +1,6 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:help_me_design/appwrite_service/auth_service.dart';
 import 'package:help_me_design/providers/snippet_tab_provider.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/theme/my_theme.dart';
@@ -15,13 +16,12 @@ class CodeSnippetsListView extends StatelessWidget {
     super.key,
   });
 
-  final List snippetCollectionList = [
-    "def",
-  ];
+  final List snippetCollectionList = ["def"];
   @override
   Widget build(BuildContext context) {
     var themeData = Theme.of(context);
     var snippetTabProvider = Provider.of<SnippetTabProvider>(context);
+    var authService = Provider.of<AuthService>(context);
     return Container(
       margin: EdgeInsets.only(left: MySpaceSystem.spaceX3),
       // width: 660,
@@ -37,49 +37,85 @@ class CodeSnippetsListView extends StatelessWidget {
                 context: context,
                 bodyWidget: AddCodeSnippetCollectionAlert(),
               );
+
+              print(authService.currentUser.$id);
             },
           ),
-          for (var snippetCollection in snippetCollectionList)
-            ButtonTapEffect(
+          for (var i = 0; i < snippetTabProvider.snippetsCollectionData.length; i++)
+            SnippetsCollectionCard(
               onTap: () {
-                snippetTabProvider.changeCollectionView(true);
+                snippetTabProvider.changeCollectionView(true, i);
               },
-              child: Container(
-                height: 154,
-                width: 300,
-                padding: EdgeInsets.all(MySpaceSystem.spaceX2),
-                decoration: BoxDecoration(
-                  color: themeData.colorScheme.secondary,
-                  boxShadow: cardShadow,
-                  borderRadius: const BorderRadius.all(Radius.circular(8)),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: const [
-                        Tag(title: 'Flutter'),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Flutter utility widgets',
-                          maxLines: 2,
-                          style: themeData.textTheme.titleSmall,
-                        ),
-                        SizedBox(height: MySpaceSystem.spaceX2),
-                        Text('20 Snippets', style: themeData.textTheme.bodyMedium),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
+              title: snippetTabProvider.snippetsCollectionData[i].data['title'],
+              tags: snippetTabProvider.snippetsCollectionData[i].data['tags'],
+              snippetsCount: snippetTabProvider.snippetsCollectionData[i].data['snippetsCount'],
             ),
+          SnippetsCollectionCard(
+            onTap: () {
+              snippetTabProvider.changeCollectionView(true, 0);
+            },
+            title: 'Flutter Code Snippets Demo',
+            tags: 'Flutter,Demo',
+            snippetsCount: 50,
+          ),
         ],
+      ),
+    );
+  }
+}
+
+class SnippetsCollectionCard extends StatelessWidget {
+  const SnippetsCollectionCard({
+    super.key,
+    required this.onTap,
+    required this.title,
+    required this.tags,
+    required this.snippetsCount,
+  });
+
+  final VoidCallback onTap;
+  final String title;
+  final String tags;
+  final int snippetsCount;
+
+  @override
+  Widget build(BuildContext context) {
+    var themeData = Theme.of(context);
+    return ButtonTapEffect(
+      onTap: onTap,
+      child: Container(
+        height: 154,
+        width: 300,
+        padding: EdgeInsets.all(MySpaceSystem.spaceX2),
+        decoration: BoxDecoration(
+          color: themeData.colorScheme.secondary,
+          boxShadow: cardShadow,
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                for (var tag in tags.split(',')) Tag(title: tag),
+              ],
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  maxLines: 2,
+                  style: themeData.textTheme.titleSmall,
+                ),
+                SizedBox(height: MySpaceSystem.spaceX2),
+                Text('$snippetsCount Snippets', style: themeData.textTheme.bodyMedium),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
