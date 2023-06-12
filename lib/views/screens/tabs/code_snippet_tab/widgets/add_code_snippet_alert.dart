@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:help_me_design/appwrite_service/databases_service.dart';
+import 'package:help_me_design/providers/snippet_tab_provider.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/views/widgets/button_tap_effect.dart';
 import 'package:help_me_design/views/widgets/form_widgets/buttons/simple_button.dart';
 import 'package:help_me_design/views/widgets/form_widgets/input_fields/text_input_field.dart';
+import 'package:provider/provider.dart';
 
 class AddCodeSnippetAlert extends StatelessWidget {
   AddCodeSnippetAlert({Key? key}) : super(key: key);
@@ -14,6 +16,7 @@ class AddCodeSnippetAlert extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var themeData = Theme.of(context);
+    var snippetTabProvider = Provider.of<SnippetTabProvider>(context);
     return Container(
       padding: EdgeInsets.all(MySpaceSystem.spaceX4),
       width: 404,
@@ -49,15 +52,19 @@ class AddCodeSnippetAlert extends StatelessWidget {
           ),
           SizedBox(height: MySpaceSystem.spaceX3),
           SimpleButton(
-            onTap: () {
+            onTap: () async {
               if (_titleEditingController.text.isEmpty || _descriptionEditingController.text.isEmpty) return;
 
-              DatabasesService.add.snippets(
-                collectionId: "6480b6027d54e9a9d96b",
+              var addResponse = await DatabasesService.add.snippets(
+                collectionId: snippetTabProvider.snippetsCollectionData[snippetTabProvider.indexOfClickedSnippetCollection].$id,
                 title: _titleEditingController.text,
                 description: _descriptionEditingController.text,
               );
               Navigator.pop(context);
+
+              if (addResponse) {
+                snippetTabProvider.getActiveSnippetsCollectionData();
+              }
             },
             buttonTitle: "Add Component",
           )

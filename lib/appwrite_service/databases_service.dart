@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
@@ -105,7 +106,7 @@ class Add {
     }
   }
 
-  snippets({required String title, required String description, required String collectionId}) async {
+  Future<bool> snippets({required String title, required String description, required String collectionId}) async {
     final databases = Databases(client);
     try {
       final document = await databases.createDocument(
@@ -121,9 +122,12 @@ class Add {
         },
       );
       UtilityHelper.toastMessage(message: "Snippet Added");
+
+      return true;
     } on AppwriteException catch (e) {
       UtilityHelper.toastMessage(message: e.message ?? "add.component() null message");
-      print(e);
+      log(e.toString());
+      return false;
     }
   }
 }
@@ -179,9 +183,10 @@ class Get {
         collectionId: AppWriteConst.savedSnippetCollectionId,
         queries: [
           Query.equal('userId', [userId]),
+          Query.orderDesc('\$createdAt'),
         ],
       );
-
+      log("Get.snippetsCollection");
       return data.documents;
     } on AppwriteException catch (e) {
       print(e);
@@ -198,9 +203,10 @@ class Get {
         collectionId: AppWriteConst.savedSnippetId,
         queries: [
           Query.equal('collectionId', currentSnippetsCollectionId),
+          Query.orderDesc('\$createdAt'),
         ],
       );
-
+      log("Get.snippets");
       return data.documents;
     } on AppwriteException catch (e) {
       print(e);

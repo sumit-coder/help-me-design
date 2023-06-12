@@ -10,21 +10,35 @@ import 'package:help_me_design/views/widgets/code_editor/code_editor.dart';
 import 'package:help_me_design/views/widgets/send_back_bar_with_title.dart';
 import 'package:provider/provider.dart';
 
-class CodeSnippetView extends StatelessWidget {
+class CodeSnippetView extends StatefulWidget {
   const CodeSnippetView({
     super.key,
   });
 
   @override
+  State<CodeSnippetView> createState() => _CodeSnippetViewState();
+}
+
+class _CodeSnippetViewState extends State<CodeSnippetView> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    var snippetTabProvider = Provider.of<SnippetTabProvider>(context, listen: false);
+    snippetTabProvider.getActiveSnippetsCollectionData();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var snippetTabProvider = Provider.of<SnippetTabProvider>(context);
-
+    var themeData = Theme.of(context);
     return Column(
       children: [
         SendBackBarWithTitle(
           title: "Flutter Code Snippets",
           onTap: () {
-            snippetTabProvider.changeCollectionView(false, 0);
+            snippetTabProvider.changeCollectionView(false, -1);
+            snippetTabProvider.makeActiveSnippetsCollectionDataToEmpty();
           },
         ),
         SizedBox(height: MySpaceSystem.spaceX2),
@@ -39,8 +53,13 @@ class CodeSnippetView extends StatelessWidget {
         SizedBox(height: MySpaceSystem.spaceX3),
         Column(
           children: [
-            CodeEditor(codeText: codeText2),
-            CodeEditor(codeText: codeText),
+            for (var i = 0; i < snippetTabProvider.activeSnippetsCollectionsSnippetsData.length; i++)
+              CodeEditor(
+                codeText: snippetTabProvider.activeSnippetsCollectionsSnippetsData[i].data['code'],
+                title: snippetTabProvider.activeSnippetsCollectionsSnippetsData[i].data['title'],
+                description: snippetTabProvider.activeSnippetsCollectionsSnippetsData[i].data['description'],
+                codeLanguage: snippetTabProvider.activeSnippetsCollectionsSnippetsData[i].data['codeLanguage'],
+              ),
           ],
         ),
       ],

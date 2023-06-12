@@ -166,6 +166,9 @@ class ComponentView extends StatelessWidget {
            ),
                           
                               ''',
+                            description: '',
+                            title: '',
+                            codeLanguage: '',
                           ),
                         ],
                       ),

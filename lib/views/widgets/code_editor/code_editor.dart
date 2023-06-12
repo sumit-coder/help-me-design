@@ -17,8 +17,14 @@ class CodeEditor extends StatefulWidget {
   const CodeEditor({
     super.key,
     required this.codeText,
+    required this.title,
+    required this.description,
+    required this.codeLanguage,
   });
 
+  final String title;
+  final String description;
+  final String codeLanguage;
   final String codeText;
 
   @override
@@ -38,7 +44,8 @@ class _CodeEditorState extends State<CodeEditor> {
     codeController = CodeController(
       text: widget.codeText,
       // language: javascript,
-      language: allLanguages[selectedLanguage],
+      // language: allLanguages[selectedLanguage],
+      language: allLanguages[widget.codeLanguage],
     );
   }
 
@@ -67,9 +74,9 @@ class _CodeEditorState extends State<CodeEditor> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Flutter alert widget", style: themeData.textTheme.titleMedium),
+                Text(widget.title, style: themeData.textTheme.titleMedium),
                 SizedBox(height: MySpaceSystem.spaceX1),
-                Text("Flutter alert widget description", style: themeData.textTheme.bodyMedium),
+                Text(widget.description, style: themeData.textTheme.bodyMedium),
               ],
             ),
           ),

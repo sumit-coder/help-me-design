@@ -11,17 +11,32 @@ import 'package:provider/provider.dart';
 
 import 'add_code_snippet_collection_alert.dart';
 
-class CodeSnippetsListView extends StatelessWidget {
+class CodeSnippetsListView extends StatefulWidget {
   CodeSnippetsListView({
     super.key,
   });
 
+  @override
+  State<CodeSnippetsListView> createState() => _CodeSnippetsListViewState();
+}
+
+class _CodeSnippetsListViewState extends State<CodeSnippetsListView> {
   final List snippetCollectionList = ["def"];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    var authService = Provider.of<AuthService>(context, listen: false);
+    var snippetTabProvider = Provider.of<SnippetTabProvider>(context, listen: false);
+    snippetTabProvider.getSnippetsData(authService.currentUser.$id);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     var themeData = Theme.of(context);
     var snippetTabProvider = Provider.of<SnippetTabProvider>(context);
-    var authService = Provider.of<AuthService>(context);
+
     return Container(
       margin: EdgeInsets.only(left: MySpaceSystem.spaceX3),
       // width: 660,
@@ -37,8 +52,8 @@ class CodeSnippetsListView extends StatelessWidget {
                 context: context,
                 bodyWidget: AddCodeSnippetCollectionAlert(),
               );
-
-              print(authService.currentUser.$id);
+              // snippetTabProvider.getSnippetsData(authService.currentUser.$id);
+              // print(authService.currentUser.$id);
             },
           ),
           for (var i = 0; i < snippetTabProvider.snippetsCollectionData.length; i++)
