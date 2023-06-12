@@ -31,7 +31,13 @@ class WelcomeScreen extends StatelessWidget {
                 ),
                 TextButton(
                   onPressed: () {
-                    // DatabasesService.add.componentsCollection();
+                    // DatabasesService.update.component(
+                    //   componentId: "648584fa8a857a7282d8",
+                    //   code: "Code",
+                    //   codeLanguage: null,
+                    //   previewType: "",
+                    //   previewUrl: null,
+                    // );
                   },
                   child: Text(
                     "hy",

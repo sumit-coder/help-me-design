@@ -45,6 +45,7 @@ class _MyAppState extends State<MyApp> {
           scrollBehavior: const ScrollBehavior().copyWith(scrollbars: false),
           themeMode: themeManagerProvider.getThemeMode,
           // home: const MyHomePage(),
+          // home: WelcomeScreen(),
           home: authServiceProvider.status == AuthStatus.unauthenticated
               ? const SignInSignUpScreen()
               : authServiceProvider.status == AuthStatus.authenticated

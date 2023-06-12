@@ -18,14 +18,15 @@ class DatabasesService {
 
   static Add add = Add();
   static Get get = Get();
+  static Update update = Update();
 
   Future<DesignResourcesCollection> getDesignResourcesData() async {
     Databases databases = Databases(client);
     // Your project ID
-    DocumentList databasesResponse = await databases.listDocuments(
-      databaseId: '6481a970aa1248a2b697',
-      collectionId: '6481a9bc39b87d8f945f',
-    );
+    DocumentList databasesResponse =
+        await databases.listDocuments(databaseId: '6481a970aa1248a2b697', collectionId: '6481a9bc39b87d8f945f', queries: [
+      Query.limit(50),
+    ]);
 
     return DesignResourcesCollection.fromJson(databasesResponse.documents);
   }
@@ -218,6 +219,42 @@ class Get {
       print(e);
       UtilityHelper.toastMessage(message: e.message ?? "get.components() null message");
       return [];
+    }
+  }
+}
+
+class Update {
+  final Client client = Client()
+      .setEndpoint(AppWriteConst.APPWRITE_ENDPOINT) // Your API Endpoint
+      .setProject(AppWriteConst.APPWRITE_PROJECT_ID);
+
+  Future<bool> component({
+    required String? code,
+    required String? codeLanguage,
+    required String? previewUrl,
+    required String? previewType,
+    required String componentId,
+  }) async {
+    final databases = Databases(client);
+    try {
+      final data = await databases.updateDocument(
+        databaseId: AppWriteConst.usersDataDatabaseID,
+        collectionId: AppWriteConst.savedComponentsId,
+        documentId: componentId,
+        data: {
+          if (code != null) "code": code,
+          if (codeLanguage != null) "codeLanguage": codeLanguage,
+          if (previewType != null) "previewType": previewType,
+          if (previewUrl != null) "previewUrl": previewUrl,
+        },
+      );
+      log("Update.component");
+      log(data.data[''].toString());
+      return true;
+    } on AppwriteException catch (e) {
+      print(e);
+      UtilityHelper.toastMessage(message: e.message ?? "update.components() null message");
+      return false;
     }
   }
 }
