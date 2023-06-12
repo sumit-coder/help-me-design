@@ -25,8 +25,8 @@ class _ExploreViewState extends State<ExploreView> {
   @override
   void initState() {
     // TODO: implement initState
-    var exploreTapProvider = Provider.of<ExploreTabProvider>(context, listen: false);
-    exploreTapProvider.initDesignResourcesData();
+    // var exploreTapProvider = Provider.of<ExploreTabProvider>(context, listen: false);
+    // exploreTapProvider.initDesignResourcesData();
     super.initState();
   }
 
@@ -35,9 +35,9 @@ class _ExploreViewState extends State<ExploreView> {
     var themeData = Theme.of(context);
     var exploreTapProvider = Provider.of<ExploreTabProvider>(context);
 
-    // if (exploreTapProvider.designResourcesCollection!.data.isEmpty) {
-    //   exploreTapProvider.initDesignResourcesData();
-    // }
+    if (exploreTapProvider.designResourcesCollection!.data.isEmpty) {
+      exploreTapProvider.initDesignResourcesData();
+    }
 
     return Container(
       alignment: Alignment.topCenter,

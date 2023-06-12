@@ -6,7 +6,7 @@ import '../../../../theme/my_design_system.dart';
 import '../../../../theme/my_theme.dart';
 import 'sidebar_button.dart';
 
-enum SideTabType { explore, settings, learning, codeSnippet, designSystem, components, docs }
+enum SideTabType { explore, settings, learning, codeSnippet, inspiration, components, docs }
 
 class AdminViewSideBar extends StatefulWidget {
   const AdminViewSideBar({Key? key, required this.onSideTabButtonChange, required this.activeButtonType}) : super(key: key);
@@ -69,11 +69,11 @@ class _AdminViewSideBarState extends State<AdminViewSideBar> {
               groupTitle: 'Saved',
               groupChildren: [
                 SideBarButton(
-                  title: 'Design System',
-                  iconData: Icons.design_services_rounded,
-                  isActive: widget.activeButtonType == SideTabType.designSystem ? true : false,
+                  title: 'Inspirations',
+                  iconData: Icons.burst_mode_rounded,
+                  isActive: widget.activeButtonType == SideTabType.inspiration ? true : false,
                   onTap: () {
-                    widget.onSideTabButtonChange(SideTabType.designSystem);
+                    widget.onSideTabButtonChange(SideTabType.inspiration);
                   },
                 ),
                 SideBarButton(
