@@ -55,6 +55,7 @@ class _CodeSnippetViewState extends State<CodeSnippetView> {
           children: [
             for (var i = 0; i < snippetTabProvider.activeSnippetsCollectionsSnippetsData.length; i++)
               CodeEditor(
+                onTapUpdateButton: ({newCode, newLanguage}) {},
                 codeText: snippetTabProvider.activeSnippetsCollectionsSnippetsData[i].data['code'],
                 title: snippetTabProvider.activeSnippetsCollectionsSnippetsData[i].data['title'],
                 description: snippetTabProvider.activeSnippetsCollectionsSnippetsData[i].data['description'],

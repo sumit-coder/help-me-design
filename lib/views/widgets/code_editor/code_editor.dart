@@ -1,6 +1,7 @@
 import 'package:code_text_field/code_text_field.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:help_me_design/appwrite_service/databases_service.dart';
 import 'package:help_me_design/theme/my_colors.dart';
@@ -14,18 +15,20 @@ import 'package:flutter_highlight/themes/atom-one-dark.dart';
 import 'language_import.dart';
 
 class CodeEditor extends StatefulWidget {
-  const CodeEditor({
+  CodeEditor({
     super.key,
     required this.codeText,
     required this.title,
     required this.description,
     required this.codeLanguage,
+    required this.onTapUpdateButton,
   });
 
   final String title;
   final String description;
   final String codeLanguage;
   final String codeText;
+  final Function({String? newCode, String? newLanguage}) onTapUpdateButton;
 
   @override
   State<CodeEditor> createState() => _CodeEditorState();
@@ -33,6 +36,9 @@ class CodeEditor extends StatefulWidget {
 
 class _CodeEditorState extends State<CodeEditor> {
   String selectedLanguage = "dart";
+
+  String? newChangedCode;
+  String? newChangedLanguage;
 
   late CodeController codeController;
 
@@ -43,10 +49,13 @@ class _CodeEditorState extends State<CodeEditor> {
 
     codeController = CodeController(
       text: widget.codeText,
-      // language: javascript,
-      // language: allLanguages[selectedLanguage],
       language: allLanguages[widget.codeLanguage],
     );
+    if (widget.codeLanguage.isNotEmpty && allLanguages.containsKey(widget.codeLanguage)) {
+      setState(() {
+        selectedLanguage = widget.codeLanguage;
+      });
+    }
   }
 
   @override
@@ -59,6 +68,7 @@ class _CodeEditorState extends State<CodeEditor> {
   @override
   Widget build(BuildContext context) {
     var themeData = Theme.of(context);
+
     return Container(
       margin: EdgeInsets.only(left: MySpaceSystem.spaceX3, bottom: MySpaceSystem.spaceX3),
       child: Column(
@@ -100,6 +110,7 @@ class _CodeEditorState extends State<CodeEditor> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      // select language
                       DropdownButtonHideUnderline(
                         child: DropdownButton2(
                           offset: const Offset(0, -4),
@@ -130,10 +141,11 @@ class _CodeEditorState extends State<CodeEditor> {
                           ),
                           onChanged: (value) {
                             setState(() {
+                              newChangedLanguage = value ?? "dart";
                               selectedLanguage = value ?? "dart";
 
                               codeController = CodeController(
-                                text: widget.codeText,
+                                text: newChangedCode ?? widget.codeText,
                                 // language: javascript,
                                 language: allLanguages[selectedLanguage],
                               );
@@ -141,22 +153,40 @@ class _CodeEditorState extends State<CodeEditor> {
                           },
                         ),
                       ),
-                      ButtonTapEffect(
-                        onTap: () async {
-                          // print('object');
-                          // var dat = await DatabasesService.get.componentsCollection();
-                          // codeController.setCursor(1);
-                          // codeController.insertStr(dat);
-                        },
-                        child: Container(
-                          height: 53,
-                          width: 53,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4),
-                            color: themeData.colorScheme.primary,
+                      Row(
+                        children: [
+                          ButtonTapEffect(
+                            onTap: () {
+                              if (newChangedCode == null && newChangedLanguage == null) return;
+
+                              widget.onTapUpdateButton(newCode: newChangedCode, newLanguage: newChangedLanguage);
+                            },
+                            child: Container(
+                              height: 53,
+                              padding: EdgeInsets.symmetric(horizontal: MySpaceSystem.spaceX3),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4),
+                                color: themeData.colorScheme.primary,
+                              ),
+                              child: Center(child: Text("Update", style: themeData.textTheme.titleMedium)),
+                            ),
                           ),
-                          child: const Icon(Icons.copy_all_rounded, size: 28),
-                        ),
+                          SizedBox(width: MySpaceSystem.spaceX2),
+                          ButtonTapEffect(
+                            onTap: () async {
+                              await Clipboard.setData(ClipboardData(text: newChangedCode ?? widget.codeText));
+                            },
+                            child: Container(
+                              height: 53,
+                              width: 53,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4),
+                                color: themeData.colorScheme.primary,
+                              ),
+                              child: const Icon(Icons.copy_all_rounded, size: 28),
+                            ),
+                          ),
+                        ],
                       )
                     ],
                   ),
@@ -177,6 +207,11 @@ class _CodeEditorState extends State<CodeEditor> {
                     //   // language: javascript,
                     //   language: allLanguages[selectedLanguage],
                     // ),
+                    onChanged: (newCode) {
+                      setState(() {
+                        newChangedCode = newCode;
+                      });
+                    },
                     controller: codeController,
                     textStyle: GoogleFonts.sourceCodePro(),
                   ),

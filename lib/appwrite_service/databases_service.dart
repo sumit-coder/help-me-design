@@ -74,8 +74,12 @@ class Add {
           "title": title,
           "previewType": "",
           "previewUrl": "",
-          "code": "",
-          "codeLanguage": "",
+          "code": ''' 
+class Example{
+ final string thisIsExampleCode;
+}
+          ''',
+          "codeLanguage": "dart",
         },
       );
       UtilityHelper.toastMessage(message: "Component Added");

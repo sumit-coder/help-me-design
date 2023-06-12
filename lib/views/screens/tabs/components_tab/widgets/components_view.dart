@@ -38,7 +38,9 @@ class _ComponentViewState extends State<ComponentView> {
   @override
   Widget build(BuildContext context) {
     var themeData = Theme.of(context);
-    var componentTabProvider = Provider.of<ComponentTabProvider>(context);
+    var componentTabProvider = Provider.of<ComponentTabProvider>(context, listen: true);
+
+    var activeCollectionData = componentTabProvider.activeCollectionComponentsData;
     return Container(
       // margin: EdgeInsets.only(left: MySpaceSystem.spaceX3),
       child: Column(
@@ -77,6 +79,7 @@ class _ComponentViewState extends State<ComponentView> {
                               isActive: componentTabProvider.activeComponentViewIndex == i,
                               onTap: () {
                                 componentTabProvider.changeActiveComponentViewIndex(i);
+                                setState(() {});
                               },
                               title: componentTabProvider.activeCollectionComponentsData[i].data['title'],
                             ),
@@ -118,53 +121,38 @@ class _ComponentViewState extends State<ComponentView> {
                               ],
                             ),
                           ),
-                          const CodeEditor(
-                            codeText: '''
-           Positioned(
-           top: 8,
-           left: 8,
-           child: Text(
-           'Preview',
-           maxLines: 2,
-           style: themeData.textTheme.titleSmall,
-           ),
-           ),
-
-           Positioned(
-           top: 8,
-           left: 8,
-           child: Text(
-           'Preview',
-           maxLines: 2,
-           style: themeData.textTheme.titleSmall,
-           ),
-           ),
-
-           Positioned(
-           top: 8,
-           left: 8,
-           child: Text(
-           'Preview',
-           maxLines: 2,
-           style: themeData.textTheme.titleSmall,
-           ),
-           ),
-
-           Positioned(
-           top: 8,
-           left: 8,
-           child: Text(
-           'Preview',
-           maxLines: 2,
-           style: themeData.textTheme.titleSmall,
-           ),
-           ),
-                          
-                              ''',
-                            description: '',
-                            title: '',
-                            codeLanguage: '',
+                          Column(
+                            children: [
+                              for (var i = 0; i < activeCollectionData.length; i++)
+                                Visibility(
+                                  visible: i == componentTabProvider.activeComponentViewIndex ? true : false,
+                                  child: CodeEditor(
+                                    onTapUpdateButton: ({newCode, newLanguage}) async {
+                                      var updateResponse = await DatabasesService.update.component(
+                                        componentId: activeCollectionData[componentTabProvider.activeComponentViewIndex].$id,
+                                        code: newCode,
+                                        codeLanguage: newLanguage,
+                                        previewType: null,
+                                        previewUrl: null,
+                                      );
+                                      if (updateResponse) {
+                                        componentTabProvider.getActiveCollectionComponentsData();
+                                      }
+                                    },
+                                    codeText: activeCollectionData[componentTabProvider.activeComponentViewIndex].data['code'],
+                                    description: '',
+                                    title: activeCollectionData[componentTabProvider.activeComponentViewIndex].data['title'],
+                                    codeLanguage: activeCollectionData[componentTabProvider.activeComponentViewIndex].data['codeLanguage'],
+                                  ),
+                                )
+                            ],
                           ),
+                          // CodeEditor(
+                          //   codeText: activeCollectionData[componentTabProvider.activeComponentViewIndex].data['code'],
+                          //   description: '',
+                          //   title: activeCollectionData[componentTabProvider.activeComponentViewIndex].data['title'],
+                          //   codeLanguage: activeCollectionData[componentTabProvider.activeComponentViewIndex].data['codeLanguage'],
+                          // ),
                         ],
                       ),
                     ),

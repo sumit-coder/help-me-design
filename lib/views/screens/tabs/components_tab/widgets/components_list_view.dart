@@ -59,6 +59,7 @@ class _ComponentsListViewState extends State<ComponentsListView> {
           for (var i = 0; i < componentTabProvider.componentsCollectionData.length; i++)
             ComponentCollectionCard(
               onTap: () {
+                componentTabProvider.changeActiveComponentViewIndex(0);
                 componentTabProvider.changeOpenActiveComponentCollectionView(true, i);
               },
               title: componentTabProvider.componentsCollectionData[i].data['title'],
