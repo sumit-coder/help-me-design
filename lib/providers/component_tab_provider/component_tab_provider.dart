@@ -37,4 +37,9 @@ class ComponentTabProvider with ChangeNotifier {
     );
     notifyListeners();
   }
+
+  makeActiveCollectionDataEmpty() {
+    activeCollectionComponentsData = [];
+    notifyListeners();
+  }
 }

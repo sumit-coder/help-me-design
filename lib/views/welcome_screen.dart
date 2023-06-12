@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../appwrite_service/databases_service.dart';
 import '../theme/my_design_system.dart';
 
 class WelcomeScreen extends StatelessWidget {

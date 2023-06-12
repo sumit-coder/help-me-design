@@ -3,9 +3,7 @@ import 'package:help_me_design/appwrite_service/auth_service.dart';
 import 'package:help_me_design/providers/component_tab_provider/component_tab_provider.dart';
 import 'package:help_me_design/providers/explore_tab_provider/explore_tab_provider.dart';
 import 'package:help_me_design/theme/my_theme.dart';
-import 'package:help_me_design/views/screens/onboarding_screens/signin_screen.dart';
 import 'package:help_me_design/views/screens/onboarding_screens/signin_signup_screen/signin_signup_screen.dart';
-import 'package:help_me_design/views/screens/onboarding_screens/signup_screen.dart';
 import 'package:help_me_design/views/welcome_screen.dart';
 import 'package:provider/provider.dart';
 
