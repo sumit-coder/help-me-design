@@ -37,7 +37,7 @@ class _CodeSnippetViewState extends State<CodeSnippetView> {
     return Column(
       children: [
         SendBackBarWithTitle(
-          title: "Flutter Code Snippets",
+          title: snippetTabProvider.snippetsCollectionData[snippetTabProvider.indexOfClickedSnippetCollection].data['title'],
           onTap: () {
             snippetTabProvider.changeCollectionView(false, -1);
             snippetTabProvider.makeActiveSnippetsCollectionDataToEmpty();
@@ -115,9 +115,9 @@ class AddCodeSnippetCard extends StatelessWidget {
                   size: 34,
                   color: themeData.colorScheme.secondary,
                 ),
-                SizedBox(width: MySpaceSystem.spaceX2),
+                SizedBox(width: MySpaceSystem.spaceX1),
                 Text(
-                  'Snippet Collection',
+                  'Snippet',
                   style: themeData.textTheme.bodyLarge!.copyWith(
                     color: themeData.colorScheme.secondary,
                   ),

@@ -63,7 +63,7 @@ class _CodeSnippetsListViewState extends State<CodeSnippetsListView> {
               },
               title: snippetTabProvider.snippetsCollectionData[i].data['title'],
               tags: snippetTabProvider.snippetsCollectionData[i].data['tags'],
-              snippetsCount: snippetTabProvider.snippetsCollectionData[i].data['snippetsCount'],
+              snippetsCount: snippetTabProvider.snippetsCollectionData[i].$createdAt.split("T").first,
             ),
           SnippetsCollectionCard(
             onTap: () {
@@ -71,7 +71,7 @@ class _CodeSnippetsListViewState extends State<CodeSnippetsListView> {
             },
             title: 'Flutter Code Snippets Demo',
             tags: 'Flutter,Demo',
-            snippetsCount: 50,
+            snippetsCount: "today",
           ),
         ],
       ),
@@ -91,7 +91,7 @@ class SnippetsCollectionCard extends StatelessWidget {
   final VoidCallback onTap;
   final String title;
   final String tags;
-  final int snippetsCount;
+  final String snippetsCount;
 
   @override
   Widget build(BuildContext context) {
@@ -126,7 +126,7 @@ class SnippetsCollectionCard extends StatelessWidget {
                   style: themeData.textTheme.titleSmall,
                 ),
                 SizedBox(height: MySpaceSystem.spaceX2),
-                Text('$snippetsCount Snippets', style: themeData.textTheme.bodyMedium),
+                Text('$snippetsCount', style: themeData.textTheme.bodyMedium),
               ],
             ),
           ],

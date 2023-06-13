@@ -53,6 +53,7 @@ class SettingsTab extends StatelessWidget {
                               Text("Default Name", style: MyTextTypeSystem.titleMediumDark),
                               const SizedBox(height: MySpaceSystem.spaceX),
                               Text(authService.currentUser.email, style: MyTextTypeSystem.titleLargeDark),
+                              // Text("currentUser@gmail.com (dummy email for demo)", style: MyTextTypeSystem.titleLargeDark),
                             ],
                           ),
                         ],

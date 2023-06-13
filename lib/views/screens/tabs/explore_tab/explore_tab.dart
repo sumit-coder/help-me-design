@@ -72,7 +72,7 @@ class _ExploreViewState extends State<ExploreView> {
               child: exploreTapProvider.showListItemView ? ExploreListItemView() : ExploreListView(),
             ),
           ],
-        ).animate().scaleXY(begin: 0.1).move(begin: const Offset(-300, -100)).flipH(begin: -0.1),
+        ),
       ),
     );
   }

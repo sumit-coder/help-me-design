@@ -32,3 +32,9 @@ class SimpleButton extends StatelessWidget {
     );
   }
 }
+
+class Button {
+  final Function onTap;
+
+  Button(this.onTap);
+}
