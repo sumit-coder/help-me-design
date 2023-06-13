@@ -163,6 +163,9 @@ class _InspirationCardState extends State<InspirationCard> {
                 child: Image.network(
                   widget.imageUrl,
                   fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Icon(Icons.error_rounded);
+                  },
                 ),
               ),
             ),
