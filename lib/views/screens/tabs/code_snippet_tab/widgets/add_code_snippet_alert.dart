@@ -30,7 +30,7 @@ class AddCodeSnippetAlert extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Add Component', style: themeData.textTheme.titleMedium),
+              Text('Add Snippet', style: themeData.textTheme.titleMedium),
               ButtonTapEffect(
                 onTap: () {
                   Navigator.pop(context);
@@ -66,7 +66,7 @@ class AddCodeSnippetAlert extends StatelessWidget {
                 snippetTabProvider.getActiveSnippetsCollectionData();
               }
             },
-            buttonTitle: "Add Component",
+            buttonTitle: "Add Snippet",
           )
         ],
       ),
