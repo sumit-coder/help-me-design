@@ -14,6 +14,7 @@ class ExploreListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var exploreTapProvider = Provider.of<ExploreTabProvider>(context);
+    var designResourcesCollection = exploreTapProvider.designResourcesCollection!;
     return Container(
       margin: EdgeInsets.only(left: MySpaceSystem.spaceX3),
       // width: 660,
@@ -23,15 +24,18 @@ class ExploreListView extends StatelessWidget {
         runSpacing: MySpaceSystem.spaceX3,
         // direction: Axis.vertical,
         children: [
-          for (var i = 0; i < exploreTapProvider.designResourcesCollection!.data.length; i++)
+          for (var i = 0; i < designResourcesCollection.data.length; i++)
             ExploreResourceCollectionCard(
-              description: exploreTapProvider.designResourcesCollection!.data[i].description,
+              description: designResourcesCollection.data[i].description,
               onTap: () {
                 exploreTapProvider.setActiveItemView(index: i, viewValue: true);
               },
-              popularResourceUrl: exploreTapProvider.designResourcesCollection!.data[i].resourcesList.first.url,
-              resourcesCount: exploreTapProvider.designResourcesCollection!.data[i].resourcesCount.toString(),
-              title: exploreTapProvider.designResourcesCollection!.data[i].title,
+              // get popular resource or get first resource url
+              popularResourceUrl: designResourcesCollection.data[i].popularResourceUrl == 'https://fonts.google.com/'
+                  ? designResourcesCollection.data[i].resourcesList.first.url
+                  : designResourcesCollection.data[i].popularResourceUrl,
+              resourcesCount: designResourcesCollection.data[i].resourcesCount.toString(),
+              title: designResourcesCollection.data[i].title,
             ),
         ],
       ),
