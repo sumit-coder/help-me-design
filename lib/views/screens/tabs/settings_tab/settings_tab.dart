@@ -30,7 +30,7 @@ class SettingsTab extends StatelessWidget {
               title: "Settings.",
               shortDescription: "Setting, Profile, About",
               posterImage: 'assets/images/settings-poster.png',
-              bgPattern: SettingsTabPatternPainter(44, context),
+              bgPattern: SettingsTabPatternPainter(54, context),
             ),
             SizedBox(height: MySpaceSystem.spaceX2),
             Column(

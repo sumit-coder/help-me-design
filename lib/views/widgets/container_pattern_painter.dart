@@ -31,7 +31,7 @@ class InspirationTabPatternPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    Dots(
+    Crosshatch(
       bgColor: Colors.transparent,
       fgColor: MyColors.actionColor,
       featuresCount: featuresCount,
@@ -51,7 +51,7 @@ class ComponentsTabPatternPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    Dots(
+    TexturePattern(
       bgColor: Colors.transparent,
       fgColor: MyColors.actionColor,
       featuresCount: featuresCount,
@@ -71,7 +71,7 @@ class SnippetsTabPatternPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    Dots(
+    Raindrops(
       bgColor: Colors.transparent,
       fgColor: MyColors.actionColor,
       featuresCount: featuresCount,
@@ -111,7 +111,7 @@ class SettingsTabPatternPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    Dots(
+    VerticalStripesThick(
       bgColor: Colors.transparent,
       fgColor: MyColors.actionColor,
       featuresCount: featuresCount,

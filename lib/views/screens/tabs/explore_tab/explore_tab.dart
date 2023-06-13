@@ -58,7 +58,7 @@ class _ExploreViewState extends State<ExploreView> {
                     posterImage: themeData.brightness == Brightness.dark
                         ? "assets/images/explore-poster-light.png"
                         : "assets/images/explore-poster.png",
-                    bgPattern: ExploreTabPatternPainter(70, context),
+                    bgPattern: ExploreTabPatternPainter(74, context),
                   ),
             // IconButton(
             //   onPressed: () {
