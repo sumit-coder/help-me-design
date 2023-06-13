@@ -55,8 +55,10 @@ class _ExploreViewState extends State<ExploreView> {
                     title: "Explore.",
                     shortDescription:
                         "Welcome to HelpMeDesign, \nHere you can Explore, Add & Create. Design Resources, Design Systems, UI Components etc.",
-                    posterImage: 'https://i.ibb.co/SNVPkKM/original-dd50f8430ab324b03b6af592e73ca6c7-removebg-preview.png',
-                    bgPattern: ContainerPatternPainter(70, context),
+                    posterImage: themeData.brightness == Brightness.dark
+                        ? "assets/images/explore-poster-light.png"
+                        : "assets/images/explore-poster.png",
+                    bgPattern: ExploreTabPatternPainter(74, context),
                   ),
             // IconButton(
             //   onPressed: () {

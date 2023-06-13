@@ -25,7 +25,25 @@ class UploadFile {
       log("createFile.uploadInspirationsFile");
       return file;
     } on AppwriteException catch (e) {
+      return null;
       print(e);
+    }
+  }
+
+  Future<File?> uploadComponentsPreviewFile(List<int> bytes, String fileName) async {
+    final storage = Storage(client);
+
+    try {
+      final file = await storage.createFile(
+        bucketId: AppWriteConst.usersComponentsPreviewFilesBucketId,
+        fileId: ID.unique(),
+        file: InputFile.fromBytes(bytes: bytes, filename: fileName),
+      );
+      log("createFile.uploadComponentsPreviewFile");
+      return file;
+    } on AppwriteException catch (e) {
+      print(e);
+      return null;
     }
   }
 }

@@ -64,7 +64,7 @@ class _ComponentsListViewState extends State<ComponentsListView> {
               },
               title: componentTabProvider.componentsCollectionData[i].data['title'],
               tags: componentTabProvider.componentsCollectionData[i].data['tags'],
-              componentsCount: componentTabProvider.componentsCollectionData[i].data['collectionsCount'],
+              addedAt: componentTabProvider.componentsCollectionData[i].$createdAt.split("T").first,
             ),
           ComponentCollectionCard(
             onTap: () {
@@ -72,7 +72,7 @@ class _ComponentsListViewState extends State<ComponentsListView> {
             },
             title: 'Flutter Components Demo',
             tags: 'Flutter, Demo',
-            componentsCount: 0,
+            addedAt: "0",
           ),
         ],
       ),
@@ -86,13 +86,13 @@ class ComponentCollectionCard extends StatelessWidget {
     required this.onTap,
     required this.title,
     required this.tags,
-    required this.componentsCount,
+    required this.addedAt,
   });
 
   final VoidCallback onTap;
   final String title;
   final String tags;
-  final int componentsCount;
+  final String addedAt;
 
   @override
   Widget build(BuildContext context) {
@@ -124,10 +124,10 @@ class ComponentCollectionCard extends StatelessWidget {
                 Text(
                   title,
                   maxLines: 2,
-                  style: themeData.textTheme.titleSmall,
+                  style: themeData.textTheme.titleMedium,
                 ),
                 SizedBox(height: MySpaceSystem.spaceX2),
-                Text('$componentsCount Components', style: themeData.textTheme.bodyMedium),
+                Text('$addedAt', style: themeData.textTheme.bodyMedium),
               ],
             ),
           ],

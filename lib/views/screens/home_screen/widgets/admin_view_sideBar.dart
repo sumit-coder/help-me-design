@@ -120,35 +120,6 @@ class _AdminViewSideBarState extends State<AdminViewSideBar> {
                 widget.onSideTabButtonChange(SideTabType.settings);
               },
             ),
-
-            Row(
-              children: [
-                IconButton(
-                  onPressed: () {
-                    if (themeMangerProvider.isDarkMode) {
-                      themeMangerProvider.changeThemeMode(ThemeMode.light);
-                      return;
-                    }
-                    themeMangerProvider.changeThemeMode(ThemeMode.dark);
-
-                    print(themeMangerProvider.getThemeMode);
-                  },
-                  icon: Icon(
-                    Icons.dark_mode,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                ),
-                IconButton(
-                  onPressed: () {
-                    authService.signOut();
-                  },
-                  icon: Icon(
-                    Icons.logout_rounded,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                ),
-              ],
-            ),
           ],
         ),
       ),
