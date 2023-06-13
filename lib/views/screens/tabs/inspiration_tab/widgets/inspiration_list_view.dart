@@ -46,7 +46,7 @@ class _InspirationsListViewState extends State<InspirationsListView> {
             onTap: () async {
               FilePickerResult? result = await FilePicker.platform.pickFiles(
                 type: FileType.custom,
-                allowedExtensions: ['jpg', 'png', 'doc'],
+                allowedExtensions: ['jpg', 'png'],
               );
               if (result != null) {
                 var bytes = result.files.first.bytes!.toList();

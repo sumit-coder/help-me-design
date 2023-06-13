@@ -289,6 +289,7 @@ class Update {
     required String? codeLanguage,
     required String? previewUrl,
     required String? previewType,
+    required String? previewFileId,
     required String componentId,
   }) async {
     final databases = Databases(client);
@@ -302,6 +303,7 @@ class Update {
           if (codeLanguage != null) "codeLanguage": codeLanguage,
           if (previewType != null) "previewType": previewType,
           if (previewUrl != null) "previewUrl": previewUrl,
+          if (previewFileId != null) "previewFileId": previewFileId,
         },
       );
       log("Update.component");
