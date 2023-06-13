@@ -37,7 +37,7 @@ class _CodeSnippetViewState extends State<CodeSnippetView> {
     return Column(
       children: [
         SendBackBarWithTitle(
-          title: "Flutter Code Snippets",
+          title: snippetTabProvider.snippetsCollectionData[snippetTabProvider.indexOfClickedSnippetCollection].data['title'],
           onTap: () {
             snippetTabProvider.changeCollectionView(false, -1);
             snippetTabProvider.makeActiveSnippetsCollectionDataToEmpty();

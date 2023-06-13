@@ -54,7 +54,7 @@ class _ComponentViewState extends State<ComponentView> {
       child: Column(
         children: [
           SendBackBarWithTitle(
-            title: "Flutter Code Snippets",
+            title: componentTabProvider.componentsCollectionData[componentTabProvider.activeComponentCollectionIndex].data['title'],
             onTap: () {
               // snippetTabProvider.changeCollectionView(false);
               componentTabProvider.changeOpenActiveComponentCollectionView(false, -1);
