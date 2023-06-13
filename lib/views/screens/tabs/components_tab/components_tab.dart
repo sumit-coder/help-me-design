@@ -32,8 +32,8 @@ class ComponentsTab extends StatelessWidget {
                       // title: MyTextConstants.docsTabHeadline,
                       title: "Components.",
                       shortDescription: "MyTextConstants.docsTabShortDescription",
-                      posterImage: "images/explore-poster.png",
-                      bgPattern: ContainerSquarePatternThreePainter(70, context),
+                      posterImage: "assets/images/explore-poster.png",
+                      bgPattern: ComponentsTabPatternPainter(70, context),
                     ),
                     ComponentsListView()
                   ],

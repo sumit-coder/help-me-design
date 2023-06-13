@@ -29,8 +29,8 @@ class SettingsTab extends StatelessWidget {
               // title: MyTextConstants.docsTabHeadline,
               title: "Settings.",
               shortDescription: "Setting, Profile, About",
-              posterImage: 'images/settings-poster.png',
-              bgPattern: ContainerSquarePatternTwoPainter(44, context),
+              posterImage: 'assets/images/settings-poster.png',
+              bgPattern: SettingsTabPatternPainter(44, context),
             ),
             SizedBox(height: MySpaceSystem.spaceX2),
             Column(
