@@ -1,4 +1,6 @@
-# help_me_design
+# Help Me Desing | Appwrite + Hashnode Hackathon Project
+
+![demo-image](https://github.com/sumit-coder/help-me-design/assets/55745378/ea5afaed-0740-4cea-95e8-26b002a741a2)
 
 A new Flutter project.
 
