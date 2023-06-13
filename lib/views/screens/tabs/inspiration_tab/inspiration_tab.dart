@@ -24,7 +24,7 @@ class InspirationTab extends StatelessWidget {
               // title: MyTextConstants.docsTabHeadline,
               title: "Inspirations.",
               shortDescription: "Save Your Design Inspirations Here.",
-              posterImage: 'https://i.ibb.co/SNVPkKM/original-dd50f8430ab324b03b6af592e73ca6c7-removebg-preview.png',
+              posterImage: "images/insp-poster.png",
               bgPattern: ContainerSquarePatternTwoPainter(44, context),
             ),
             InspirationsListView(),

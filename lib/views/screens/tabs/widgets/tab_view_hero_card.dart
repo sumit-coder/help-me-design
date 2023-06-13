@@ -46,7 +46,7 @@ class TabViewHeroCard extends StatelessWidget {
               // width: 300,
               child: ClipRRect(
                 borderRadius: const BorderRadius.only(bottomRight: Radius.circular(8), topRight: Radius.circular(8)),
-                child: Image.network(
+                child: Image.asset(
                   posterImage,
                   fit: BoxFit.cover,
                   alignment: Alignment.topCenter,

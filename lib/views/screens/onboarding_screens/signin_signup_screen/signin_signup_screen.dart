@@ -91,19 +91,6 @@ class _SignInSignUpScreenState extends State<SignInSignUpScreen> {
                   ],
                 ),
               ),
-              ButtonTapEffect(
-                  onTap: () {
-                    if (themeMangerProvider.isDarkMode) {
-                      themeMangerProvider.changeThemeMode(ThemeMode.light);
-                      setState(() {});
-                      return;
-                    }
-                    themeMangerProvider.changeThemeMode(ThemeMode.dark);
-                    setState(() {});
-
-                    print(themeMangerProvider.getThemeMode);
-                  },
-                  child: const Text('LOgin'))
             ],
           ),
         ),

@@ -138,6 +138,7 @@ class SignInView extends StatelessWidget {
                         child: ButtonWithTitleAndIcon(
                           onTap: () {
                             // authService.createVerification();
+                            UtilityHelper.toastMessage(message: "Google in is not working");
                           },
                           buttonTitle: "Google",
                           icon: Image.asset("assets/images/google-icon.png"),
@@ -146,7 +147,9 @@ class SignInView extends StatelessWidget {
                       SizedBox(width: MySpaceSystem.spaceX2),
                       Expanded(
                         child: ButtonWithTitleAndIcon(
-                          onTap: () async {},
+                          onTap: () async {
+                            signInGithub(context);
+                          },
                           buttonTitle: "Github",
                           icon: Image.asset("assets/images/github-icon-light.png"),
                         ),
@@ -189,7 +192,7 @@ class SignInView extends StatelessWidget {
     // Go to OAuth provider login page
 
     try {
-      await account.createOAuth2Session(provider: 'github', success: "http://localhost:50423/#/");
+      await account.createOAuth2Session(provider: 'github', success: "https://help-me-design.netlify.app/#/");
 
       Navigator.pop(context);
       const snackbar = SnackBar(content: Text('Account created!'));

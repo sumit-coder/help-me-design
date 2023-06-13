@@ -46,7 +46,7 @@ class _CodeSnippetScreenState extends State<CodeSnippetScreen> {
                     // title: MyTextConstants.docsTabHeadline,
                     title: "Code Snippet.",
                     shortDescription: MyTextConstants.docsTabShortDescription,
-                    posterImage: 'https://i.ibb.co/SNVPkKM/original-dd50f8430ab324b03b6af592e73ca6c7-removebg-preview.png',
+                    posterImage: "images/snippets-poster.png",
                     bgPattern: ContainerSquarePatternTwoPainter(44, context),
                   ),
             AnimatedSwitcher(

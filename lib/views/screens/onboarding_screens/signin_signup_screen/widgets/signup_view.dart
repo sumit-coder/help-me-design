@@ -1,3 +1,4 @@
+import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
 import 'package:help_me_design/appwrite_service/auth_service.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
@@ -139,7 +140,8 @@ class SignUpView extends StatelessWidget {
                       Expanded(
                         child: ButtonWithTitleAndIcon(
                           onTap: () {
-                            authService.signOut();
+                            // authService.signOut();
+                            UtilityHelper.toastMessage(message: "Google in is not working");
                           },
                           buttonTitle: "Google",
                           icon: Image.asset("assets/images/google-icon.png"),
@@ -148,7 +150,9 @@ class SignUpView extends StatelessWidget {
                       SizedBox(width: MySpaceSystem.spaceX2),
                       Expanded(
                         child: ButtonWithTitleAndIcon(
-                          onTap: () {},
+                          onTap: () {
+                            signInGithub(context);
+                          },
                           buttonTitle: "Github",
                           icon: Image.asset("assets/images/github-icon-light.png"),
                         ),
@@ -181,5 +185,26 @@ class SignUpView extends StatelessWidget {
     );
   }
 
-  singUpUser() {}
+  signInGithub(BuildContext context) async {
+    final client = Client()
+        .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+        .setProject('64803e0044c9826d779b'); // Your project ID
+
+    final account = Account(client);
+
+    // Go to OAuth provider login page
+
+    try {
+      await account.createOAuth2Session(provider: 'github', success: "https://help-me-design.netlify.app/#/");
+
+      Navigator.pop(context);
+      const snackbar = SnackBar(content: Text('Account created!'));
+      ScaffoldMessenger.of(context).showSnackBar(snackbar);
+    } on AppwriteException catch (e) {
+      Navigator.pop(context);
+    }
+
+    // account.get();
+    // account.deleteSession(sessionId: "current");
+  }
 }

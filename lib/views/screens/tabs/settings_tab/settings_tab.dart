@@ -29,7 +29,7 @@ class SettingsTab extends StatelessWidget {
               // title: MyTextConstants.docsTabHeadline,
               title: "Settings.",
               shortDescription: "Setting, Profile, About",
-              posterImage: 'https://i.ibb.co/SNVPkKM/original-dd50f8430ab324b03b6af592e73ca6c7-removebg-preview.png',
+              posterImage: 'images/settings-poster.png',
               bgPattern: ContainerSquarePatternTwoPainter(44, context),
             ),
             SizedBox(height: MySpaceSystem.spaceX2),
@@ -58,7 +58,9 @@ class SettingsTab extends StatelessWidget {
                         ],
                       ),
                       ButtonTapEffect(
-                        onTap: () {},
+                        onTap: () {
+                          authService.signOut();
+                        },
                         child: Container(
                           height: 64,
                           decoration: BoxDecoration(

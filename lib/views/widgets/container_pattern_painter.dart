@@ -68,9 +68,9 @@ class ContainerSquarePatternThreePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    DiagonalStripesLight(
+    Raindrops(
       bgColor: Colors.transparent,
-      fgColor: Theme.of(context).colorScheme.secondary.withOpacity(1),
+      fgColor: MyColors.actionColor,
       featuresCount: featuresCount,
     ).paintOnWidget(canvas, size);
   }
