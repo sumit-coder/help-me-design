@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:help_me_design/providers/explore_tab_provider/explore_tab_provider.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/theme/my_theme.dart';
@@ -36,7 +37,14 @@ class ExploreListView extends StatelessWidget {
                   : designResourcesCollection.data[i].popularResourceUrl,
               resourcesCount: designResourcesCollection.data[i].resourcesCount.toString(),
               title: designResourcesCollection.data[i].title,
-            ),
+            )
+                .animate()
+                .scaleXY(
+                  begin: 0.2,
+                  alignment: Alignment.bottomLeft,
+                )
+                .then()
+                .saturate(begin: 0, delay: 0.ms, duration: 300.ms)
         ],
       ),
     );
