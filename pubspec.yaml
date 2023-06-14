@@ -54,6 +54,7 @@ dependencies:
   file_picker: ^5.3.1
 
   web_scraper: ^0.1.4
+  url_strategy: ^0.2.0
 
 dev_dependencies:
   flutter_test:

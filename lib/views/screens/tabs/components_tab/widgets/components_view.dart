@@ -182,10 +182,10 @@ class _ComponentViewState extends State<ComponentView> {
                                         UtilityHelper.toastMessage(message: "Code Updated");
                                       }
                                     },
-                                    codeText: activeCollectionData[componentTabProvider.activeComponentViewIndex].data['code'],
+                                    codeText: activeCollectionData[i].data['code'],
                                     description: '',
-                                    title: activeCollectionData[componentTabProvider.activeComponentViewIndex].data['title'],
-                                    codeLanguage: activeCollectionData[componentTabProvider.activeComponentViewIndex].data['codeLanguage'],
+                                    title: activeCollectionData[i].data['title'],
+                                    codeLanguage: activeCollectionData[i].data['codeLanguage'],
                                   ),
                                 )
                             ],

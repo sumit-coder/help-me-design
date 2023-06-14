@@ -22,6 +22,7 @@ class ExploreView extends StatefulWidget {
 }
 
 class _ExploreViewState extends State<ExploreView> {
+  ScrollController _scrollController = ScrollController();
   @override
   void initState() {
     // TODO: implement initState
@@ -60,13 +61,6 @@ class _ExploreViewState extends State<ExploreView> {
                         : "assets/images/explore-poster.png",
                     bgPattern: ExploreTabPatternPainter(74, context),
                   ),
-            // IconButton(
-            //   onPressed: () {
-            //     // DatabasesService().getDesignResourcesData();
-            //     exploreTapProvider.initDesignResourcesData();
-            //   },
-            //   icon: const Icon(Icons.abc),
-            // ),
             AnimatedSwitcher(
               duration: 500.ms,
               child: exploreTapProvider.showListItemView ? ExploreListItemView() : ExploreListView(),

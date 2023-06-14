@@ -31,7 +31,7 @@ class InspirationTabPatternPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    Crosshatch(
+    TexturePattern(
       bgColor: Colors.transparent,
       fgColor: MyColors.actionColor,
       featuresCount: featuresCount,
@@ -51,7 +51,7 @@ class ComponentsTabPatternPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    TexturePattern(
+    Crosshatch(
       bgColor: Colors.transparent,
       fgColor: MyColors.actionColor,
       featuresCount: featuresCount,

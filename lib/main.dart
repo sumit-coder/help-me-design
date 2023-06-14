@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:help_me_design/appwrite_service/auth_service.dart';
 import 'package:help_me_design/providers/component_tab_provider/component_tab_provider.dart';
 import 'package:help_me_design/providers/explore_tab_provider/explore_tab_provider.dart';
@@ -12,7 +13,10 @@ import 'providers/inspiration_tab_provider/inspiration_tab_provider.dart';
 import 'providers/snippet_tab_provider.dart';
 import 'views/screens/home_screen/home_screen.dart';
 
+import 'package:url_strategy/url_strategy.dart';
+
 void main() {
+  setPathUrlStrategy();
   runApp(const MyApp());
 }
 
@@ -26,6 +30,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
+    Animate.restartOnHotReload = true;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<ThemeManager>(create: (_) => ThemeManager()),
