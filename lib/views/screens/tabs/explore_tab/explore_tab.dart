@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:help_me_design/appwrite_service/databases_service.dart';
+import 'package:help_me_design/constants/text_constants.dart';
 import 'package:help_me_design/providers/explore_tab_provider/explore_tab_provider.dart';
 import 'package:help_me_design/theme/my_colors.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
@@ -52,10 +53,8 @@ class _ExploreViewState extends State<ExploreView> {
             exploreTapProvider.showListItemView
                 ? SizedBox()
                 : TabViewHeroCard(
-                    // title: MyTextConstants.docsTabHeadline,
-                    title: "Explore.",
-                    shortDescription:
-                        "Welcome to HelpMeDesign, \nHere you can Explore, Add & Create. Design Resources, Design Systems, UI Components etc.",
+                    title: MyTextConstants.exploreTabHeadline,
+                    shortDescription: MyTextConstants.exploreTabShortDescription,
                     posterImage: themeData.brightness == Brightness.dark
                         ? "assets/images/explore-poster-light.png"
                         : "assets/images/explore-poster.png",

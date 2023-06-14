@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/theme/my_theme.dart';
+import 'package:help_me_design/views/widgets/add_icon_with_animation.dart';
 import 'package:help_me_design/views/widgets/button_tap_effect.dart';
 
 class AddComponentCard extends StatelessWidget {
@@ -41,7 +42,8 @@ class AddComponentCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Icon(Icons.add_rounded, color: themeData.colorScheme.secondary),
+                AddIconWithAnimation(color: themeData.colorScheme.secondary),
+                // Icon(Icons.add_rounded, color: themeData.colorScheme.secondary),
                 SizedBox(width: MySpaceSystem.spaceX1),
                 Text(
                   'Component',

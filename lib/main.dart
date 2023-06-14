@@ -10,7 +10,8 @@ import 'package:provider/provider.dart';
 
 import 'constants/app_constants.dart';
 import 'providers/inspiration_tab_provider/inspiration_tab_provider.dart';
-import 'providers/snippet_tab_provider.dart';
+import 'providers/saved_tab_provider/saved_tab_provider.dart';
+import 'providers/snippet_tab_provider/snippet_tab_provider.dart';
 import 'views/screens/home_screen/home_screen.dart';
 
 import 'package:url_strategy/url_strategy.dart';
@@ -34,11 +35,12 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<ThemeManager>(create: (_) => ThemeManager()),
-        ChangeNotifierProvider<SnippetTabProvider>(create: (_) => SnippetTabProvider()),
-        ChangeNotifierProvider<ComponentTabProvider>(create: (_) => ComponentTabProvider()),
         ChangeNotifierProvider<AuthService>(create: (_) => AuthService()),
         ChangeNotifierProvider<ExploreTabProvider>(create: (_) => ExploreTabProvider()),
         ChangeNotifierProvider<InspirationTabProvider>(create: (_) => InspirationTabProvider()),
+        ChangeNotifierProvider<ComponentTabProvider>(create: (_) => ComponentTabProvider()),
+        ChangeNotifierProvider<SnippetTabProvider>(create: (_) => SnippetTabProvider()),
+        ChangeNotifierProvider<SavedTabProvider>(create: (_) => SavedTabProvider()),
       ],
       child: Consumer2<ThemeManager, AuthService>(builder: (context, themeManagerProvider, authServiceProvider, snapshot) {
         return MaterialApp(
@@ -55,7 +57,7 @@ class _MyAppState extends State<MyApp> {
               ? const SignInSignUpScreen()
               : authServiceProvider.status == AuthStatus.authenticated
                   ? const MyHomePage()
-                  : WelcomeScreen(),
+                  : const WelcomeScreen(),
           // home: WelcomeScreen(),
         );
       }),

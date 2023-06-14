@@ -1,10 +1,12 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:help_me_design/appwrite_service/auth_service.dart';
 import 'package:help_me_design/providers/component_tab_provider/component_tab_provider.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/theme/my_theme.dart';
 import 'package:help_me_design/utility/utility_helper.dart';
+import 'package:help_me_design/views/widgets/add_icon_with_animation.dart';
 import 'package:help_me_design/views/widgets/button_tap_effect.dart';
 import 'package:help_me_design/views/widgets/tag_widget.dart';
 import 'package:provider/provider.dart';
@@ -66,14 +68,6 @@ class _ComponentsListViewState extends State<ComponentsListView> {
               tags: componentTabProvider.componentsCollectionData[i].data['tags'],
               addedAt: componentTabProvider.componentsCollectionData[i].$createdAt.split("T").first,
             ),
-          ComponentCollectionCard(
-            onTap: () {
-              componentTabProvider.changeOpenActiveComponentCollectionView(true, 0);
-            },
-            title: 'Flutter Components Demo',
-            tags: 'Flutter, Demo',
-            addedAt: "0",
-          ),
         ],
       ),
     );
@@ -102,6 +96,7 @@ class ComponentCollectionCard extends StatelessWidget {
       child: Container(
         height: 154,
         width: 300,
+        clipBehavior: Clip.antiAlias,
         padding: EdgeInsets.all(MySpaceSystem.spaceX2),
         decoration: BoxDecoration(
           color: themeData.colorScheme.secondary,
@@ -129,11 +124,11 @@ class ComponentCollectionCard extends StatelessWidget {
                 SizedBox(height: MySpaceSystem.spaceX2),
                 Text('$addedAt', style: themeData.textTheme.bodyMedium),
               ],
-            ),
+            ).animate().moveX(begin: -154, delay: 200.ms, duration: 400.ms, curve: Curves.easeInOutBack),
           ],
         ),
       ),
-    );
+    ).animate().scaleXY(begin: 0);
   }
 }
 
@@ -174,10 +169,9 @@ class AddComponentCollectionCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(
-                    Icons.add_rounded,
-                    size: 44,
+                  AddIconWithAnimation(
                     color: themeData.colorScheme.secondary,
+                    size: 44,
                   ),
                   SizedBox(height: MySpaceSystem.spaceX2),
                   Text(
@@ -192,6 +186,6 @@ class AddComponentCollectionCard extends StatelessWidget {
           ),
         ),
       ),
-    );
+    ).animate().shake(delay: 1000.ms);
   }
 }

@@ -1,13 +1,9 @@
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
-// import 'package:help_me_design/appwrite_service/appwrite_constants.dart';
 import 'package:help_me_design/models/design_resources_model.dart';
-import 'package:help_me_design/providers/snippet_tab_provider.dart';
 import 'package:help_me_design/utility/utility_helper.dart';
-import 'package:help_me_design/views/screens/tabs/components_tab/widgets/add_component_collection_alert.dart';
 
 import 'appwrite_constants_all.dart';
 
@@ -171,6 +167,37 @@ class Example{
       return false;
     }
   }
+
+  Future<bool> saveDesignResource({
+    required String userId,
+    required String url,
+    required String title,
+    required String description,
+    required String originalResourceId,
+  }) async {
+    final databases = Databases(client);
+    try {
+      final document = await databases.createDocument(
+        databaseId: AppWriteConst.usersDataDatabaseID,
+        collectionId: AppWriteConst.savedDesignResourcesId,
+        documentId: ID.unique(),
+        data: {
+          "title": title,
+          "url": url,
+          "userId": userId,
+          "description": description,
+          "originalResourceId": originalResourceId,
+        },
+      );
+      UtilityHelper.toastMessage(message: "Design Resource Saved");
+
+      return true;
+    } on AppwriteException catch (e) {
+      UtilityHelper.toastMessage(message: e.message ?? "add.saveDesignResource() null message");
+      log(e.toString());
+      return false;
+    }
+  }
 }
 
 class Get {
@@ -277,6 +304,26 @@ class Get {
       return [];
     }
   }
+
+  Future<List<Document>> savedDesignResource({required String userId}) async {
+    final databases = Databases(client);
+    try {
+      final data = await databases.listDocuments(
+        databaseId: AppWriteConst.usersDataDatabaseID,
+        collectionId: AppWriteConst.savedDesignResourcesId,
+        queries: [
+          Query.equal('userId', userId),
+          Query.orderDesc('\$createdAt'),
+        ],
+      );
+      log("Get.savedDesignResource");
+      return data.documents;
+    } on AppwriteException catch (e) {
+      print(e);
+      UtilityHelper.toastMessage(message: e.message ?? "get.savedDesignResource() null message");
+      return [];
+    }
+  }
 }
 
 class Update {
@@ -365,14 +412,24 @@ class DeleteData {
       return false;
     }
   }
-}
 
-String code = ''' Positioned(
-           top: 8,
-           left: 8,
-           child: Text(
-           "Preview",
-           maxLines: 2,
-           style: themeData.textTheme.titleSmall,
-           ),
-           ),''';
+  Future<bool> savedDesignResource({
+    required String docId,
+  }) async {
+    final databases = Databases(client);
+    try {
+      final data = await databases.deleteDocument(
+        databaseId: AppWriteConst.usersDataDatabaseID,
+        collectionId: AppWriteConst.savedDesignResourcesId,
+        documentId: docId,
+      );
+      log("Delete.savedDesignResource");
+
+      return true;
+    } on AppwriteException catch (e) {
+      print(e);
+      UtilityHelper.toastMessage(message: e.message ?? "delete.savedDesignResource() null message");
+      return false;
+    }
+  }
+}

@@ -91,7 +91,7 @@ class SavedTabPatternPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    Dots(
+    VerticalStripesThick(
       bgColor: Colors.transparent,
       fgColor: MyColors.actionColor,
       featuresCount: featuresCount,
@@ -111,7 +111,7 @@ class SettingsTabPatternPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    VerticalStripesThick(
+    Dots(
       bgColor: Colors.transparent,
       fgColor: MyColors.actionColor,
       featuresCount: featuresCount,

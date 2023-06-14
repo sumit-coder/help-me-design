@@ -2,10 +2,11 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:help_me_design/appwrite_service/auth_service.dart';
 import 'package:help_me_design/appwrite_service/databases_service.dart';
-import 'package:help_me_design/providers/snippet_tab_provider.dart';
+import 'package:help_me_design/providers/snippet_tab_provider/snippet_tab_provider.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/utility/utility_helper.dart';
 import 'package:help_me_design/views/screens/tabs/code_snippet_tab/widgets/add_code_snippet_alert.dart';
+import 'package:help_me_design/views/widgets/add_icon_with_animation.dart';
 import 'package:help_me_design/views/widgets/button_tap_effect.dart';
 import 'package:help_me_design/views/widgets/code_editor/code_editor.dart';
 import 'package:help_me_design/views/widgets/send_back_bar_with_title.dart';
@@ -110,10 +111,9 @@ class AddCodeSnippetCard extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  Icons.add_rounded,
-                  size: 34,
+                AddIconWithAnimation(
                   color: themeData.colorScheme.secondary,
+                  size: 34,
                 ),
                 SizedBox(width: MySpaceSystem.spaceX1),
                 Text(

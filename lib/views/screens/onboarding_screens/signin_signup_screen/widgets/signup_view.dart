@@ -110,17 +110,18 @@ class SignUpView extends StatelessWidget {
                       return;
                     }
 
-                    User userInfo = await authService.createUser(
+                    User? userInfo = await authService.createUser(
                       email: emailController.text,
                       password: passwordController.text,
                     );
 
-                    if (userInfo.$id.isNotEmpty) {
+                    if (userInfo != null) {
                       clearTextFields();
                       UtilityHelper.toastMessage(
                         message: "SignUp is Successful, SignIn Now",
                         msgDuration: Duration(seconds: 3),
                       );
+                      // authService.createVerification();
                       // send user to signIn View
                       onTapSignIn();
                     }

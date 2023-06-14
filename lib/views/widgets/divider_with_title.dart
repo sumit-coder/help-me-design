@@ -22,7 +22,7 @@ class DividerWithTitle extends StatelessWidget {
           Expanded(child: Divider(thickness: 2, height: 1, color: themeData.colorScheme.outline)),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: MySpaceSystem.spaceX1),
-            child: Text("Continue With", style: themeData.textTheme.bodySmall),
+            child: Text(title, style: themeData.textTheme.bodySmall),
           ),
           Expanded(child: Divider(thickness: 2, height: 1, color: themeData.colorScheme.outline)),
         ],

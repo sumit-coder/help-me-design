@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:help_me_design/appwrite_service/databases_service.dart';
-import 'package:help_me_design/providers/snippet_tab_provider.dart';
+import 'package:help_me_design/providers/snippet_tab_provider/snippet_tab_provider.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/views/widgets/button_tap_effect.dart';
 import 'package:help_me_design/views/widgets/form_widgets/buttons/simple_button.dart';
