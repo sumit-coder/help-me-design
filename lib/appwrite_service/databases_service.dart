@@ -412,4 +412,24 @@ class DeleteData {
       return false;
     }
   }
+
+  Future<bool> savedDesignResource({
+    required String docId,
+  }) async {
+    final databases = Databases(client);
+    try {
+      final data = await databases.deleteDocument(
+        databaseId: AppWriteConst.usersDataDatabaseID,
+        collectionId: AppWriteConst.savedDesignResourcesId,
+        documentId: docId,
+      );
+      log("Delete.savedDesignResource");
+
+      return true;
+    } on AppwriteException catch (e) {
+      print(e);
+      UtilityHelper.toastMessage(message: e.message ?? "delete.savedDesignResource() null message");
+      return false;
+    }
+  }
 }
