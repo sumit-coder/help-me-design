@@ -49,8 +49,8 @@ class ExploreListItemView extends StatelessWidget {
                 )
                 .then()
                 .saturate(begin: 0, delay: 100.ms, duration: 400.ms)
-                .then()
-                .shakeX(delay: 200.ms, hz: 8, amount: i == 0 ? 4 : 0)
+                .animate(target: i == 1 ? 1 : 0)
+                .shake(delay: 800.ms, hz: 5)
         ],
       ),
     );

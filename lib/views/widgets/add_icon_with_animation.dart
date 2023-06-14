@@ -15,11 +15,12 @@ class AddIconWithAnimation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Icon(
-        Icons.add_rounded,
-        color: color,
-        size: size,
-      ).animate().shakeX(delay: 200.ms, hz: rnd.nextInt(9).toDouble()).shakeY(hz: rnd.nextInt(9).toDouble()),
-    );
+        child: Icon(
+      Icons.add_rounded,
+      color: color,
+      size: size,
+    )
+        // .animate().shakeX(delay: 200.ms, hz: rnd.nextInt(9).toDouble()).shakeY(hz: rnd.nextInt(9).toDouble()),
+        );
   }
 }

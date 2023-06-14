@@ -39,12 +39,11 @@ class ExploreListView extends StatelessWidget {
               title: designResourcesCollection.data[i].title,
             )
                 .animate()
-                .scaleXY(
-                  begin: 0.2,
-                  alignment: Alignment.bottomLeft,
-                )
+                .scaleXY(begin: 0.2, alignment: Alignment.bottomLeft)
                 .then()
                 .saturate(begin: 0, delay: 0.ms, duration: 300.ms)
+                .animate(target: i == 1 ? 1 : 0)
+                .shake(delay: 800.ms, hz: 5)
         ],
       ),
     );

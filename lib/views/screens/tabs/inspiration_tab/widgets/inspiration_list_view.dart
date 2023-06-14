@@ -244,6 +244,6 @@ class AddInspirationCard extends StatelessWidget {
           ),
         ),
       ),
-    );
+    ).animate().shake(delay: 1000.ms, hz: 5);
   }
 }

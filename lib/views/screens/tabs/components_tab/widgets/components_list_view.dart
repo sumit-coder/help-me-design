@@ -104,6 +104,7 @@ class ComponentCollectionCard extends StatelessWidget {
       child: Container(
         height: 154,
         width: 300,
+        clipBehavior: Clip.antiAlias,
         padding: EdgeInsets.all(MySpaceSystem.spaceX2),
         decoration: BoxDecoration(
           color: themeData.colorScheme.secondary,
@@ -131,11 +132,11 @@ class ComponentCollectionCard extends StatelessWidget {
                 SizedBox(height: MySpaceSystem.spaceX2),
                 Text('$addedAt', style: themeData.textTheme.bodyMedium),
               ],
-            ),
+            ).animate().moveX(begin: -154, delay: 200.ms, duration: 400.ms, curve: Curves.easeInOutBack),
           ],
         ),
       ),
-    );
+    ).animate().scaleXY(begin: 0);
   }
 }
 
@@ -193,6 +194,6 @@ class AddComponentCollectionCard extends StatelessWidget {
           ),
         ),
       ),
-    );
+    ).animate().shake(delay: 1000.ms);
   }
 }
