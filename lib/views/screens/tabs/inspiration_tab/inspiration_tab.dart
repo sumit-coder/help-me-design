@@ -1,5 +1,6 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:help_me_design/constants/text_constants.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/theme/my_theme.dart';
 import 'package:help_me_design/views/screens/tabs/widgets/tab_view_hero_card.dart';
@@ -22,8 +23,9 @@ class InspirationTab extends StatelessWidget {
           children: [
             TabViewHeroCard(
               // title: MyTextConstants.docsTabHeadline,
-              title: "Inspirations.",
-              shortDescription: "Save Your Design Inspirations Here.",
+              title: MyTextConstants.inspirationsTabHeadline,
+              shortDescription: MyTextConstants.inspirationTabShortDescription,
+
               posterImage: "assets/images/insp-poster.png",
               bgPattern: InspirationTabPatternPainter(44, context),
             ),
