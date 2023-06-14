@@ -2,17 +2,9 @@
 
 ![demo-image](https://github.com/sumit-coder/help-me-design/assets/55745378/ea5afaed-0740-4cea-95e8-26b002a741a2)
 
-A new Flutter project.
+## About Project
 
-## Getting Started
+Help Me Desing app is built for the developer to explore design resources, like UI Design, Logos, Fonts, UI Frameworks, Design Systems, and many more different categories to explore.
 
-This project is a starting point for a Flutter application.
+### Help Me Design: Live (https://help-me-design.sumitpanwar.com/)
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
