@@ -166,7 +166,7 @@ class ThemeModeCard extends StatelessWidget {
               child: Image.asset(mode == 'dark' ? 'assets/images/dark.png' : 'assets/images/light.png'),
             ),
             SizedBox(height: MySpaceSystem.spaceX3),
-            Text(title, style: mode == 'dark' ? MyTextTypeSystem.titleLarge : MyTextTypeSystem.titleLargeDark),
+            Text(title, style: mode == 'dark' ? MyTextTypeSystem.titleMedium : MyTextTypeSystem.titleMediumDark),
             SizedBox(height: MySpaceSystem.spaceX1),
           ],
         ),

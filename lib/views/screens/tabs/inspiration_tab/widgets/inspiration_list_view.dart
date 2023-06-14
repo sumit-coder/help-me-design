@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:help_me_design/appwrite_service/appwrite_constants_all.dart';
 import 'package:help_me_design/appwrite_service/auth_service.dart';
 import 'package:help_me_design/appwrite_service/databases_service.dart';
@@ -12,6 +13,7 @@ import 'package:help_me_design/providers/inspiration_tab_provider/inspiration_ta
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/theme/my_theme.dart';
 import 'package:help_me_design/utility/utility_helper.dart';
+import 'package:help_me_design/views/widgets/add_icon_with_animation.dart';
 import 'package:help_me_design/views/widgets/button_tap_effect.dart';
 import 'package:provider/provider.dart';
 
@@ -223,11 +225,12 @@ class AddInspirationCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(
-                    Icons.add_rounded,
-                    size: 44,
+                  AddIconWithAnimation(
                     color: themeData.colorScheme.secondary,
+                    size: 44,
                   ),
+
+                  // .scaleXY(end: 1, duration: 600.ms),
                   SizedBox(height: MySpaceSystem.spaceX2),
                   Text(
                     'Add Inspiration Image',

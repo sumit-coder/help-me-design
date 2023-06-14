@@ -34,7 +34,7 @@ class AuthService extends ChangeNotifier {
   AuthStatus get status => _status;
   String? get username => _currentUser.name;
   String? get email => _currentUser.email;
-  String? get userid => _currentUser.$id;
+  String? get userId => _currentUser.$id;
 
   // Constructor
   AuthService() {
