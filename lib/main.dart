@@ -12,7 +12,10 @@ import 'providers/inspiration_tab_provider/inspiration_tab_provider.dart';
 import 'providers/snippet_tab_provider.dart';
 import 'views/screens/home_screen/home_screen.dart';
 
+import 'package:url_strategy/url_strategy.dart';
+
 void main() {
+  setPathUrlStrategy();
   runApp(const MyApp());
 }
 
