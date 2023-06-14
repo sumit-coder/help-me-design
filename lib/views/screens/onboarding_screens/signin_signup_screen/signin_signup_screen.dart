@@ -8,6 +8,7 @@ import 'package:help_me_design/appwrite_service/auth_service.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/theme/my_theme.dart';
 import 'package:help_me_design/views/screens/onboarding_screens/signin_signup_screen/widgets/signup_view.dart';
+import 'package:help_me_design/views/screens/onboarding_screens/signin_signup_screen/widgets/verification_view.dart';
 import 'package:help_me_design/views/widgets/button_tap_effect.dart';
 import 'package:help_me_design/views/widgets/container_pattern_painter.dart';
 import 'package:help_me_design/views/widgets/divider_with_title.dart';
@@ -88,6 +89,21 @@ class _SignInSignUpScreenState extends State<SignInSignUpScreen> {
                         ).animate().rotate(begin: -0.07, alignment: Alignment.bottomRight),
                       ],
                     ),
+
+                    // Email Verification not been implemented right now
+                    // Column(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    //     Container(
+                    //       child: VerificationView(
+                    //         onTapSignUp: () {},
+                    //       ),
+                    //       // onTapSignIn: () {
+                    //       //   _pageController.animateToPage(0, duration: Duration(milliseconds: 300), curve: Curves.decelerate);
+                    //       // },
+                    //     ).animate().rotate(begin: -0.07, alignment: Alignment.bottomCenter),
+                    //   ],
+                    // ),
                   ],
                 ),
               ),

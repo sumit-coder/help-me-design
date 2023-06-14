@@ -68,7 +68,7 @@ class AuthService extends ChangeNotifier {
       return user;
     } on AppwriteException catch (e) {
       print(e);
-      UtilityHelper.toastMessage(message: e.message ?? "AuthService.components() null message");
+      UtilityHelper.toastMessage(message: e.message ?? "AuthService.createUser() null message");
       return null;
     }
   }
