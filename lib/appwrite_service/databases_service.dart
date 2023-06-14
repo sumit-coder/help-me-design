@@ -5,7 +5,7 @@ import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
 // import 'package:help_me_design/appwrite_service/appwrite_constants.dart';
 import 'package:help_me_design/models/design_resources_model.dart';
-import 'package:help_me_design/providers/snippet_tab_provider.dart';
+import 'package:help_me_design/providers/snippet_tab_provider/snippet_tab_provider.dart';
 import 'package:help_me_design/utility/utility_helper.dart';
 import 'package:help_me_design/views/screens/tabs/components_tab/widgets/add_component_collection_alert.dart';
 

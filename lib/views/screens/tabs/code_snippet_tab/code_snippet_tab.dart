@@ -1,7 +1,7 @@
 // import 'package:dart_code_viewer2/dart_code_viewer2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:help_me_design/providers/snippet_tab_provider.dart';
+import 'package:help_me_design/providers/snippet_tab_provider/snippet_tab_provider.dart';
 import 'package:help_me_design/views/screens/tabs/code_snippet_tab/widgets/code_snippet_list_view.dart';
 // import 'package:selectable_code_view/selectable_code_view.dart';
 

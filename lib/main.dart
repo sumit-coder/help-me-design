@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 
 import 'constants/app_constants.dart';
 import 'providers/inspiration_tab_provider/inspiration_tab_provider.dart';
-import 'providers/snippet_tab_provider.dart';
+import 'providers/snippet_tab_provider/snippet_tab_provider.dart';
 import 'views/screens/home_screen/home_screen.dart';
 
 import 'package:url_strategy/url_strategy.dart';
