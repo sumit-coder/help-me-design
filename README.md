@@ -1,6 +1,7 @@
 # Help Me Desing | Appwrite + Hashnode Hackathon Project
 
-![demo-image](https://github.com/sumit-coder/help-me-design/assets/55745378/ea5afaed-0740-4cea-95e8-26b002a741a2)
+![demo image](https://github.com/sumit-coder/help-me-design/assets/55745378/e7d21fa3-e41b-419e-9b04-d60bacf27372)
+
 
 ### Help Me Design: Live (https://help-me-design.sumitpanwar.com/)
 
