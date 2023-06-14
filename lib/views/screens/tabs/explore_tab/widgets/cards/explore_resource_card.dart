@@ -73,11 +73,11 @@ class _ExploreResourceCardState extends State<ExploreResourceCard> {
                   ),
                 ),
                 SizedBox(
-                  width: 23,
+                  width: 24,
                   child: Column(
                     children: [
                       ButtonTapEffect(
-                        child: Icon(Icons.open_in_new_rounded, color: themeData.colorScheme.primary),
+                        child: Icon(Icons.launch_rounded, color: themeData.colorScheme.primary),
                         onTap: () {
                           UtilityHelper.launchUrlNow(widget.resourceUrl);
                         },

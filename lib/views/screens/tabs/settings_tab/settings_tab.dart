@@ -60,8 +60,7 @@ class SettingsTab extends StatelessWidget {
                       ),
                       ButtonTapEffect(
                         onTap: () {
-                          // authService.signOut();
-                          authService.createVerification();
+                          authService.signOut();
                         },
                         child: Container(
                           height: 64,
