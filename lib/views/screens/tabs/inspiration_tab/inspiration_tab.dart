@@ -2,9 +2,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:help_me_design/constants/text_constants.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
-import 'package:help_me_design/theme/my_theme.dart';
 import 'package:help_me_design/views/screens/tabs/widgets/tab_view_hero_card.dart';
-import 'package:help_me_design/views/widgets/button_tap_effect.dart';
 import 'package:help_me_design/views/widgets/container_pattern_painter.dart';
 
 import 'widgets/inspiration_list_view.dart';

@@ -43,9 +43,8 @@ class _CodeSnippetScreenState extends State<CodeSnippetScreen> {
             snippetTabProvider.openActiveSnippetCollectionView
                 ? SizedBox()
                 : TabViewHeroCard(
-                    // title: MyTextConstants.docsTabHeadline,
-                    title: "Code Snippet.",
-                    shortDescription: MyTextConstants.docsTabShortDescription,
+                    title: MyTextConstants.snippetsTabHeadline,
+                    shortDescription: MyTextConstants.snippetsTabShortDescription,
                     posterImage: "assets/images/snippets-poster.png",
                     bgPattern: SnippetsTabPatternPainter(48, context),
                   ),

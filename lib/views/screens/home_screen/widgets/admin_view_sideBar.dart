@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:help_me_design/appwrite_service/auth_service.dart';
-import 'package:provider/provider.dart';
 
 import '../../../../theme/my_design_system.dart';
 import '../../../../theme/my_theme.dart';
@@ -21,8 +19,6 @@ class AdminViewSideBar extends StatefulWidget {
 class _AdminViewSideBarState extends State<AdminViewSideBar> {
   @override
   Widget build(BuildContext context) {
-    var themeMangerProvider = Provider.of<ThemeManager>(context, listen: false);
-    var authService = Provider.of<AuthService>(context);
     var themeData = Theme.of(context);
     return Container(
       width: 244,

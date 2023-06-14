@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:help_me_design/constants/text_constants.dart';
 import 'package:help_me_design/providers/component_tab_provider/component_tab_provider.dart';
 import 'package:help_me_design/views/screens/tabs/widgets/tab_view_hero_card.dart';
 import 'package:help_me_design/views/widgets/container_pattern_painter.dart';
@@ -29,9 +30,8 @@ class ComponentsTab extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TabViewHeroCard(
-                      // title: MyTextConstants.docsTabHeadline,
-                      title: "Components.",
-                      shortDescription: "MyTextConstants.docsTabShortDescription",
+                      title: MyTextConstants.componentsTabHeadline,
+                      shortDescription: MyTextConstants.componentsTabShortDescription,
                       posterImage: "assets/images/explore-poster.png",
                       bgPattern: ComponentsTabPatternPainter(48, context),
                     ),

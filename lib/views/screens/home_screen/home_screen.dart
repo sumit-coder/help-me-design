@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:help_me_design/views/screens/tabs/components_tab/components_tab.dart';
 import 'package:help_me_design/views/screens/tabs/inspiration_tab/inspiration_tab.dart';
+import 'package:help_me_design/views/screens/tabs/saved_tab/saved_tab.dart';
 import 'package:help_me_design/views/screens/tabs/settings_tab/settings_tab.dart';
 
-import '../tabs/categories_screens.dart';
 import '../tabs/code_snippet_tab/code_snippet_tab.dart';
-import '../tabs/docs_tab/docs_tab.dart';
 import '../tabs/explore_tab/explore_tab.dart';
 import 'widgets/admin_view_sidebar.dart';
 
@@ -27,19 +26,25 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget switchTabs(SideTabType newActiveTab) {
     switch (newActiveTab) {
       case SideTabType.explore:
-        return ExploreView();
+        return const ExploreView();
+
       case SideTabType.inspiration:
-        return InspirationTab();
-      // case SideTabType.docs:
-      //   return DocsView();
-      case SideTabType.codeSnippet:
-        return CodeSnippetScreen();
+        return const InspirationTab();
+
       case SideTabType.components:
         return const ComponentsTab();
+
+      case SideTabType.codeSnippet:
+        return CodeSnippetScreen();
+
+      case SideTabType.saved:
+        return const SavedDesignResourceTab();
+
       case SideTabType.settings:
         return const SettingsTab();
+
       default:
-        return const CategoriesView();
+        return const ExploreView();
     }
   }
 
