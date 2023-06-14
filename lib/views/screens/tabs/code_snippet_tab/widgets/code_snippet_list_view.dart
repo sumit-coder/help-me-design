@@ -67,14 +67,6 @@ class _CodeSnippetsListViewState extends State<CodeSnippetsListView> {
               tags: snippetTabProvider.snippetsCollectionData[i].data['tags'],
               snippetsCount: snippetTabProvider.snippetsCollectionData[i].$createdAt.split("T").first,
             ),
-          SnippetsCollectionCard(
-            onTap: () {
-              snippetTabProvider.changeCollectionView(true, 0);
-            },
-            title: 'Flutter Code Snippets Demo',
-            tags: 'Flutter,Demo',
-            snippetsCount: "today",
-          ),
         ],
       ),
     );

@@ -42,8 +42,8 @@ class _SavedDesignResourceTabState extends State<SavedDesignResourceTab> {
             TabViewHeroCard(
               title: MyTextConstants.savedTabHeadline,
               shortDescription: MyTextConstants.savedTabShortDescription,
-              posterImage: 'assets/images/settings-poster.png',
-              bgPattern: SavedTabPatternPainter(44, context),
+              posterImage: 'assets/images/saved-poster.png',
+              bgPattern: SavedTabPatternPainter(54, context),
             ),
             Padding(
               padding: EdgeInsets.only(left: MySpaceSystem.spaceX3),

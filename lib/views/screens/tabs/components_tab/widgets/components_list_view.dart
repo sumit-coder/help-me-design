@@ -68,14 +68,6 @@ class _ComponentsListViewState extends State<ComponentsListView> {
               tags: componentTabProvider.componentsCollectionData[i].data['tags'],
               addedAt: componentTabProvider.componentsCollectionData[i].$createdAt.split("T").first,
             ),
-          ComponentCollectionCard(
-            onTap: () {
-              componentTabProvider.changeOpenActiveComponentCollectionView(true, 0);
-            },
-            title: 'Flutter Components Demo',
-            tags: 'Flutter, Demo',
-            addedAt: "0",
-          ),
         ],
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:help_me_design/theme/my_design_system.dart';
 import 'package:help_me_design/theme/my_theme.dart';
 import 'package:help_me_design/utility/utility_helper.dart';
@@ -71,22 +72,27 @@ class _ExploreResourceCardState extends State<ExploreResourceCard> {
                     ),
                   ),
                 ),
-                Column(
-                  children: [
-                    ButtonTapEffect(
-                      child: Icon(Icons.open_in_new_rounded, color: themeData.colorScheme.primary),
-                      onTap: () {
-                        UtilityHelper.launchUrlNow(widget.resourceUrl);
-                      },
-                    ),
-                    ButtonTapEffect(
-                      margin: EdgeInsets.only(top: MySpaceSystem.spaceX3),
-                      child: Icon(widget.onTapSaveIconData, size: 27, color: themeData.colorScheme.primary),
-                      onTap: () {
-                        widget.onTapSave();
-                      },
-                    )
-                  ],
+                SizedBox(
+                  width: 23,
+                  child: Column(
+                    children: [
+                      ButtonTapEffect(
+                        child: Icon(Icons.open_in_new_rounded, color: themeData.colorScheme.primary),
+                        onTap: () {
+                          UtilityHelper.launchUrlNow(widget.resourceUrl);
+                        },
+                      ),
+                      showSaveButton
+                          ? ButtonTapEffect(
+                              margin: EdgeInsets.only(top: MySpaceSystem.spaceX3),
+                              child: Icon(widget.onTapSaveIconData, size: 27, color: themeData.colorScheme.primary),
+                              onTap: () {
+                                widget.onTapSave();
+                              },
+                            ).animate().fadeIn().shake()
+                          : SizedBox()
+                    ],
+                  ),
                 ),
               ],
             ),
