@@ -60,14 +60,16 @@ class AuthService extends ChangeNotifier {
     }
   }
 
-  Future<User> createUser({required String email, required String password}) async {
+  Future<User?> createUser({required String email, required String password}) async {
     notifyListeners();
 
     try {
-      final user = await account.create(userId: ID.unique(), email: email, password: password, name: 'Sam Alt');
+      final user = await account.create(userId: ID.unique(), email: email, password: password);
       return user;
-    } finally {
-      notifyListeners();
+    } on AppwriteException catch (e) {
+      print(e);
+      UtilityHelper.toastMessage(message: e.message ?? "AuthService.components() null message");
+      return null;
     }
   }
 
@@ -118,13 +120,5 @@ class AuthService extends ChangeNotifier {
     } finally {
       notifyListeners();
     }
-  }
-
-  Future<Preferences> getUserPreferences() async {
-    return await account.getPrefs();
-  }
-
-  updatePreferences({required String bio}) async {
-    return account.updatePrefs(prefs: {'bio': bio});
   }
 }
