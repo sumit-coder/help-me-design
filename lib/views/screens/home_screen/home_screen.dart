@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:help_me_design/appwrite_service/auth_service.dart';
+import 'package:help_me_design/utility/utility_helper.dart';
 import 'package:help_me_design/views/screens/tabs/components_tab/components_tab.dart';
 import 'package:help_me_design/views/screens/tabs/inspiration_tab/inspiration_tab.dart';
 import 'package:help_me_design/views/screens/tabs/saved_tab/saved_tab.dart';
 import 'package:help_me_design/views/screens/tabs/settings_tab/settings_tab.dart';
+import 'package:provider/provider.dart';
 
 import '../tabs/code_snippet_tab/code_snippet_tab.dart';
 import '../tabs/explore_tab/explore_tab.dart';
 import 'widgets/admin_view_sidebar.dart';
+import 'widgets/sign_in_alert_card.dart';
 
 // save youtube videos
 // save websites
@@ -51,20 +55,15 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    var authService = Provider.of<AuthService>(context, listen: false);
     return Scaffold(
       body: Center(
         child: Container(
-          // width: double.maxFinite,
           height: size.height,
-          // clipBehavior: Clip.antiAlias,
           constraints: const BoxConstraints(maxWidth: 1200, minWidth: 1200),
-          // margin: const EdgeInsets.all(44), //web
           margin: const EdgeInsets.all(22), // MObile
-          // padding: EdgeInsets.all(24),
           decoration: BoxDecoration(
-            // border: Border.all(width: 1, color: Colors.black54),
             borderRadius: BorderRadius.circular(24),
-            // color: Theme.of(context).colorScheme.secondary,
           ),
           child: SafeArea(
             child: Row(
@@ -74,8 +73,23 @@ class _MyHomePageState extends State<MyHomePage> {
                 AdminViewSideBar(
                   activeButtonType: activeButton,
                   onSideTabButtonChange: (SideTabType newTabChange) {
-                    activeButton = newTabChange;
-                    setState(() {});
+                    // if user is not logged in then only let him see explore and settings sections
+                    if (newTabChange == SideTabType.explore || newTabChange == SideTabType.settings) {
+                      activeButton = newTabChange;
+                      setState(() {});
+                      return;
+                    }
+                    // if user is logged in then let him see everything
+                    if (authService.status == AuthStatus.authenticated) {
+                      activeButton = newTabChange;
+                      setState(() {});
+                      return;
+                    }
+                    // else show him alert for SignIn
+                    UtilityHelper.showAlertMyDialog(
+                      context: context,
+                      bodyWidget: SignInAlertCard(),
+                    );
                   },
                 ),
                 Expanded(

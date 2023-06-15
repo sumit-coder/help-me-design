@@ -198,3 +198,22 @@ class ContainerSquarePatternThreePainter extends CustomPainter {
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => true;
 }
+
+class WelcomeScreenPatternThreePainter extends CustomPainter {
+  final int featuresCount;
+  final BuildContext context;
+
+  WelcomeScreenPatternThreePainter(this.featuresCount, this.context);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    Crosshatch(
+      bgColor: Colors.transparent,
+      fgColor: Color(0xFF13121B),
+      featuresCount: featuresCount,
+    ).paintOnWidget(canvas, size);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => true;
+}

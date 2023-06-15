@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:help_me_design/appwrite_service/auth_service.dart';
 import 'package:help_me_design/providers/component_tab_provider/component_tab_provider.dart';
 import 'package:help_me_design/providers/explore_tab_provider/explore_tab_provider.dart';
+import 'package:help_me_design/theme/my_colors.dart';
 import 'package:help_me_design/theme/my_theme.dart';
 import 'package:help_me_design/views/screens/onboarding_screens/signin_signup_screen/signin_signup_screen.dart';
 import 'package:help_me_design/views/welcome_screen.dart';
@@ -53,11 +54,12 @@ class _MyAppState extends State<MyApp> {
           themeMode: themeManagerProvider.getThemeMode,
           // home: const MyHomePage(),
           // home: WelcomeScreen(),
-          home: authServiceProvider.status == AuthStatus.unauthenticated
-              ? const SignInSignUpScreen()
+          home: authServiceProvider.status == AuthStatus.uninitialized
+              ? Container(child: const Center(child: CircularProgressIndicator(color: DesignSystemColors.secondaryColorDark)))
               : authServiceProvider.status == AuthStatus.authenticated
                   ? const MyHomePage()
                   : const WelcomeScreen(),
+          // : SignInSignUpScreen()
           // home: WelcomeScreen(),
         );
       }),
