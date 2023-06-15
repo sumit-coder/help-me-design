@@ -29,7 +29,7 @@ class WelcomeScreen extends StatelessWidget {
               child: Container(
                 color: const Color(0xFF13121B),
                 height: size.height * 0.64,
-                child: Image.network('https://i.ibb.co/bWR8cC0/Group-92.png'),
+                child: Image.asset('assets/images/welcome-poster.png'),
               ),
             ),
             Positioned(
