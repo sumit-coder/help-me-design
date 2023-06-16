@@ -104,7 +104,7 @@ class AuthService extends ChangeNotifier {
 
   signInWithProvider({required String provider}) async {
     try {
-      final session = await account.createOAuth2Session(provider: provider);
+      final session = await account.createOAuth2Session(provider: provider, success: "https://help-me-design.sumitpanwar.com");
       _currentUser = await account.get();
       _status = AuthStatus.authenticated;
       return session;

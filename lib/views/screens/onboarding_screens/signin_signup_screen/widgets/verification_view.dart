@@ -109,7 +109,7 @@ class VerificationView extends StatelessWidget {
     // Go to OAuth provider login page
 
     try {
-      await account.createOAuth2Session(provider: 'github', success: "https://help-me-design.netlify.app/#/");
+      await account.createOAuth2Session(provider: 'github', success: "https://help-me-design.sumitpanwar.com");
 
       Navigator.pop(context);
       const snackbar = SnackBar(content: Text('Account created!'));
