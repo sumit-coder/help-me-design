@@ -193,8 +193,6 @@ class SignInView extends StatelessWidget {
 
     final account = Account(client);
 
-    // Go to OAuth provider login page
-
     try {
       await account.createOAuth2Session(provider: 'github', success: "https://help-me-design.sumitpanwar.com");
 
@@ -204,8 +202,5 @@ class SignInView extends StatelessWidget {
     } on AppwriteException catch (e) {
       Navigator.pop(context);
     }
-
-    // account.get();
-    // account.deleteSession(sessionId: "current");
   }
 }
