@@ -9,7 +9,7 @@ class ExploreTabProvider with ChangeNotifier {
   DesignResourcesCollection? designResourcesCollection = DesignResourcesCollection.empty();
 
   initDesignResourcesData() async {
-    designResourcesCollection = await DatabasesService().getDesignResourcesData();
+    designResourcesCollection = await DatabasesService.get.designResources();
 
     print(designResourcesCollection!.data);
 

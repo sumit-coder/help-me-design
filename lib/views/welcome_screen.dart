@@ -20,7 +20,6 @@ class WelcomeScreen extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
-            // Positioned(child: Center(child: CircularProgressIndicator(color: DesignSystemColors.secondaryColorDark))),
             Positioned(
               // top: 100,
               bottom: 0,

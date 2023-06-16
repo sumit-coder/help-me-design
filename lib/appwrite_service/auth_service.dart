@@ -77,7 +77,7 @@ class AuthService extends ChangeNotifier {
 
     try {
       Token result = await account.createVerification(
-        url: 'http://localhost:50423/#/',
+        url: 'https://help-me-design.sumitpanwar.com/',
       );
       print(result.secret);
       // return result;
