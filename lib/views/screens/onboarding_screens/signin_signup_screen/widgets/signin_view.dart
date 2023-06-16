@@ -28,6 +28,15 @@ class SignInView extends StatelessWidget {
     passwordController.clear();
   }
 
+  void sendToHome(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MyHomePage(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     var themeData = Theme.of(context);
@@ -116,12 +125,7 @@ class SignInView extends StatelessWidget {
                       UtilityHelper.toastMessage(message: "You Are in");
                       clearTextFields();
 
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => MyHomePage(),
-                      //   ),
-                      // );
+                      sendToHome(context);
                     }
 
                     // print(user.);

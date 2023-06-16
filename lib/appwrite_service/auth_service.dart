@@ -1,9 +1,8 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
 import 'package:flutter/material.dart';
+import 'package:help_me_design/appwrite_service/appwrite_constants_all.dart';
 import 'package:help_me_design/utility/utility_helper.dart';
-
-import 'appwrite_constants.dart';
 
 // class AuthService {
 //   final client = Client()
@@ -78,7 +77,7 @@ class AuthService extends ChangeNotifier {
 
     try {
       Token result = await account.createVerification(
-        url: 'http://localhost:50423/#/',
+        url: 'https://help-me-design.sumitpanwar.com/',
       );
       print(result.secret);
       // return result;
@@ -96,6 +95,7 @@ class AuthService extends ChangeNotifier {
       _status = AuthStatus.authenticated;
       return session;
     } on AppwriteException catch (e) {
+      print(e);
       UtilityHelper.toastMessage(message: e.message.toString());
     } finally {
       notifyListeners();

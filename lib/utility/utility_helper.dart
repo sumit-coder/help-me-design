@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:help_me_design/theme/my_colors.dart';
-import 'package:help_me_design/theme/my_design_system.dart';
-import 'package:help_me_design/views/widgets/button_tap_effect.dart';
-import 'package:help_me_design/views/widgets/form_widgets/buttons/simple_button.dart';
-import 'package:help_me_design/views/widgets/form_widgets/input_fields/email_input_field.dart';
-import 'package:help_me_design/views/widgets/form_widgets/input_fields/text_input_field.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 
 import '../constants/app_constants.dart';

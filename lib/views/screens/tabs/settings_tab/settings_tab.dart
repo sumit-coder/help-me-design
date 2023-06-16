@@ -52,35 +52,38 @@ class SettingsTab extends StatelessWidget {
                             children: [
                               Text("Default Name", style: MyTextTypeSystem.titleMediumDark),
                               const SizedBox(height: MySpaceSystem.spaceX),
-                              Text(authService.currentUser.email, style: MyTextTypeSystem.titleLargeDark),
+                              authService.status == AuthStatus.authenticated
+                                  ? Text(authService.currentUser.email, style: MyTextTypeSystem.titleLargeDark)
+                                  : Text("example@gmail.com (Not Signed In)", style: MyTextTypeSystem.titleLargeDark),
                               // Text("currentUser@gmail.com (dummy email for demo)", style: MyTextTypeSystem.titleLargeDark),
                             ],
                           ),
                         ],
                       ),
-                      ButtonTapEffect(
-                        onTap: () {
-                          authService.signOut();
-                        },
-                        child: Container(
-                          height: 64,
-                          decoration: BoxDecoration(
-                            boxShadow: cardShadow,
-                            color: DesignSystemColors.secondaryColorDark,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          padding: EdgeInsets.symmetric(horizontal: MySpaceSystem.spaceX2),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              SizedBox(width: MySpaceSystem.spaceX1),
-                              Text("Logout", style: MyTextTypeSystem.titleMedium),
-                              SizedBox(width: MySpaceSystem.spaceX1),
-                              const Icon(Icons.logout_rounded, color: DesignSystemColors.secondaryColor, size: 34),
-                            ],
+                      if (authService.status == AuthStatus.authenticated)
+                        ButtonTapEffect(
+                          onTap: () {
+                            authService.signOut();
+                          },
+                          child: Container(
+                            height: 64,
+                            decoration: BoxDecoration(
+                              boxShadow: cardShadow,
+                              color: DesignSystemColors.secondaryColorDark,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            padding: EdgeInsets.symmetric(horizontal: MySpaceSystem.spaceX2),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SizedBox(width: MySpaceSystem.spaceX1),
+                                Text("Logout", style: MyTextTypeSystem.titleMedium),
+                                SizedBox(width: MySpaceSystem.spaceX1),
+                                const Icon(Icons.logout_rounded, color: DesignSystemColors.secondaryColor, size: 34),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
                     ],
                   ),
                 ),
