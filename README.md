@@ -1,4 +1,4 @@
-# Help Me Desing | Appwrite + Hashnode Hackathon Project
+# Help Me Design | Appwrite + Hashnode Hackathon Project
 ![App Demo Screenshot](https://github.com/sumit-coder/help-me-design/assets/55745378/320bebe1-0f07-47e3-8e15-c57c72e919ab)
 
 
